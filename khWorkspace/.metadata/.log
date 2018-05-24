@@ -23,3 +23,6 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.jface.text 2 0 2018-05-24 16:57:36.306
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.wst.server.discovery 1 0 2018-05-24 21:12:43.218
+!MESSAGE already installed: org.eclipse.jst.server.generic.jonas4
