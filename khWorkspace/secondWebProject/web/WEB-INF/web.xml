@@ -19,4 +19,16 @@
   	<servlet-name>researchXml</servlet-name>
   	<url-pattern>/researchXml.do</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>researchJsp</servlet-name>
+  	<servlet-class>com.kh.java.controller.ResearchJspServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>researchJsp</servlet-name>
+  	<url-pattern>/researchJsp.do</url-pattern>
+  </servlet-mapping>
 </web-app>
+
