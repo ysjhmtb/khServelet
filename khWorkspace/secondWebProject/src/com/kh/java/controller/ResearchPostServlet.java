@@ -29,7 +29,7 @@ public class ResearchPostServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 전송값에 한글 처리
+				// 전송값에 한글 처리
 				request.setCharacterEncoding("utf-8");
 				response.setContentType("text/html; charset=UTF-8");
 

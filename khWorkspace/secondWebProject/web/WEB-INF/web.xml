@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>researchXml</servlet-name>
+  	<servlet-class>com.kh.java.controller.ResearchXmlServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>researchXml</servlet-name>
+  	<url-pattern>/researchXml.do</url-pattern>
+  </servlet-mapping>
 </web-app>
