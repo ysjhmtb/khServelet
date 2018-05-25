@@ -31,8 +31,8 @@ public class ResearchGetServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 전송값에 한글 처리
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset=UTF-8");
+//		request.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html; charset=UTF-8");
 
 		// 전송 값을 변수에 저장
 		String name = request.getParameter("name");
