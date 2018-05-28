@@ -30,6 +30,9 @@ public class LoginServlet extends HttpServlet {
 		// EncodingFilter가 이미 설정되어 있다.
 		
 		String id = request.getParameter("id");
+		String pass = request.getParameter("pwd");
+		
+		System.out.println("id : "+id+" pwd : "+ pass);
 		
 		
 		

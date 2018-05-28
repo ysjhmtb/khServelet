@@ -431,3 +431,61 @@ java.lang.NullPointerException
 
 !ENTRY org.eclipse.jface.text 2 0 2018-05-28 18:01:59.690
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.recommenders.types.rcp 1 4 2018-05-28 18:50:31.682
+!MESSAGE Full project indexing required:
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/charsets.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/cldrdata.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/dnsns.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/jaccess.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/jfxrt.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/localedata.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/nashorn.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/sunec.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/ext/zipfs.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/jce.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/jfr.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/jsse.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/resources.jar
+  [+] /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home/jre/lib/rt.jar
+  [+] /System/Library/Java/Extensions/MRJToolkit.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/annotations-api.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/catalina-ant.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/catalina-ha.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/catalina-storeconfig.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/catalina-tribes.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/catalina.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/ecj-4.6.3.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/el-api.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/jasper-el.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/jasper.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/jsp-api.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/servlet-api.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-api.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-coyote.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-dbcp.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-i18n-es.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-i18n-fr.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-i18n-ja.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-jdbc.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-jni.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-util-scan.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-util.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/tomcat-websocket.jar
+  [+] /Users/yunseokjeon/dev/apache-tomcat-8.0.52/lib/websocket-api.jar
+  [+] /Users/yunseokjeon/git/khServlet/khWorkspace/thirdWebProject/web/WEB-INF/lib/log4j-1.2-api-2.11.0.jar
+  [+] /Users/yunseokjeon/git/khServlet/khWorkspace/thirdWebProject/web/WEB-INF/lib/log4j-api-2.11.0.jar
+  [+] /Users/yunseokjeon/git/khServlet/khWorkspace/thirdWebProject/web/WEB-INF/lib/log4j-core-2.11.0.jar
+  [+] /Users/yunseokjeon/git/khServlet/khWorkspace/thirdWebProject/web/WEB-INF/lib/log4j-taglib-2.11.0.jar
+
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:381)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:134)
+	at org.eclipse.recommenders.internal.types.rcp.ProjectTypesIndex.needsRebuild(ProjectTypesIndex.java:169)
+	at org.eclipse.recommenders.internal.types.rcp.ProjectTypesIndex.startUp(ProjectTypesIndex.java:122)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Thread.java:748)
