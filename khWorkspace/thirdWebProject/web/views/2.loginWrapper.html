@@ -16,3 +16,19 @@
 	
 </body>
 </html>
+<!-- 
+
+1. login.dd, 즉 LoginServlet로 요청이 넘어간다.
+
+2. LoginServlet이 실행되기 전에 LoginFilter가 호출된다. 
+여기서 ServletRequest를 HttpServletRequest로 형변환이 일어난다. 
+그리고 LoginWrapper 객체를 생성한다. (HttpServletRequestWrapper를 상속한 
+LoginWrapper의 생성자는 매개변수 형으로 HttpServletRequest를 사용한다.)
+
+3. LoginWrapper에서는 전달받은 HttpServletRequest를 사용하여 super키워드로 부모 
+클래스의 생성자를 호출한다. 그리고 getParameter 메소드가 호출되면 비밀번호를 변형시킨다.
+
+4. 이렇게 변현된 정보를 담은 LoginWrapper 객체를 LoginFilter 에서 
+chain.doFilter를 사용하여 LoginServlet으로 전달한다. 전달받으면 이를 출력한다.
+
+ -->
