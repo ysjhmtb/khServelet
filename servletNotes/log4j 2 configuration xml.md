@@ -92,15 +92,47 @@ To include **Log4j2** in your project, include below dependency in your projec
 
 아래의 xml 파일이 없다면 DefaultConfiguration 이 사용된다.
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="debug" additivity="false">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
+
+```
 
 
-[XML Layout](https://logging.apache.org/log4j/2.x/manual/layouts.html#XMLLayout) 을 참조.
+
+<br>
+
+[Layout](https://logging.apache.org/log4j/2.x/manual/layouts.html) 을 참조.
+
+<br>
+
+**[%-5level]** : 이는 **Pattern Converters** 에 나와있는 표에서 확인. <br>
+
+**%20c** 는 left justify는 false, minimum width는 20, maximum width는 none 의미. "Left pad with spaces if the category name is less than 20 characters long." <br>
+
+비슷한 맥락에서 **%-20c** 는 "Right pad with spaces if the category name is less than 20 characters long." <br>
+
+
 
 
 
 
 
 <br>
+
+
 
 
 
