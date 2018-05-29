@@ -14,3 +14,16 @@
 19:28:07.294 [http-nio-8081-exec-2] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
 19:28:09.385 [http-nio-8081-exec-3] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
 19:28:12.789 [http-nio-8081-exec-4] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:04:45.098 [http-nio-8081-exec-3] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:04:54.041 [http-nio-8081-exec-4] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:43:28.704 [http-nio-8081-exec-2] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:43:33.684 [http-nio-8081-exec-4] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:44:55.317 [http-nio-8081-exec-2] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:46:53.227 [http-nio-8081-exec-2] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:48:55.940 [http-nio-8081-exec-2] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:49:00.168 [http-nio-8081-exec-3] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:52:40.467 [http-nio-8081-exec-4] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:52:43.181 [http-nio-8081-exec-6] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+16:52:46.781 [http-nio-8081-exec-7] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+17:15:41.854 [http-nio-8081-exec-2] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
+17:15:43.983 [http-nio-8081-exec-4] FATAL com.kh.java.common.filter.LogFilter - 치명적인 오류 발생 
