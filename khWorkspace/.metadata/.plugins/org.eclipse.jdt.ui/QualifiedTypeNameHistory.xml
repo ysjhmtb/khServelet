@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
-<fullyQualifiedTypeName name="java.io.PrintWriter"/>
-<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="java.security.MessageDigest"/>
+<fullyQualifiedTypeName name="java.util.Base64"/>
+<fullyQualifiedTypeName name="com.kh.java.common.wrapper.EncryptWrapper"/>
+<fullyQualifiedTypeName name="org.apache.tomcat.util.collections.SynchronizedStack"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 </qualifiedTypeNameHistroy>

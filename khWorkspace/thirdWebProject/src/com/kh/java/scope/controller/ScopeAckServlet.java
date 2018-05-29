@@ -44,12 +44,15 @@ public class ScopeAckServlet extends HttpServlet {
 		//session scope의 값 저장.
 		//false를 선택하면 세션 생성 시 기존에 세션이 있다면 해당 세션을 반환.
 		//기존에 생성된 세션이 없다면 세션을 반환하지 않는다.
-		HttpSession session = request.getSession(false);
-		int sessionNum = (Integer)session.getAttribute("sessionSum");
+//		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
+		int sessionNum = session.getAttribute("sessionSum") == null?
+				0 : (Integer)session.getAttribute("sessionSum");
 		
 		//application scope의 값 저장.
 		ServletContext application = getServletContext();
-		int applicationNum = (Integer)application.getAttribute("applicationSum");
+		int applicationNum = application.getAttribute("applicationSum") == null?
+				0 : (Integer)application.getAttribute("applicationSum");
 		
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
@@ -74,7 +77,7 @@ public class ScopeAckServlet extends HttpServlet {
 		out.println("<p>서버가 실행되고 있는 동안 유지되는 값의 범위.(서버가 켜져 있다면 계속 유지된다.)"
 		+"서버를 사용하는 모든 사용자들이 접근 가능한 메모리.</p>");
 		out.println("계산 결과 : "+applicationNum +"<br>");
-		
+		out.println("<a href='/twp/index.html'>메인 페이지로 이동 </a>");
 		
 		
 		
