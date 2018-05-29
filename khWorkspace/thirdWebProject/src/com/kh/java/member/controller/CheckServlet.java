@@ -25,7 +25,7 @@ public class CheckServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    //a 태그는 무조건 get 방식으로 서블릿 호출. form은 선택 가능. 
+    //a 태그는 무조건 get 방식으로 서블릿 호출. form 태그는 선택 가능. 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
