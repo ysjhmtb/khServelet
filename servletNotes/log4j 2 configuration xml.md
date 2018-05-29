@@ -94,7 +94,7 @@ To include **Log4j2** in your project, include below dependency in your projec
 
 
 
-[Layouts](https://logging.apache.org/log4j/2.x/manual/layouts.html) 을 참조.
+[XML Layout](https://logging.apache.org/log4j/2.x/manual/layouts.html#XMLLayout) 을 참조.
 
 
 
