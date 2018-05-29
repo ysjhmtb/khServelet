@@ -88,8 +88,6 @@ To include **Log4j2** in your project, include below dependency in your projec
 
 <br>
 
-###test
-
 <h3>콘솔에 로그 남기기</h3>
 
 아래의 xml 파일이 없다면 DefaultConfiguration 이 사용된다.
