@@ -9,4 +9,17 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  
+  <!--  
+  annotation 을 사용하지 않는 경우.
+  
+  <listener>
+  
+  	<listener-class>com.kh.java.listener.controller.MySessionListener</listener-class>
+  
+  </listener>
+ -->
+
+
 </web-app>
