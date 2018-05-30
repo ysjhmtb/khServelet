@@ -124,7 +124,25 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="/Users/yunseokjeon/git/khServlet/khWorkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ROOT" path="" reloadable="false"/><Context docBase="/Users/yunseokjeon/git/khServlet/khWorkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/thirdWebProject" path="/twp" reloadable="true" source="org.eclipse.jst.jee.server:thirdWebProject"/></Host>
+      <Context docBase="/Users/yunseokjeon/git/khServlet/khWorkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ROOT" path="" reloadable="false"/><Context docBase="/Users/yunseokjeon/git/khServlet/khWorkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/jspFirstProject" path="/jfp" reloadable="true" source="org.eclipse.jst.jee.server:jspFirstProject" workDir="/Users/yunseokjeon/git/khServlet/khWorkspace/jspFirstProject/web/WEB-INF/jspwork">
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+    
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+         on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+</Context></Host>
     </Engine>
   </Service>
 </Server>
