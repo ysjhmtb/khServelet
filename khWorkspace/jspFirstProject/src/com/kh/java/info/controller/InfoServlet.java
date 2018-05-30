@@ -26,8 +26,13 @@ public class InfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		System.out.println("프로토콜 : " + request.getProtocol());
+		System.out.println("서버명 : " + request.getServerName());
+		System.out.println("웹 루트 경로 : " + request.getContextPath());
+		System.out.println("현재 경로 : " + request.getRequestURI());
+		System.out.println("요청자 IP 정보 : " + request.getRemoteAddr());
+		System.out.println("");
 	}
 
 }
