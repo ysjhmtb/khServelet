@@ -27,9 +27,12 @@
 		}
 		
 		
+		
+		/* 
 		//it tried to print a null variable, so errorPage.jsp was called.
 		String str = null;
-		System.out.println(str.charAt(0));
+		System.out.println(str.charAt(0)); 
+		*/
 	%>
 
 	<%-- <%= %> : 익스프레션 태그. 자바 영역의 값을 출력할 때 사용. --%>
