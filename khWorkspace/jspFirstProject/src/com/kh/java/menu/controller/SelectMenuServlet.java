@@ -1,6 +1,8 @@
 package com.kh.java.menu.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -71,6 +73,15 @@ public class SelectMenuServlet extends HttpServlet {
 		
 		
 		//4. 결과값 화면 출력(전송 값 전달.)
+		//다음 화면, 다음 서블릿으로 값을 전달할 때 사용할 스코프.
+		request.setAttribute("name", name);
+		request.setAttribute("menu", menuStr);
+		request.setAttribute("price", price);
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher("views/4.menuResult.jsp");
+		view.forward(request, response);
+		
 		
 	}
 

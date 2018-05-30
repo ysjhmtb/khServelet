@@ -13,7 +13,7 @@
 		<li><a href="views/2.today.jsp">test 2</a></li>
 		<li><a href="views/3.fortune.jsp">test 3</a></li>
 		<li><a href="views/4.menu.jsp">test 4</a></li>
-		<li></li>
+		<li><a href="views/5.menu.jsp">test 5</a></li>
 		<li></li>
 	</ol>
 
