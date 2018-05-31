@@ -464,6 +464,367 @@ Sequel Pro를 연결하려고 했으나 실패.
 
 <hr>
 
+한글 입력이 제대로 되지 않아서, 우선 system / oracle 계정에서 
+
+```sql
+SELECT value$ FROM sys.props$ WHERE name = 'NLS_CHARACTERSET';
+```
+
+입력하고,  **AL32UTF8** 를 확인하였다.
+
+<br>
+
+jsp / jsp 계정에서 
+
+```sql
+SELECT * FROM NLS_DATABASE_PARAMETERS;
+```
+
+를 입력하고, 
+
+<br>
+
+```
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_LANGUAGE
+AMERICAN
+
+NLS_TERRITORY
+AMERICA
+
+NLS_CURRENCY
+$
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_ISO_CURRENCY
+AMERICA
+
+NLS_NUMERIC_CHARACTERS
+.,
+
+NLS_CHARACTERSET
+AL32UTF8
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_CALENDAR
+GREGORIAN
+
+NLS_DATE_FORMAT
+DD-MON-RR
+
+NLS_DATE_LANGUAGE
+AMERICAN
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_SORT
+BINARY
+
+NLS_TIME_FORMAT
+HH.MI.SSXFF AM
+
+NLS_TIMESTAMP_FORMAT
+DD-MON-RR HH.MI.SSXFF AM
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_TIME_TZ_FORMAT
+HH.MI.SSXFF AM TZR
+
+NLS_TIMESTAMP_TZ_FORMAT
+DD-MON-RR HH.MI.SSXFF AM TZR
+
+NLS_DUAL_CURRENCY
+$
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_COMP
+BINARY
+
+NLS_LENGTH_SEMANTICS
+BYTE
+
+NLS_NCHAR_CONV_EXCP
+FALSE
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_NCHAR_CHARACTERSET
+AL16UTF16
+
+NLS_RDBMS_VERSION
+11.2.0.2.0
+
+
+20 rows selected.
+
+```
+
+를 확인하였다. 다행히 **NLS_CHARACTERSET** 은 **AL32UTF8** 임을 확인하였는데, 아무래도 **NLS_LANGUAGE** 를 변경해야 할 것 같다.
+
+<br>
+
+<hr>
+
+<br>
+
+```sql
+SELECT * FROM NLS_DATABASE_PARAMETERS;
+```
+
+<br>
+
+```
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_LANGUAGE
+AMERICAN
+
+NLS_TERRITORY
+AMERICA
+
+NLS_CURRENCY
+$
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_ISO_CURRENCY
+AMERICA
+
+NLS_NUMERIC_CHARACTERS
+.,
+
+NLS_CHARACTERSET
+AL32UTF8
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_CALENDAR
+GREGORIAN
+
+NLS_DATE_FORMAT
+DD-MON-RR
+
+NLS_DATE_LANGUAGE
+AMERICAN
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_SORT
+BINARY
+
+NLS_TIME_FORMAT
+HH.MI.SSXFF AM
+
+NLS_TIMESTAMP_FORMAT
+DD-MON-RR HH.MI.SSXFF AM
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_TIME_TZ_FORMAT
+HH.MI.SSXFF AM TZR
+
+NLS_TIMESTAMP_TZ_FORMAT
+DD-MON-RR HH.MI.SSXFF AM TZR
+
+NLS_DUAL_CURRENCY
+$
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_COMP
+BINARY
+
+NLS_LENGTH_SEMANTICS
+BYTE
+
+NLS_NCHAR_CONV_EXCP
+FALSE
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_NCHAR_CHARACTERSET
+AL16UTF16
+
+NLS_RDBMS_VERSION
+11.2.0.2.0
+
+
+20 rows selected.
+
+SQL> SQL> SELECT * FROM NLS_DATABASE_PARAMETERS;
+
+출처: http://kittyphunk.tistory.com/5 [forever in the rain]SP2-0734: unknown command beginning "출처: ht..." - rest of line ignored.
+SQL>SELECT * FROM NLS_DATABASE_PARAMETERS;
+SP2-0734: unknown command beginning "출처: ht..." - rest of line ignored.
+SQL>         
+SQL> SELECT * FROM NLS_DATABASE_PARAMETERS;
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_LANGUAGE
+AMERICAN
+
+NLS_TERRITORY
+AMERICA
+
+NLS_CURRENCY
+$
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_ISO_CURRENCY
+AMERICA
+
+NLS_NUMERIC_CHARACTERS
+.,
+
+NLS_CHARACTERSET
+AL32UTF8
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_CALENDAR
+GREGORIAN
+
+NLS_DATE_FORMAT
+DD-MON-RR
+
+NLS_DATE_LANGUAGE
+AMERICAN
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_SORT
+BINARY
+
+NLS_TIME_FORMAT
+HH.MI.SSXFF AM
+
+NLS_TIMESTAMP_FORMAT
+DD-MON-RR HH.MI.SSXFF AM
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_TIME_TZ_FORMAT
+HH.MI.SSXFF AM TZR
+
+NLS_TIMESTAMP_TZ_FORMAT
+DD-MON-RR HH.MI.SSXFF AM TZR
+
+NLS_DUAL_CURRENCY
+$
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_COMP
+BINARY
+
+NLS_LENGTH_SEMANTICS
+BYTE
+
+NLS_NCHAR_CONV_EXCP
+FALSE
+
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_NCHAR_CHARACTERSET
+AL16UTF16
+
+NLS_RDBMS_VERSION
+11.2.0.2.0
+
+
+20 rows selected.
+
+```
+
+<br>
+
+sqlplus에서 나와서 다커 터미널에서
+
+```bash
+root@1f54f877de4b:/# export NLS_LANG=KOREAN_KOREA.AL32UTF8
+```
+
+<br>
+
+```Sql
+SQL> SELECT '한글' FROM DUAL;
+```
+
+<br>
+
+한글 입력 테스트를 시도했을 때 바로 되지는 않고, 재시도했을 때 성공했다.
+
+<br>
+
+<hr>
+
 
 
 
