@@ -20,7 +20,7 @@ public class MemberDao {
 			//실행 할 jdbc 라이브러리 등록.
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			//접속 정보 설정.
-			con = DriverManager.getConnection("jdbc:oracle:thin:192.168.10.33:1521:xe", "jsp", "jsp");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.33:1521:xe", "jsp", "jsp");
 			
 			//2.쿼리 실행 객체 생성.
 			stmt = con.createStatement();
