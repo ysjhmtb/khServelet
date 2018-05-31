@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "com.kh.java.member.model.vo.MemberVo"%>
 <!DOCTYPE html>
 <html>
 <head>
+
+<%
+	MemberVo member = (MemberVo)session.getAttribute("user");
+	
+
+
+%>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -113,6 +121,13 @@
 	  src="https://code.jquery.com/jquery-3.3.1.js"
 	  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 	  crossorigin="anonymous"></script>
+	  
+	<script>
+		function login(){
+			$("#loginForm").submit();
+			
+		}
+	</script>
   
   
   
@@ -121,7 +136,10 @@
 <body>
 	<h1 align = "center">My Web Project</h1>
 	<div class = "loginArea">
-		<form id = "loginForm" action = "login.do" method = "post">
+	
+	<%if(member == null) {%>
+	
+		<form id = "loginForm" action = "/mwp/login.do" method = "post">
 			<table>
 				<tr>
 					<td>id :</td>
@@ -149,6 +167,12 @@
 			</table>
 		
 		</form>
+		
+		<%} else{%>
+		
+			<p>로그인 성공.</p>
+		
+		<%} %>
 	</div>
 	<br>
 	<br>
