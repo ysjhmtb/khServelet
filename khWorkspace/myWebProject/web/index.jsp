@@ -16,7 +16,7 @@
 	
 	<div class = "wrap">
 			<div class = "nav">
-				<div class = "menu">HOME</div>
+				<div class = "menu" onclick="mainPage()">HOME</div>
 				<div class = "menu">공지사항.</div>
 				<div class = "menu">게시판.</div>
 				<div class = "menu">사진 게시판.</div>

@@ -33,7 +33,7 @@ public class LogoutServlet extends HttpServlet {
 			session.invalidate();
 		}
 		
-		//값을 유지하면서 페이지 이동할거면
+		//값을 유지하면서 페이지 이동할거면 포워드를 사용하겠지만, 로그아웃에서는 유지해야 할 정보가 없으므로 리다이렉트.
 		response.sendRedirect("index.jsp");
 		
 		

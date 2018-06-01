@@ -1,6 +1,8 @@
 package com.kh.java.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +31,7 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unused")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//전송값에 한글이 있을 경우 한글 인코딩 처리.
@@ -41,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		
 		//비지니스 로직 호출.
 		MemberVo member = new MemberService().login(id,pwd);
-		System.out.println(member.toString());
+//		System.out.println(member.toString());
 		
 		if(member != null) {
 			//로그인  성공.
@@ -53,8 +56,15 @@ public class LoginServlet extends HttpServlet {
 
 		}else {
 			
+			//로그인 실패.
+			//로그인에 싪패하셨습니다.
+			request.setAttribute("msg", "로그인에 실패하셨습니다.");
 			
+			RequestDispatcher view 
+				= request.getRequestDispatcher("views/common/errorPage.jsp");
 			
+			view.forward(request, response);
+	
 		}
 		
 		

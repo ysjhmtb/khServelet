@@ -135,6 +135,45 @@
 			location.href = "/mwp/logout.do";
 			
 		}
+		
+		function mainPage(){
+			//request.getContextPath() : /mwp
+			//location.href = "/mwp/index.jsp";
+			
+			/*
+			request.getContextPath() : 프로젝트의 context path 반환.
+
+			/example
+			
+			
+			
+			request.getRequestURI() : 웹 전체 경로 반환.
+			
+			/example/index.jsp
+			
+			
+			
+			request.getHeader("REFERER") : 요청을 한 부모요청의 URL 반환.
+			
+			현재 페이지 : localhost:8080/example/test1.do
+			
+			요청 페이지 : localhost:8080/example/test.do
+			
+			localhost:8080/example/test.do 반환.
+			
+			
+			
+			request.getRealPath("/") : 서버 또는 로컬의 웹앱 서버의 docBase 설정값 반환.
+			
+			요청  : localhost:8080/example/test.jsp
+			
+			반환 : D:/Project/webapps/example
+			
+			*/
+			location.href = "<%=request.getContextPath()%>/index.jsp";
+			
+			
+		}
 	</script>
   
   
