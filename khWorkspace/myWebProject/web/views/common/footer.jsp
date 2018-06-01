@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<br> <br> <br> <br> <br> <br> <br>
 
 	<div class = "footer">
 		<p>@copyright 2018</p>

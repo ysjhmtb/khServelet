@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ include file="../common/header.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -18,13 +19,68 @@
 		padding:20px;
 		border: 1px solid white;
 	}
+	
+	#idCheckBtn, #searchAddressBtn, #joinMainBtn, #joinBtn{
+		background:orangered;
+		order-radius:5px;
+		width:100px;
+		height:25px;
+		text-align:center;
+		cursor:pointer;
+	}
+	
+	
+	#joinMainBtn, #joinBtn{
+		display:inline-block;
+		
+		
+	}
+	
+	
+	#searchAddressBtn, #joinBtn{
+		background:yellowgreen;
+		
+	}
+	
+	
+	
+	
 </style>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  
+<script>
+	function memberJoin(){
+		$("#joinForm").submit();
+		
+		
+	}
+	
+	function validate(){
+		
+		if($("#userPwd").val() == $("#userPwd2").val()){
+			$("#passChkSpan").text("입력하신 비밀번호가 일치하지 않습니다.");
+			$("#userPwd2").focus();
+			return false;
+		}
+		
+		//다른 값들을 체크하는 로직 추가.(유효성 검사 로직 추가 영역.)
+		
+		return true;
+	}
+	
+	
+
+</script>
 
 </head>
 <body>
 	<div class="outer">
 		<h2 align="center">회원가입.</h2>
-		<form >
+		<form id="joinForm" method="post" action="/mwp/join.do" onsubmit="return vallidate();">
 			<table>
 				<tr>
 					<td width="200px"> <span class="import">*</span>아이디.</td>
@@ -77,9 +133,9 @@
 				<tr>
 					<td>전화번호.</td>
 					<td>
-						<input type="text" name="phone1" id="phone1" > - 
-						<input type="text" name="phone2" id="phone2" > -
-						<input type="text" name="phone3" id="phone3" > 
+						<input type="text" name="phone1" id="phone1"  size="2"> - 
+						<input type="text" name="phone2" id="phone2" size="2"> -
+						<input type="text" name="phone3" id="phone3" size="2"> 
 					
 					</td>
 					<td></td>
@@ -138,14 +194,17 @@
 			
 			</table>
 			
-			<div class="btns">
+			<br>
+			
+			<div class="btns" align="center">
 			
 				<div id="joinMainBtn" > 메인으로 이동.</div>
-				<div id="joinMainBtn" > 회원가입.</div>
+				<div id="joinMainBtn"  onclick="memberJoin()"> 회원가입.</div>
 			</div>
 		
 		</form>
 	</div>
 
+	<%@ include file = "../common/footer.jsp" %>
 </body>
 </html>
