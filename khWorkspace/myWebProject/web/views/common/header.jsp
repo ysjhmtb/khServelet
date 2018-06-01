@@ -136,6 +136,10 @@
 			
 		}
 		
+		function join(){
+			location.href = "/mwp/views/member/memberJoin.jsp"
+		}
+		
 		function mainPage(){
 			//request.getContextPath() : /mwp
 			//location.href = "/mwp/index.jsp";
