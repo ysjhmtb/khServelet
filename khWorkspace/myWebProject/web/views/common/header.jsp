@@ -54,13 +54,13 @@
 		
 	}
 	
-	.loginArea > #loginForm{
+	.loginArea > #loginForm, .userInfo{
 		float:right;
 		
 	
 	}
 	
-	#memberLoginBtn, #memberJoinBtn {
+	#memberLoginBtn, #memberJoinBtn, #memberInfoBtn, #memberLogoutBtn {
 	
 		display:inline-block;
 		vertical-align:middle;
@@ -114,6 +114,8 @@
 		text-align:center;
 		width:100%;
 	}
+	
+	
 
 </style>
 
@@ -125,6 +127,12 @@
 	<script>
 		function login(){
 			$("#loginForm").submit();
+			
+		}
+		
+		
+		function logout(){
+			location.href = "/mwp/logout.do";
 			
 		}
 	</script>
@@ -169,8 +177,14 @@
 		</form>
 		
 		<%} else{%>
-		
-			<p>로그인 성공.</p>
+			<div class="userInfo">
+			
+				<p><%= member.getUserName() %>님 방문을 환영합니다.</p>
+				<div id="memberInfoBtn" onclick="myInfo();">정보 수정.</div>
+				<div id="memberLogoutBtn" onclick="logout();">로그 아웃.</div>
+			
+			</div>
+			
 		
 		<%} %>
 	</div>
