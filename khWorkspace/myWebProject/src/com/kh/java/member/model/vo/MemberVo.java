@@ -12,9 +12,33 @@ public class MemberVo {
 	private String email;
 	private String phone;
 	private String address;
+	private String hobbyStr;
 	private List<String> hobby;
 	private Date enrolldate;
 	
+	
+	public MemberVo() {
+		
+	}
+	
+	
+	
+	public MemberVo(String userId, String password, String userName, char gender, int age, String email, String phone,
+			String address, String hobbyStr) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.userName = userName;
+		this.gender = gender;
+		this.age = age;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.hobbyStr = hobbyStr;
+	}
+
+
+
 	
 	public String getUserId() {
 		return userId;
@@ -77,6 +101,12 @@ public class MemberVo {
 		this.enrolldate = enrolldate;
 	}
 	
+	public String getHobbyStr() {
+		return hobbyStr;
+	}
+	public void setHobbyStr(String hobbyStr) {
+		this.hobbyStr = hobbyStr;
+	}
 	@Override
 	public String toString() {
 		return userId +" / "+password+" / "+userName;

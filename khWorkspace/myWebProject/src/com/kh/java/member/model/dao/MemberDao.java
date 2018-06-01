@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.kh.java.common.JDBCTemplate;
 import com.kh.java.member.model.vo.MemberVo;
 
 public class MemberDao {
@@ -68,6 +69,38 @@ public class MemberDao {
 			}
 			
 		}
+		
+		return result;
+	}
+	
+	
+	public int insertMember(MemberVo m) {
+		int result = 0;
+		
+		//1.커넥션을 맺는다.
+		Connection con = JDBCTemplate.getConnection();
+		
+		Statement stmt = null;
+		
+		
+		try {
+			//2.쿼리 객체를 생성한다.
+			stmt = con.createStatement();
+			//실행할 쿼리 작성.
+			String query = "INSERT MEMBER ----";
+			
+			//3.쿼리 실행 결과를 가져온다. 
+			stmt.executeUpdate("");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
 		
 		return result;
 	}

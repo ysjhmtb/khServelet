@@ -10,7 +10,13 @@ public class MemberService {
 //		result = new MemberDao().login(id, pwd);
 //		return result;
 		
+		//recommended name : login => selectMember
 		return new MemberDao().login(id, pwd);
+	}
+	
+	public int joinMember(MemberVo m) {
+		
+		return new MemberDao().insertMember(m);
 	}
 
 }
