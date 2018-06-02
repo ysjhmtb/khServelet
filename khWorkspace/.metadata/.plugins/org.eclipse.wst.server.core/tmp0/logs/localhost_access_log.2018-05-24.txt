@@ -1,6 +1,0 @@
-127.0.0.1 - - [24/May/2018:21:13:11 +0900] "GET / HTTP/1.1" 404 994
-0:0:0:0:0:0:0:1 - - [24/May/2018:21:13:12 +0900] "GET /firstWebProject/index.html HTTP/1.1" 200 471
-0:0:0:0:0:0:0:1 - - [24/May/2018:21:13:16 +0900] "GET /firstWebProject/views/menu.html HTTP/1.1" 200 480
-0:0:0:0:0:0:0:1 - - [24/May/2018:21:13:17 +0900] "GET /firstWebProject/menu.do?menu=%EA%B9%80%EC%B9%98%EC%B0%8C%EA%B0%9C+ HTTP/1.1" 404 1040
-127.0.0.1 - - [24/May/2018:21:15:12 +0900] "GET / HTTP/1.1" 404 994
-0:0:0:0:0:0:0:1 - - [24/May/2018:21:15:16 +0900] "GET /firstWebProject/menu.do?menu=%EA%B9%80%EC%B9%98%EC%B0%8C%EA%B0%9C+ HTTP/1.1" 200 143
