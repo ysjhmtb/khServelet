@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<!-- 헤더에 MemberVo member 이미 존재.  -->
 <%@ include file="../common/header.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입.</title>
+<title>내 정보 수정.</title>
 
 <!-- https://spi.maps.daum.net/postcode/guidessl  -->  
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
@@ -18,39 +20,30 @@
 
 <style>
 	.outer{
-		width: 600px;
-		height: 500px;
+		width:600px;
+		height:500px;
 		background:black;
 		color:white;
 		margin-left:auto;
 		margin-right:auto;
 		padding:20px;
-		border: 1px solid white;
+		border:1px solid white;
 	}
 	
-	#idCheckBtn, #searchAddressBtn, #joinMainBtn, #joinBtn{
+	#idCheckBtn, #searchAddressBtn, #joinMainBtn, #updateBtn, #deleteBtn{
 		background:orangered;
-		order-radius:5px;
+		border-radius:5px;
 		width:100px;
 		height:25px;
 		text-align:center;
 		cursor:pointer;
-	}
-	
-	
-	#joinMainBtn, #joinBtn{
+	} 
+	#joinMainBtn, #updateBtn, #deleteBtn {
 		display:inline-block;
-		
-		
 	}
-	
-	
-	#searchAddressBtn, #joinBtn{
+	#searchAddressBtn, #updateBtn, #joinMainBtn{
 		background:yellowgreen;
-		
 	}
-	
-	
 	
 	
 </style>
@@ -148,25 +141,26 @@
 			<table>
 				<tr>
 					<td width="200px"> <span class="import">*</span>아이디.</td>
-					<td> <input type="text" name="userId" id="userId" required> </td>
-					<td width="200px"> <div id="idCheckBtn">중복 확인.</div> </td>
+					<td> <input type="text" name="userId" id="userId" value="<%=member.getUserId()%>" readonly> </td>
+					<td width="200px"> </td>
 				</tr>
 					
 				<tr>
-					<td><span class="import">*</span>비밀번호.</td>
+					<td><span class="import">*</span>변경 비밀번호.</td>
 					<td><input type="password" name="userPwd" id="userPwd" required></td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td><span class="import">*</span>비밀번호 확인.</td>
+					<td><span class="import">*</span>변경 비밀번호 확인.</td>
 					<td><input type="password" name="userPwd2" id="userPwd2" required></td>
 					<td><span id="passChkSpan"></span></td>
 				</tr>
 				
 				<tr>
 					<td><span class="import">*</span>이름.</td>
-					<td><input type="text" name="userName" id="userName" required></td>
+					<td><input type="text" name="userName" id="userName" 
+						value="<%=member.getUserName()%>"></td>
 					<td></td>
 				</tr>
 				
@@ -174,7 +168,7 @@
 				<tr>
 					<td>성별.</td>
 					<td>
-						<input type="radio" name="gender" value="M" checked>남성.
+						<input type="radio" name="gender" value="M">남성.
 						<input type="radio" name="gender" vlaue="F">여성.
 					</td>
 					<td></td>
@@ -184,13 +178,13 @@
 				<tr>
 					<td>나이.</td>
 					<td><input type="number" name="age" min="10" max="100" 
-							value="20"></td>
+							value="<%=member.getAge()%>"></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>이메일.</td>
-					<td><input type="email" name="email"></td>
+					<td><input type="email" name="email" value="<%=member.getEmail()%>"></td>
 					<td></td>
 				</tr>
 				
@@ -265,7 +259,8 @@
 				<!-- 헤더에 선언된 mainPage() -->
 			
 				<div id="joinMainBtn" onclick="mainPage()" > 메인으로 이동.</div>
-				<div id="joinBtn"  onclick="memberJoin()"> 회원가입.</div>
+				<div id="updateBtn"  onclick="updateMember()">회원수정.</div>
+				<div id="deleteBtn"  onclick="deleteMember()">회원탈퇴.</div>
 			</div>
 		
 		</form>

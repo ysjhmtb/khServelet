@@ -176,6 +176,11 @@
 			
 			
 		}
+		
+		function myInfo(){
+			location.href = "/mwp/views/member/memberUpdate.jsp"
+			
+		}
 	</script>
   
   
