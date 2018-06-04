@@ -73,6 +73,48 @@ public class MemberDao {
 		return result;
 	}
 	
+	public MemberVo selectMemberId(String id) {
+		MemberVo result = null;
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		//1.커넥션을 맺는다.
+		con = JDBCTemplate.getConnection();
+		//2.쿼리 객체를 생성.
+		try {
+			stmt = con.createStatement();
+			//3.실행할 쿼리 작성.
+			String query = "SELECT * FROM MEMBER WHERE USERID = '" + id + "'";
+			rs = stmt.executeQuery(query);
+			
+			//4.쿼리 실행 결과 처리.(resultSet)
+			if(rs.next()) {
+				result = new MemberVo();
+				result.setUserId(id);
+				result.setPassword(rs.getString("password"));
+				result.setUserName(rs.getString("username"));
+				result.setAge(rs.getInt("age"));
+				result.setEmail(rs.getString("email"));
+				
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			//5.클로즈 처리.
+			try {
+				rs.close();
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 	
 	public int insertMember(MemberVo m) {
 		System.out.println("insertMember called");

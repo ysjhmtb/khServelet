@@ -14,6 +14,10 @@ public class MemberService {
 		return new MemberDao().login(id, pwd);
 	}
 	
+	public MemberVo getMemberId(String id) {
+		return new MemberDao().selectMemberId(id);
+	}
+	
 	public int joinMember(MemberVo m) {
 		
 		System.out.println("joinMember called");

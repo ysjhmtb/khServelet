@@ -58,6 +58,20 @@ public class JoinServlet extends HttpServlet {
 		
 		//서비스 호출. 
 		MemberService ms = new MemberService();
+		//메모리 관리 측면에서 조건문 안에 변수 선언 지양.
+		RequestDispatcher view = null;
+		
+		//아이디 중복 체크 확인.
+		if(ms.getMemberId(id) != null) {
+			//아이디 중복.
+			System.out.println("회원가입 실패.");
+			request.setAttribute("msg", "회원 가입 중 아이디 중복.");
+			view 
+				= request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+			
+		}
+		
 		
 		int result = ms.joinMember(member);
 		
@@ -70,7 +84,7 @@ public class JoinServlet extends HttpServlet {
 		}else {
 			System.out.println("회원가입 실패.");
 			request.setAttribute("msg", "회원 가입 실패!!!");
-			RequestDispatcher view 
+			view 
 				= request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 			
