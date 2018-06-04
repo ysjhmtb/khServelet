@@ -61,7 +61,7 @@
 	
 	function validate(){
 		
-		if($("#userPwd").val() == $("#userPwd2").val()){
+		if($("#userPwd").val() != $("#userPwd2").val()){
 			$("#passChkSpan").text("입력하신 비밀번호가 일치하지 않습니다.");
 			$("#userPwd2").focus();
 			return false;
@@ -80,7 +80,7 @@
 <body>
 	<div class="outer">
 		<h2 align="center">회원가입.</h2>
-		<form id="joinForm" method="post" action="/mwp/join.do" onsubmit="return vallidate();">
+		<form id="joinForm" method="post" action="/mwp/join.do" onsubmit="return validate();">
 			<table>
 				<tr>
 					<td width="200px"> <span class="import">*</span>아이디.</td>
@@ -143,14 +143,14 @@
 				
 				<tr>
 					<td>우편번호.</td>
-					<td><input type="text" name="zipcode" id="zipcode" readonly></td>
+					<td><input type="text" name="zipcode" id="zipcode" ></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>주소.</td>
 					
-					<td><input type="text" name="address1" id="address1" readonly></td>
+					<td><input type="text" name="address1" id="address1" ></td>
 					
 					<td><div id="searchAddrBtn">주소 검색.</div></td>
 				
@@ -198,7 +198,9 @@
 			
 			<div class="btns" align="center">
 			
-				<div id="joinMainBtn" > 메인으로 이동.</div>
+				<!-- 헤더에 선언된 mainPage() -->
+			
+				<div id="joinMainBtn" onclick="mainPage()" > 메인으로 이동.</div>
 				<div id="joinMainBtn"  onclick="memberJoin()"> 회원가입.</div>
 			</div>
 		

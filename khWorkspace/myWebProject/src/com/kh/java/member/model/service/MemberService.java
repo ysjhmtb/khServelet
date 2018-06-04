@@ -16,6 +16,8 @@ public class MemberService {
 	
 	public int joinMember(MemberVo m) {
 		
+		System.out.println("joinMember called");
+		
 		return new MemberDao().insertMember(m);
 	}
 

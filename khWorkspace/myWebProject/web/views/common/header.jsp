@@ -6,8 +6,6 @@
 
 <%
 	MemberVo member = (MemberVo)session.getAttribute("user");
-	
-
 
 %>
 

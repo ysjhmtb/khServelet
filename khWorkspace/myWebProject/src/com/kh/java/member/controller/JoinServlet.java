@@ -1,6 +1,8 @@
 package com.kh.java.member.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.java.member.model.service.MemberService;
 import com.kh.java.member.model.vo.MemberVo;
+
+import oracle.net.aso.s;
 
 /**
  * Servlet implementation class JoinServlet
@@ -30,6 +34,7 @@ public class JoinServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("JoinServlet called");
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -55,6 +60,24 @@ public class JoinServlet extends HttpServlet {
 		MemberService ms = new MemberService();
 		
 		int result = ms.joinMember(member);
+		
+		if(result > 0) {
+			System.out.println("회원가입 완료.");
+			//모든 서블릿은 웹 루트에서 실행된다. 따라서 상대경로 사용 가능하다.
+			response.sendRedirect("index.jsp");
+			
+			
+		}else {
+			System.out.println("회원가입 실패.");
+			request.setAttribute("msg", "회원 가입 실패!!!");
+			RequestDispatcher view 
+				= request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+			
+			
+		}
+		
+		System.out.println("result : " + result);
 		
 		
 		

@@ -75,6 +75,8 @@ public class MemberDao {
 	
 	
 	public int insertMember(MemberVo m) {
+		System.out.println("insertMember called");
+		
 		int result = 0;
 		
 		//1.커넥션을 맺는다.
@@ -87,18 +89,50 @@ public class MemberDao {
 			//2.쿼리 객체를 생성한다.
 			stmt = con.createStatement();
 			//실행할 쿼리 작성.
-			String query = "INSERT MEMBER ----";
+			String query = "INSERT INTO MEMBER VALUES('"
+					+m.getUserId()+"','"
+					+m.getPassword()+"','"
+					+m.getUserName()+"','"
+					+m.getGender()+"',"
+					+m.getAge()+",'"
+					+m.getEmail()+"','"
+					+m.getPhone()+"','"
+					+m.getAddress()+"','"
+					+m.getHobbyStr()+"',sysdate)";
+			
+			System.out.println("insert query : " + query);
 			
 			//3.쿼리 실행 결과를 가져온다. 
-			stmt.executeUpdate("");
+			//executeQuery -> resultSet(표 형식의 데이터.)
+			// 				-> select 문 호출시 사용.
+			//executeUpdate -> int(수정/추가/삭제된 행의 수.)
+			//				-> 추가/수정/삭제시 사용. 
+			result = stmt.executeUpdate(query);
+			
+			
+			//dml의 경우 트랜젝션 처리 필요.
+			//result가 0이 아닐 때 commit, 0일 때 rollback.
+			
+			if(result > 0) {
+				con.commit();
+			}else {
+				con.rollback();
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
-		
-		
-		
-		
 		
 		
 		
