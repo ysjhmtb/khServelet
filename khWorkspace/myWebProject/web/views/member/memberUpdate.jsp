@@ -201,14 +201,14 @@
 				
 				<tr>
 					<td>우편번호.</td>
-					<td><input type="text" name="zipcode" id="zipcode" ></td>
+					<td><input type="text" name="zipcode" id="zipcode" readonly></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td>주소.</td>
 					
-					<td><input type="text" name="address1" id="address1" ></td>
+					<td><input type="text" name="address1" id="address1" readonly></td>
 					
 					<td><div id="searchAddrBtn" onclick="openAddressPopup()">주소 검색.</div></td>
 				
@@ -265,6 +265,43 @@
 		
 		</form>
 	</div>
+	
+	<script>
+		$(function(){
+			$("input:radio").each(function(){
+				if($(this).val == "<%=member.getGender()%>"){
+					$(this).prop("checked",true);
+					
+				}
+			});
+			
+			var phones = '<%=member.getPhone()%>'.split('-');
+			$("input[name*=phone]").each(function(index){
+				$(this).val(phones[index]);
+				
+			});
+			
+			
+			var addrArr = '<%=member.getAddress()%>'.split(', ');
+			$('#zipcode').val(addrArr[0]);
+			$('#address1').val(addrArr[1]);
+			$('#address2').val(addrArr[2]);
+			
+			
+			var hobbies = '<%=member.getHobbyStr()%>'.split(', ');
+			$("input:checkbox").each(function(index){
+				if(-1 < $.inArray($(this).val(),hobbies)){
+					$(this).prop("checked",true);
+				}
+			});
+			
+			
+		});
+		
+		
+		
+		
+	</script>
 
 	<%@ include file = "../common/footer.jsp" %>
 </body>

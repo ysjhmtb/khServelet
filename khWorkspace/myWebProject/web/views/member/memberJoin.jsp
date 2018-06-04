@@ -175,7 +175,7 @@
 					<td>성별.</td>
 					<td>
 						<input type="radio" name="gender" value="M" checked>남성.
-						<input type="radio" name="gender" vlaue="F">여성.
+						<input type="radio" name="gender" value="F">여성.
 					</td>
 					<td></td>
 				

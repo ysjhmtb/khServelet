@@ -94,8 +94,13 @@ public class MemberDao {
 				result.setUserId(id);
 				result.setPassword(rs.getString("password"));
 				result.setUserName(rs.getString("username"));
+				result.setGender(rs.getString("gender").charAt(0));
 				result.setAge(rs.getInt("age"));
 				result.setEmail(rs.getString("email"));
+				result.setPhone(rs.getString("phone"));
+				result.setAddress(rs.getString("address"));
+				result.setHobbyStr(rs.getString("hobby"));
+				
 				
 			}
 			
