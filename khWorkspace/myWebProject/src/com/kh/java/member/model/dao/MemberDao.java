@@ -116,6 +116,8 @@ public class MemberDao {
 		return result;
 	}
 	
+	
+	
 	public int insertMember(MemberVo m) {
 		System.out.println("insertMember called");
 		
@@ -180,4 +182,7 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	
+	
 }

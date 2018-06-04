@@ -42,30 +42,60 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("userId");
 		String pwd = request.getParameter("userPwd");
 		
-		//비지니스 로직 호출.
-		MemberVo member = new MemberService().login(id,pwd);
-//		System.out.println(member.toString());
+		//서비스 호출.
+		MemberVo member = new MemberService().getMemberId(id);
+		RequestDispatcher view = null;
 		
-		if(member != null) {
-			//로그인  성공.
-			HttpSession session = request.getSession();
-			session.setAttribute("user", member);
-			
-			//멤버는 세션에 담았으므로 유지해야 할 값이 없다. 리다이렉트 가능함.
-			response.sendRedirect("index.jsp");
-
+		//1. 아이디가 존재하지 않습니다.
+		if(member == null) {
+			view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "아이디가 존재하지 않습니다.");
+			view.forward(request, response);
 		}else {
 			
-			//로그인 실패.
-			//로그인에 싪패하셨습니다.
-			request.setAttribute("msg", "로그인에 실패하셨습니다.");
+			if(pwd.equals(member.getPassword())) {
+				//로그인  성공.
+				HttpSession session = request.getSession();
+				session.setAttribute("user", member);
+				
+				//멤버는 세션에 담았으므로 유지해야 할 값이 없다. 리다이렉트 가능함.
+				response.sendRedirect("index.jsp");
 			
-			RequestDispatcher view 
-				= request.getRequestDispatcher("views/common/errorPage.jsp");
+			}else {
+				//2. 비밀번호가 틀렸습니다.
+				view = request.getRequestDispatcher("views/common/errorPage.jsp");
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
+				view.forward(request, response);
 			
-			view.forward(request, response);
-	
+			}
+			
 		}
+		
+//		//비지니스 로직 호출.
+//		MemberVo member = new MemberService().login(id,pwd);
+//		
+//		if(member != null) {
+//			//로그인  성공.
+//			HttpSession session = request.getSession();
+//			session.setAttribute("user", member);
+//			
+//			//멤버는 세션에 담았으므로 유지해야 할 값이 없다. 리다이렉트 가능함.
+//			response.sendRedirect("index.jsp");
+//
+//		}else {
+//			
+//			//로그인 실패.
+//			//로그인에 싪패하셨습니다.
+//			request.setAttribute("msg", "로그인에 실패하셨습니다.");
+//			
+//			
+//			
+//			RequestDispatcher view 
+//				= request.getRequestDispatcher("views/common/errorPage.jsp");
+//			
+//			view.forward(request, response);
+			
+		
 		
 		
 	}

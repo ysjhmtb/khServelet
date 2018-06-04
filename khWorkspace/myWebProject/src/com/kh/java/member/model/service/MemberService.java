@@ -18,6 +18,9 @@ public class MemberService {
 		return new MemberDao().selectMemberId(id);
 	}
 	
+	
+
+	
 	public int joinMember(MemberVo m) {
 		
 		System.out.println("joinMember called");
