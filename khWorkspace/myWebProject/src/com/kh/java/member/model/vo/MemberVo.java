@@ -107,10 +107,17 @@ public class MemberVo {
 	public void setHobbyStr(String hobbyStr) {
 		this.hobbyStr = hobbyStr;
 	}
+
+
+
 	@Override
 	public String toString() {
-		return userId +" / "+password+" / "+userName;
+		return "MemberVo [userId=" + userId + ", password=" + password + ", userName=" + userName + ", gender=" + gender
+				+ ", age=" + age + ", email=" + email + ", phone=" + phone + ", address=" + address + ", hobbyStr="
+				+ hobbyStr + ", hobby=" + hobby + ", enrolldate=" + enrolldate + "]";
 	}
+	
+	
 	
 	
 	

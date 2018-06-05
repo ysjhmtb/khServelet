@@ -1,23 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<!-- 헤더에 MemberVo member 이미 존재.  -->
-<%@ include file="../common/header.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 정보 수정.</title>
-
-<!-- https://spi.maps.daum.net/postcode/guidessl  -->  
+<title>내 정보 수정</title>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-
-<script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-
-
 <style>
 	.outer{
 		width:600px;
@@ -44,29 +32,19 @@
 	#searchAddressBtn, #updateBtn, #joinMainBtn{
 		background:yellowgreen;
 	}
-	
-	
 </style>
-
-
-  
 <script>
 	function memberJoin(){
-		$("#joinForm").submit();
-		
-		
+		$("#joinForm").submit();		
 	}
 	
 	function validate(){
-		
 		if($("#userPwd").val() != $("#userPwd2").val()){
-			$("#passChkSpan").text("입력하신 비밀번호가 일치하지 않습니다.");
+			$("#passChkSpan").text("비밀번호가 일치하지 않습니다.");
 			$("#userPwd2").focus();
 			return false;
 		}
-		
-		//다른 값들을 체크하는 로직 추가.(유효성 검사 로직 추가 영역.)
-		
+		//다른 값들을 체크 하는 로직 추가(유효성 검사 로직 추가 영역)
 		return true;
 	}
 	
@@ -103,206 +81,152 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                
-                /* 
-                
-                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sample6_address').value = fullAddr; 
-                
-                */
-                
-				$("#zipcode").val(data.zonecode);
+                //data.zonecode; //5자리 새우편번호 사용
+                $("#zipcode").val(data.zonecode);
                 $("#address1").val(fullAddr);
-                
-                
+
                 // 커서를 상세주소 필드로 이동한다.
-                /* 
-                
-                document.getElementById('sample6_address2').focus(); 
-                
-                */
-                
                 $("#address2").focus();
             }
         }).open();
 	}
 	
+	function updateMember(){
+		$("#updateForm").submit();
+	}
 	
 	
-	
-
 </script>
-
 </head>
 <body>
+	<%@ include file="../common/header.jsp" %>
 	<div class="outer">
-		<h2 align="center">회원가입.</h2>
-		<form id="joinForm" method="post" action="/mwp/join.do" onsubmit="return validate();">
-			<table>
-				<tr>
-					<td width="200px"> <span class="import">*</span>아이디.</td>
-					<td> <input type="text" name="userId" id="userId" value="<%=member.getUserId()%>" readonly> </td>
-					<td width="200px"> </td>
-				</tr>
-					
-				<tr>
-					<td><span class="import">*</span>변경 비밀번호.</td>
-					<td><input type="password" name="userPwd" id="userPwd" required></td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td><span class="import">*</span>변경 비밀번호 확인.</td>
-					<td><input type="password" name="userPwd2" id="userPwd2" required></td>
-					<td><span id="passChkSpan"></span></td>
-				</tr>
-				
-				<tr>
-					<td><span class="import">*</span>이름.</td>
-					<td><input type="text" name="userName" id="userName" 
-						value="<%=member.getUserName()%>"></td>
-					<td></td>
-				</tr>
-				
-				
-				<tr>
-					<td>성별.</td>
-					<td>
-						<input type="radio" name="gender" value="M">남성.
-						<input type="radio" name="gender" vlaue="F">여성.
-					</td>
-					<td></td>
-				
-				</tr>
-				
-				<tr>
-					<td>나이.</td>
-					<td><input type="number" name="age" min="10" max="100" 
-							value="<%=member.getAge()%>"></td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>이메일.</td>
-					<td><input type="email" name="email" value="<%=member.getEmail()%>"></td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>전화번호.</td>
-					<td>
-						<input type="text" name="phone1" id="phone1"  size="2"> - 
-						<input type="text" name="phone2" id="phone2" size="2"> -
-						<input type="text" name="phone3" id="phone3" size="2"> 
-					
-					</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>우편번호.</td>
-					<td><input type="text" name="zipcode" id="zipcode" readonly></td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>주소.</td>
-					
-					<td><input type="text" name="address1" id="address1" readonly></td>
-					
-					<td><div id="searchAddrBtn" onclick="openAddressPopup()">주소 검색.</div></td>
-				
-				</tr>
-				
-				<tr>
-					<td>상세주소.</td>
-					
-					<td><input type="text" name="address2" id="address2"></td>
-					
-					<td></td>
-				
-				</tr>
-				
-				<tr>
-					<td>취미.</td>
-					<td>
-						<input type="checkBox" id="game" name="hobby" value="게임">
-						<lable for="game">게임.</lable>
-					
-						<input type="checkBox" id="climbing" name="hobby" value="등산">
-						<lable for="climbing">등산.</lable>
-						
-						<input type="checkBox" id="sing" name="hobby" value="노래">
-						<lable for="sing">노래.</lable>
-						
-						<input type="checkBox" id="board" name="hobby" value="보드">
-						<lable for="board">보드.</lable>
-						
-						<input type="checkBox" id="read" name="hobby" value="독서">
-						<lable for="read">독서.</lable>
-						
-						<input type="checkBox" id="etc" name="hobby" value="기타">
-						<lable for="etc">기타.</lable>
-					
-					</td>
-					
-					<td></td>
-				</tr>
-				
-			
-			</table>
-			
-			<br>
-			
-			<div class="btns" align="center">
-			
-				<!-- 헤더에 선언된 mainPage() -->
-			
-				<div id="joinMainBtn" onclick="mainPage()" > 메인으로 이동.</div>
-				<div id="updateBtn"  onclick="updateMember()">회원수정.</div>
-				<div id="deleteBtn"  onclick="deleteMember()">회원탈퇴.</div>
-			</div>
-		
+		<h2 align="center">회원 가입</h2>
+		<form id="updateForm" method="post" action="/mwp/updateMember.do" 
+					onsubmit="return validate();" >
+		<table>
+			<tr>
+				<td width="200px;"><span class="import">*</span>아이디</td>
+				<td><input type="text" name="userId" id="userId" value="<%=member.getUserId()%>" readonly/></td>
+				<td width="200px"></td>
+			</tr>		
+			<tr>
+				<td><span class="import">*</span>변경 비밀번호</td>
+				<td><input type="password" name="userPwd" id="userPwd" required/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><span class="import">*</span>변경 비밀번호 확인</td>
+				<td><input type="password" name="userPwd2" id="userPwd2" required/></td>
+				<td><span id="passChkSpan"></span></td>
+			</tr>
+			<tr>
+				<td><span class="import">*</span>이름</td>
+				<td><input type="text" name="userName" id="userName" 
+										value="<%=member.getUserName()%>"/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>성별</td>
+				<td>
+					<input type="radio" name="gender" value="M"> 남성
+					<input type="radio" name="gender" value="F"> 여성
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>나이</td>
+				<td><input type="number" name="age" min="10" max="100" 
+									value="<%=member.getAge()%>"/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" name="email" value="<%=member.getEmail()%>"/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td>
+					<input type="text" name="phone1" id="phone1" size="2"/>-
+					<input type="text" name="phone2" id="phone2" size="2"/>-
+					<input type="text" name="phone3" id="phone3" size="2"/>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>우편번호</td>
+				<td><input type="text" name="zipcode" id="zipcode" readonly/></td>
+				<td><div id="searchAddressBtn" onclick="openAddressPopup();">주소 검색</div></td>
+			</tr>
+			<tr>
+				<td>주소</td>
+				<td><input type="text" name="address1" id="address1" readonly/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>상세주소</td>
+				<td><input type="text" name="address2" id="address2"/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>취미</td>
+				<td>
+					<input type="checkbox" id="game" name="hobby" value="게임"/>
+					<label for="game">게임</label>
+					<input type="checkbox" id="climbing" name="hobby" value="등산"/>
+					<label for="climbing">등산</label>
+					<input type="checkbox" id="sing" name="hobby" value="노래"/>
+					<label for="sing">노래</label>
+					<input type="checkbox" id="board" name="hobby" value="보드"/>
+					<label for="board">보드</label>
+					<input type="checkbox" id="read" name="hobby" value="독서"/>
+					<label for="read">독서</label>
+					<input type="checkbox" id="etc" name="hobby" value="기타"/>
+					<label for="etc">기타</label>
+				</td>
+				<td></td>
+			</tr>
+		</table>
+		<br>
+		<div class="btns" align="center">
+			<div id="joinMainBtn" onclick="mainPage();">메인으로</div>		
+			<div id="updateBtn" onclick="updateMember();">회원 수정</div>		
+			<div id="deleteBtn" onclick="deleteMember();">회원 탈퇴</div>		
+		</div>
 		</form>
 	</div>
-	
 	<script>
 		$(function(){
 			$("input:radio").each(function(){
-				if($(this).val == "<%=member.getGender()%>"){
-					$(this).prop("checked",true);
-					
+				if($(this).val() == '<%=member.getGender()%>'){
+					$(this).prop("checked", true);
 				}
 			});
 			
 			var phones = '<%=member.getPhone()%>'.split('-');
 			$("input[name*=phone]").each(function(index){
 				$(this).val(phones[index]);
-				
 			});
 			
-			
 			var addrArr = '<%=member.getAddress()%>'.split(', ');
-			$('#zipcode').val(addrArr[0]);
-			$('#address1').val(addrArr[1]);
-			$('#address2').val(addrArr[2]);
-			
+			$("#zipcode").val(addrArr[0]);			
+			$("#address1").val(addrArr[1]);			
+			$("#address2").val(addrArr[2]);			
 			
 			var hobbies = '<%=member.getHobbyStr()%>'.split(', ');
 			$("input:checkbox").each(function(index){
-				if(-1 < $.inArray($(this).val(),hobbies)){
-					$(this).prop("checked",true);
+				if(-1 < $.inArray($(this).val(), hobbies)){
+					$(this).prop("checked", true);
 				}
 			});
-			
-			
 		});
 		
-		
-		
-		
+		function deleteMember(){
+			location.href = "/mwp/deleteMember.do?userid=<%=member.getUserId()%>";
+		}
 	</script>
-
-	<%@ include file = "../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
+

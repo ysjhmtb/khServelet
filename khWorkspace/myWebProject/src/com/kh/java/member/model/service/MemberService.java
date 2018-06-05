@@ -27,5 +27,20 @@ public class MemberService {
 		
 		return new MemberDao().insertMember(m);
 	}
+	
+	public int setMemberInfo(MemberVo m) {
+		return new MemberDao().updateMember(m);
+	}
+
+	public int deleteMember(String id) {
+		// TODO Auto-generated method stub
+		return new MemberDao().deleteMember(id);
+	}
+	
+	//트랜젝션
+	//커넥션 관리, 트랜젝션 처리(commit, rollback)
+	//게시글 
+	
+	
 
 }

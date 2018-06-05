@@ -188,6 +188,118 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int updateMember(MemberVo m) {
+		int result = -1;
+		Connection con = null;
+		Statement stmt = null;
+		String query = null;
+	
+		
+		//데이터 베이스 커넥션 생성.
+		con = JDBCTemplate.getConnection();
+	
+		
+		try {
+			//쿼리 전송 객체 생성.
+			stmt = con.createStatement();
+			
+			//쿼리 작성.
+			query = "UPDATE MEMBER "
+					+ "SET PASSWORD = '" + m.getPassword() + "',"
+						+ "USERNAME = '" + m.getUserName() + "', "
+						+ "GENDER = '" + m.getGender() + "', "
+						+ "AGE = '" + m.getAge() + "', "
+						+ "EMAIL = '" + m.getEmail() + "', "
+						+ "PHONE = '" + m.getPhone() + "', "
+						+ "ADDRESS = '" + m.getAddress() + "', "
+						+ "HOBBY = '" + m.getHobbyStr() + "' "
+					+ "WHERE USERID = '" + m.getUserId() + "'";
+			System.out.println("query : " + query);
+					
+			//실행 결과 처리.(resultSet or int)
+			result = stmt.executeUpdate(query);
+			
+			if(0 < result) {
+				con.commit();
+			}else {
+				con.rollback();
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				//자원 반납.
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+				
+		
+		return result;
+	}
+
+	public int deleteMember(String id) {
+		
+		int result = 0;
+		
+		//1.커넥션을 맺는다.
+		Connection con = JDBCTemplate.getConnection();
+		
+		Statement stmt = null;
+		
+		
+		try {
+			//2.쿼리 객체를 생성한다.
+			stmt = con.createStatement();
+			//실행할 쿼리 작성.
+			String query = "DELETE FROM MEMBER WHERE USERID='"+ id + "'";
+			System.out.println("delete query : " + query);
+			
+			//3.쿼리 실행 결과를 가져온다. 
+			
+			result = stmt.executeUpdate(query);
+			
+			
+			//dml의 경우 트랜젝션 처리 필요.
+			//result가 0이 아닐 때 commit, 0일 때 rollback.
+			
+			if(result > 0) {
+				con.commit();
+			}else {
+				con.rollback();
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		
+		return result;
+	}
+
+	
+	
 	
 	
 }

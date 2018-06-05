@@ -206,7 +206,7 @@
 				<tr>
 					<td>password :</td>
 					<td>
-						<input type = "text" name = "userPwd">
+						<input type = "password" name = "userPwd">
 					</td>
 				
 				</tr>
