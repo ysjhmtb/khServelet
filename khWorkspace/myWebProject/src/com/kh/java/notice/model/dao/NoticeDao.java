@@ -25,7 +25,7 @@ public class NoticeDao {
 			stmt = con.createStatement();
 			String query = "SELECT NNO,NTITLE,NCONTENT,NWRITER,NCOUNT,NDATE,USERNAME "
 					+ "FROM NOTICE "
-					+ "JOIN MEMBER ON (NWITER = USERIS)";
+					+ "JOIN MEMBER ON (NWRITER = USERID)";
 			rs = stmt.executeQuery(query);
 			
 			

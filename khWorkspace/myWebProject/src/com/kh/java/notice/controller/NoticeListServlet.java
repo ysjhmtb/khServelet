@@ -1,11 +1,16 @@
 package com.kh.java.notice.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.java.notice.model.service.NoticeService;
+import com.kh.java.notice.model.vo.NoticeVo;
 
 /**
  * Servlet implementation class NoticeListServlet
@@ -34,6 +39,11 @@ public class NoticeListServlet extends HttpServlet {
 		
 		//3.비지니스 로직 호출.(서비스 호출)
 		//공지사항의 목록을 조회.
+		List<NoticeVo> list = new NoticeService().getNoticeList();
+		
+		for(NoticeVo vo : list) {
+			System.out.println(vo.toString());
+		}
 		
 		//4.로직 결과 처리.(응답 페이지 처리)
 		
