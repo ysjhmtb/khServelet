@@ -52,7 +52,7 @@ public class NoticeListServlet extends HttpServlet {
 		if(list.size() != 0) {
 			//조회 성공 -> 공지사항 페이지 목록 출력.
 			request.setAttribute("list", list);
-			view = request.getRequestDispatcher("목적지 jsp");
+			view = request.getRequestDispatcher("views/notice/noticeList.jsp");
 			
 			
 		}else {
