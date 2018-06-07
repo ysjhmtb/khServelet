@@ -3,6 +3,7 @@
  <%@page import ="java.util.ArrayList" %>
  <%@page import="com.kh.java.notice.model.vo.NoticeVo"%>
  
+ 
 <% ArrayList<NoticeVo> list = (ArrayList<NoticeVo>) request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
@@ -34,6 +35,12 @@
 		text-align:center;
 	}
 	
+	a{
+		/* text-decoration:none; */
+		color:white;
+		
+	}
+	
 	
 </style>
 
@@ -57,10 +64,9 @@
 			<%for(NoticeVo n : list){ %>
 			
 				<tr>
-				
 					<td><%=n.getNo() %></td>
-					<td><a href="/mwp/noticeDetail.do/?noticeNo=<%=n.getNo()%>"><%=n.getTitle() %></a></td>
-					<td><%=n.getWriter() %></td>
+					<td><a href="/mwp/noticeDetail.do?noticeNo=<%=n.getNo()%>"><%=n.getTitle() %></a></td>
+					<td><%=n.getName() %></td>
 					<td><%=n.getCount() %></td>
 					<td><%=n.getWriteDate() %></td>	
 				</tr>

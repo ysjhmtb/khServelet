@@ -24,6 +24,15 @@ public class NoticeService {
 		
 	}
 	
+	public NoticeVo getNotice(int noticeNo) {
+		
+		Connection con = JDBCTemplate.getConnection();
+		NoticeVo notice = new NoticeDao().selectNotice(con, noticeNo);
+		JDBCTemplate.close(con);
+		
+		return notice;
+	}
+	
 	public NoticeVo getNoticeOne() {
 		//select
 		

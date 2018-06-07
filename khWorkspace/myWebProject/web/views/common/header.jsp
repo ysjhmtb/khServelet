@@ -197,6 +197,8 @@
 	<h1 align = "center">My Web Project</h1>
 	<div class = "loginArea">
 	
+	
+	
 	<%if(member == null) {%>
 	
 		<form id = "loginForm" action = "/mwp/login.do" method = "post">
@@ -239,6 +241,16 @@
 			
 		
 		<%} %>
+	</div>
+	
+	
+	<div class = "wrap">
+			<div class = "nav">
+				<div class = "menu" onclick="mainPage()">HOME</div>
+				<div class = "menu" onclick="noticePage()">공지사항.</div>
+				<div class = "menu">게시판.</div>
+				<div class = "menu">사진 게시판.</div>
+			</div>	
 	</div>
 	<br>
 	<br>

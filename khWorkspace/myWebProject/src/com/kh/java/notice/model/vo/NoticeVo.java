@@ -9,7 +9,10 @@ public class NoticeVo {
 	private String writer;
 	private int count;
 	private Date writeDate;
+	private String name;
 	
+	
+
 	public NoticeVo(){
 		
 	}
@@ -23,6 +26,20 @@ public class NoticeVo {
 		this.count = count;
 		this.writeDate = writeDate;
 	}
+	
+	
+	public NoticeVo(int no, String title, String content, String writer, int count, Date writeDate, String name) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.count = count;
+		this.writeDate = writeDate;
+		this.name = name;
+	}
+	
+	
 
 	public int getNo() {
 		return no;
@@ -71,6 +88,18 @@ public class NoticeVo {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+
+	
 
 	@Override
 	public String toString() {
