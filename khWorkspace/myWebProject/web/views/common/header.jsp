@@ -181,6 +181,12 @@
 			location.href = "/mwp/views/member/memberUpdate.jsp"
 			
 		}
+		
+		function noticePage(){
+			location.href = "/mwp/noticeList.do";
+			
+			
+		}
 	</script>
   
   

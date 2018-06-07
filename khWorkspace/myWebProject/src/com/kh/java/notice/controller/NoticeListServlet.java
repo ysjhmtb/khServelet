@@ -26,8 +26,19 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//1.한글 전송값이 존재할 경우 인코딩 처리.
+		//전송값이 없기 때문에 인코딩 처리 불필요.
+		
+		//2.전송값 변수에 저장.
+		//변수 저장도 불필요.
+		
+		//3.비지니스 로직 호출.(서비스 호출)
+		//공지사항의 목록을 조회.
+		
+		//4.로직 결과 처리.(응답 페이지 처리)
+		
+		
+		
 	}
 
 	/**
