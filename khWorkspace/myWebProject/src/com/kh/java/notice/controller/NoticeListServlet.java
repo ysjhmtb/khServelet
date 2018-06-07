@@ -3,6 +3,7 @@ package com.kh.java.notice.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,6 +47,28 @@ public class NoticeListServlet extends HttpServlet {
 		}
 		
 		//4.로직 결과 처리.(응답 페이지 처리)
+		RequestDispatcher view = null;
+		
+		if(list.size() != 0) {
+			//조회 성공 -> 공지사항 페이지 목록 출력.
+			request.setAttribute("list", list);
+			view = request.getRequestDispatcher("목적지 jsp");
+			
+			
+		}else {
+			// 조회 실패 -> 에러 페이지 -> 공지사항 불러오기를 실패하셨습니다.
+			view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "공지사항 불러오기를 실패하였습니다.");
+			
+			
+		}
+		
+		// if와 else 모두에서 forward를 사용하므로 하나만 사용하도록 이곳에 위치.
+		view.forward(request, response);
+		
+		
+		
+		
 		
 		
 		
