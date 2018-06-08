@@ -1,16 +1,14 @@
+<%@page import="com.kh.java.notice.model.vo.NoticeVo"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@page import ="java.util.ArrayList" %>
- <%@page import="com.kh.java.notice.model.vo.NoticeVo"%>
- 
- 
-<% ArrayList<NoticeVo> list = (ArrayList<NoticeVo>) request.getAttribute("list"); %>
+<% ArrayList<NoticeVo> list 
+				= (ArrayList<NoticeVo>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항.</title>
-
+<title>공지 사항 목록</title>
 <style>
 	.outer{
 		width:800px;
@@ -22,65 +20,90 @@
 		padding:20px;
 		border:1px solid white;
 	}
-	
 	.tableArea{
 		width:600px;
 		height:400px;
 		margin-left:auto;
 		margin-right:auto;
-		border:1px solid white;
 	}
-	
-	table{
+	table td{
 		text-align:center;
+	}
+	.searchArea{
+		width:600px;
+		margin-left:auto;
+		margin-right:auto;
 	}
 	
 	a{
-		/* text-decoration:none; */
 		color:white;
-		
 	}
-	
-	
 </style>
+
+
+<script>
+	function searchNotice(){
+		
+		var condition = $("#searchCondition").val();
+		var searchText = $("#searchText").val();
+		//쿼리 스트링(파라미터 값 작성 방법.)
+		//url?key1=value1&key2=value2;
+		location.href = "/mwp/searchNotice.do?condition=" + condition 
+				+ "&keyword=" + searchText;
+		
+	};
+
+</script>
 
 
 </head>
 <body>
-<%@ include file = "../common/header.jsp" %>
-
+<%@ include file="../common/header.jsp" %>
 <div class="outer">
-	<h1>공지사항.</h1>
-	<div class="tabelArea">
+	<h1 align="center">공지사항</h1>
+	<div class="tableArea">
 		<table align="center">
 			<tr>
-				<th>글 번호.</th>
-				<th width="200">글 제목.</th>
-				<th width="100">작성자.</th>
-				<th>조회 수.</th>
-				<th width="100">작성일.</th>
-			</tr>	
-			
+				<th>글번호</th>
+				<th width="200">글제목</th>
+				<th width="100">작성자</th>
+				<th>조회수</th>
+				<th width="100">작성일</th>
+			</tr>
 			<%for(NoticeVo n : list){ %>
-			
-				<tr>
-					<td><%=n.getNo() %></td>
-					<td><a href="/mwp/noticeDetail.do?noticeNo=<%=n.getNo()%>"><%=n.getTitle() %></a></td>
-					<td><%=n.getName() %></td>
-					<td><%=n.getCount() %></td>
-					<td><%=n.getWriteDate() %></td>	
-				</tr>
-			
+			<tr>
+				<td><%=n.getNo() %></td>			
+				<td>
+<a href="/mwp/noticeDetail.do?noticeNo=<%=n.getNo() %>"><%=n.getTitle() %></a>
+				</td>			
+				<td><%=n.getName() %></td>			
+				<td><%=n.getCount() %></td>			
+				<td><%=n.getWriteDate() %></td>			
+			</tr>
 			<%} %>
-			
-			
 		</table>
-		
 	</div>
-
+	<div class="searchArea" align="center">
+		<select id="searchCondition">
+			<option value="0">전체</option>
+			<option value="1">제목</option>
+			<option value="2">내용</option>
+			<option value="3">작성자</option>
+		</select>		
+		<input type="text" id="searchText" placeholder="검색어 입력"/>
+		<input type="button" value="검색하기" onclick="searchNotice();"/>
+		<%if(null != member && "admin".equals(member.getUserId())){ %>
+			<input type="button" value="작성하기" onclick="writeNotice();"/>
+		<%} %>
+	</div>
 </div>
-
-<%@ include file = "../common/footer.jsp" %>
-	
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
+
+
+
+
+
+
+

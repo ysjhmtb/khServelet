@@ -43,5 +43,20 @@ public class NoticeService {
 		
 		
 	}
+	
+	public ArrayList<NoticeVo> searchNotice(int condition, String keyword){
+		//커넥션 생성.
+		Connection con = JDBCTemplate.getConnection();
+		
+		//비지니스 로직.(dao 해당 기능 호출.)
+		ArrayList<NoticeVo> list = new NoticeDao().selectNoticeKeyword(con, condition, keyword);
+		
+		//close
+		JDBCTemplate.close(con);
+		
+		
+		//return
+		return list;
+	}
 
 }
