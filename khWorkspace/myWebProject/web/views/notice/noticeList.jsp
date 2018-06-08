@@ -39,23 +39,24 @@
 		color:white;
 	}
 </style>
-
-
 <script>
 	function searchNotice(){
-		
 		var condition = $("#searchCondition").val();
 		var searchText = $("#searchText").val();
-		//쿼리 스트링(파라미터 값 작성 방법.)
+		//쿼리 스트링(파라미터 값 작성 방법)
 		//url?key1=value1&key2=value2;
-		location.href = "/mwp/searchNotice.do?condition=" + condition 
-				+ "&keyword=" + searchText;
+		location.href = "/mwp/searchNotice.do?condition=" + condition
+																		+ "&keyword=" + searchText;
 		
-	};
-
+	}
+	
+	
+	function writeNotice(){
+		
+		location.href = "/mwp/views/notice/noticeForm.jsp";
+		
+	}
 </script>
-
-
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
@@ -70,16 +71,22 @@
 				<th>조회수</th>
 				<th width="100">작성일</th>
 			</tr>
-			<%for(NoticeVo n : list){ %>
-			<tr>
-				<td><%=n.getNo() %></td>			
-				<td>
-<a href="/mwp/noticeDetail.do?noticeNo=<%=n.getNo() %>"><%=n.getTitle() %></a>
-				</td>			
-				<td><%=n.getName() %></td>			
-				<td><%=n.getCount() %></td>			
-				<td><%=n.getWriteDate() %></td>			
-			</tr>
+			<%if(list.size() == 0){ %>
+				<tr>
+					<td colspan="5">조회 된 공지사항이 없습니다.</td>
+				</tr>
+			<%}else{ %>
+				<%for(NoticeVo n : list){ %>
+				<tr>
+					<td><%=n.getNo() %></td>			
+					<td>
+	<a href="/mwp/noticeDetail.do?noticeNo=<%=n.getNo() %>"><%=n.getTitle() %></a>
+					</td>			
+					<td><%=n.getName() %></td>			
+					<td><%=n.getCount() %></td>			
+					<td><%=n.getWriteDate() %></td>			
+				</tr>
+				<%} %>
 			<%} %>
 		</table>
 	</div>
@@ -100,8 +107,6 @@
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
-
-
 
 
 
