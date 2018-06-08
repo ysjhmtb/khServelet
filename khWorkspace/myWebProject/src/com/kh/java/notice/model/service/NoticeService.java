@@ -28,6 +28,20 @@ public class NoticeService {
 		
 		Connection con = JDBCTemplate.getConnection();
 		NoticeVo notice = new NoticeDao().selectNotice(con, noticeNo);
+		
+		if(null != notice) {
+			int result = new NoticeDao().updateNoticeCount(con, noticeNo);
+			
+			if(0 < result) {
+				JDBCTemplate.commit(con);
+				
+			}else {
+				JDBCTemplate.rollback(con);
+			}
+		}
+		
+		
+		
 		JDBCTemplate.close(con);
 		
 		return notice;
@@ -59,4 +73,35 @@ public class NoticeService {
 		return list;
 	}
 
+	public int writeNotice(NoticeVo notice) {
+		//커넥션을 생성.
+		Connection con = JDBCTemplate.getConnection();
+		
+		//비지니스 로직 호출.
+		int result = new NoticeDao().insertNotice(con,notice);
+		
+		if(0 < result) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		//자원 반납. close
+		JDBCTemplate.close(con);
+		
+		//결과 반환.
+		return result;
+	}
+
+	public NoticeVo getNoticeFormData(int noticeNo) {
+		Connection con = JDBCTemplate.getConnection();
+		NoticeVo notice = new NoticeDao().selectNotice(con, noticeNo);
+		JDBCTemplate.close(con);
+		return notice;
+	}
+
 }
+
+
+
+

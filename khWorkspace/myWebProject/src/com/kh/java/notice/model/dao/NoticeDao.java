@@ -214,6 +214,84 @@ public class NoticeDao {
 		}
 		return list;
 	}
+
+	public int insertNotice(Connection con, NoticeVo notice) {
+		int result = 0;
+		Statement stmt = null;
+		String query = "";
+		
+		try {
+			
+			
+			//1.쿼리 실행 객체 생성.
+			stmt = con.createStatement();
+			
+			//2.쿼리 작성.
+			/*
+			 INSERT INTO NOTICE 
+			 VALUES (SEQ_NNO.NEXTVAL, '제목', '내용', 'admin', 0, sysdate);
+			 
+			 
+			 */
+			query = "INSERT INTO NOTICE " 
+					+ "VALUES (SEQ_NNO.NEXTVAL, '" + notice.getTitle() +"', '"
+					+ notice.getContent() + "', '"
+					+ notice.getWriter() + "', 0, sysdate)";
+			System.out.println("공지 사항 작성 쿼리 : " + query);
+			
+			
+			//3.쿼리 실행.
+			result = stmt.executeUpdate(query);
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			//4.자원 반납.
+			JDBCTemplate.close(stmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int updateNoticeCount(Connection con, int noticeNo) {
+		int result = 0;
+		Statement stmt = null;
+		String query = "";
+		
+		
+		try {
+			//1.쿼리 전송 객체 생성.
+			stmt = con.createStatement();
+			//2.쿼리 작성.
+			/*
+			 UPDATE NOTICE 
+			 SET NCOUNT = NCOUNT + 1
+			 WHERE NNO = 24;
+			 */
+			
+			query = "UPDATE NOTICE "
+					+ "SET NCOUNT = NCOUNT + 1 "
+					+ "WHERE NNO = " + noticeNo;
+			
+			//3.쿼리 실행.
+			result = stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//4.자원 반납.
+			JDBCTemplate.close(stmt);
+		}
+		
+		//5.결과 반환.
+		return result;
+	}
 }
 
 

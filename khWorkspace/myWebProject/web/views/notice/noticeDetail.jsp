@@ -41,7 +41,7 @@
 	}
 	
 	function updateNoticePage(){
-		location.href = "/mwp/updateNotice.do?noticeNo=<%=notice.getNo()%>";
+		location.href = "/mwp/updateNoticeForm.do?noticeNo=<%=notice.getNo()%>";
 	}
 
 

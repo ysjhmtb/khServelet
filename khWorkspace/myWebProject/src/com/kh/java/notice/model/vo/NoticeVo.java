@@ -39,6 +39,12 @@ public class NoticeVo {
 		this.name = name;
 	}
 	
+	public NoticeVo(String id, String title, String content) {
+		super();
+		writer = id;
+		this.title = title;
+		this.content = content;
+	}
 	
 
 	public int getNo() {
