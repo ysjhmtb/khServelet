@@ -187,6 +187,12 @@
 			
 			
 		}
+		
+		$(function(){
+			$("#pwd").change(function(){
+				alert($(this).val());
+			});
+		})
 	</script>
   
   
@@ -214,7 +220,7 @@
 				<tr>
 					<td>password :</td>
 					<td>
-						<input type = "password" name = "userPwd">
+						<input type = "password" name = "userPwd" id="pwd">
 					</td>
 				
 				</tr>
