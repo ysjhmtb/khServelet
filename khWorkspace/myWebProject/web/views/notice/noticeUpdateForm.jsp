@@ -26,6 +26,18 @@
 
 </style>
 
+<script>
+	function deleteNotice(){
+		if(confirm("삭제하시겠습니까?")){
+			location.href = "/mwp/deleteNotice.do?noticeNo=<%=notice.getNo()%>";
+		}
+		
+		
+		
+	}
+</script>
+
+
 
 </head>
 <body>

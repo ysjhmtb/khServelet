@@ -46,6 +46,13 @@ public class NoticeVo {
 		this.content = content;
 	}
 	
+	
+	public NoticeVo(int no, String title, String content) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+	}
 
 	public int getNo() {
 		return no;

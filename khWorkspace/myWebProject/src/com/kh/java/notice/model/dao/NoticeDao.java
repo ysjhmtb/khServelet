@@ -292,6 +292,119 @@ public class NoticeDao {
 		//5.결과 반환.
 		return result;
 	}
+
+	public int updateNotice(Connection con, NoticeVo notice) {
+		int result = 0;
+		Statement stmt = null;
+		String query = "";
+		
+		
+		try {
+			//1. 쿼리 전송 객체 생성.
+			stmt = con.createStatement();
+			
+			//2. 쿼리 작성.
+			query = "UPDATE NOTICE " 
+					+ "SET NTITLE='" + notice.getTitle() 
+					+ "', NCONTENT='" + notice.getContent()  
+					+ "' WHERE NNO= " + notice.getNo();
+			System.out.println("executed query : " + query);
+			
+			
+			//3. 쿼리 실행.
+			result = stmt.executeUpdate(query);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//4. 자원 반납.
+			JDBCTemplate.close(stmt);
+			
+		}
+		
+		//5. 결과 리턴
+		return result;
+	}
+
+	public int deleteNotice(Connection con, int noticeNo) {
+		
+		int result = 0;
+		Statement stmt = null;
+		String query = "";
+		
+		
+		try {
+			//1. creating query statement object
+			stmt = con.createStatement();
+			
+			//2. writing query to execute
+			query = "DELETE FROM NOTICE WHERE NNO = " + noticeNo;
+			System.out.println("called query as delete notice : " + query);
+			
+			//3. executing query
+			result = stmt.executeUpdate(query);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//4. retrieving resource
+			JDBCTemplate.close(stmt);
+		}
+		
+		//5. returning results
+		return result;
+	}
+
+	public NoticeVo selectNoticeLast(Connection con) {
+		
+		NoticeVo result = null;
+		Statement stmt = null;
+		String query = "";
+		ResultSet rs = null;
+		
+		
+		try {
+			//1. 쿼리 전송 객체 생성 
+			stmt = con.createStatement();
+			
+			//2. 쿼리 작성 
+			query = "SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE " + 
+					"FROM NOTICE " + 
+					"WHERE NNO = (SELECT MAX(N.NNO) FROM NOTICE N)";
+			
+			
+			//3. 쿼리 실행 
+			rs = stmt.executeQuery(query);
+			
+			
+			
+			//4. 결과 처리 
+			while(rs.next()) {
+				String title = rs.getString("ntitle");
+				String content = rs.getString("ncontent");
+				result = new NoticeVo();
+				result.setTitle(title);
+				result.setContent(content);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//5. 자원 회수 
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+
+		
+		//6. 결과 반환 
+		return result;
+		
+	}
 }
 
 

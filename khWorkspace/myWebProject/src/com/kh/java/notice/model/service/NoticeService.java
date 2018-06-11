@@ -100,6 +100,58 @@ public class NoticeService {
 		return notice;
 	}
 
+	public int modifyNotice(NoticeVo notice) {
+		//1. 커넥션 생성.
+		Connection con = JDBCTemplate.getConnection();
+		
+		//2. dao 호출.
+		int result = new NoticeDao().updateNotice(con,notice);
+		
+		//3. 트랜잭션 처리.
+		if(0 < result) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		//4. 자원 반납.
+		JDBCTemplate.close(con);
+				
+		//5. return
+		return result;
+		
+		
+	}
+
+	public int removeNotice(int noticeNo) {
+		//1. 커넥션 생성.
+		Connection con = JDBCTemplate.getConnection();
+		
+		//2. dao 호출.
+		int result = new NoticeDao().deleteNotice(con,noticeNo);
+		
+		//3. 트랜잭션 처리.
+		if(0 < result) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		//4. 자원 반납.
+		JDBCTemplate.close(con);
+				
+		//5. return
+		return result;
+	}
+
+	
+	public NoticeVo getNoticeLast() {
+		Connection con = JDBCTemplate.getConnection();
+		NoticeVo notice = new NoticeDao().selectNoticeLast(con);
+		JDBCTemplate.close(con);
+		return notice;
+	}
+
 }
 
 
