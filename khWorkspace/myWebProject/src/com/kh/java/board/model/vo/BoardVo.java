@@ -7,6 +7,7 @@ public class BoardVo {
 	private String title;
 	private String content;
 	private String writer;
+	private String writerName;
 	private int count;
 	private Date writeDate;
 	private boolean delFlag;
@@ -69,6 +70,15 @@ public class BoardVo {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+	
+
+	public String getWriterName() {
+		return writerName;
+	}
+
+	public void setWriterName(String writerName) {
+		this.writerName = writerName;
 	}
 
 	public int getCount() {
