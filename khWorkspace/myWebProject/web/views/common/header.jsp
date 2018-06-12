@@ -122,6 +122,8 @@
 	  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 	  crossorigin="anonymous"></script>
 	  
+	  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	  
 	<script>
 		function login(){
 			$("#loginForm").submit();
@@ -178,7 +180,21 @@
 		}
 		
 		function myInfo(){
-			location.href = "/mwp/views/member/memberUpdate.jsp"
+			
+			/*
+			Kakao.Auth.getStatus(callback)
+			현재 로그인 상태를 반환합니다.
+			
+			Parameters
+			callback : Function(statusObj)
+			statusObj: { status: "connected" | "not_connected", user: userObj }
+			로그인 상태를 반환할 콜백 함수
+			*/
+			
+			Kakao.Auth.getStatus(function(status){
+				console.log(status);
+			});
+			//location.href = "/mwp/views/member/memberUpdate.jsp"
 			
 		}
 		
@@ -192,6 +208,21 @@
 			$("#pwd").change(function(){
 				alert($(this).val());
 			});
+		})
+		
+		
+		$(function(){
+			Kakao.init('2176ef7240bdb4d15b1109660b0f4365');
+		    // 카카오 로그인 버튼을 생성합니다.
+		    Kakao.Auth.createLoginButton({
+		      container: '#kakao-login-btn',
+		      success: function(authObj) {
+		        alert(JSON.stringify(authObj));
+		      },
+		      fail: function(err) {
+		         alert(JSON.stringify(err));
+		      }
+		    });	
 		})
 	</script>
   
@@ -229,6 +260,12 @@
 					<td colspan = "2">
 						<div id = "memberLoginBtn" onclick = "login()">sign in</div>
 						<div id = "memberJoinBtn" onclick = "join()">sign up</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2">
+						<a id="kakao-login-btn"></a>
 					</td>
 				</tr>
 			
