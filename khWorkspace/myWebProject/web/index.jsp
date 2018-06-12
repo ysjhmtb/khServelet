@@ -43,7 +43,7 @@
 	<script>
 		$(function(){
 			//popup
-			window.open("/mwp/noticePopup.do","_blank","width=300,height=400,left=200,top=200");
+			//window.open("/mwp/noticePopup.do","_blank","width=300,height=400,left=200,top=200");
 			
 		})
 	</script>
