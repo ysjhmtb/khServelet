@@ -20,6 +20,20 @@ public class BoardService {
 		
 		return list;
 	}
+
+	public int insertBoard(BoardVo board) {
+		Connection con = JDBCTemplate.getConnection();
+		int result = new BoardDao().insertBoard(con, board);
+		
+		if(0 < result) {
+			JDBCTemplate.commit(con);
+		}else{
+			JDBCTemplate.rollback(con);
+		}
+		
+		JDBCTemplate.close(con);
+		return result;
+	}
 	
 	
 	

@@ -80,4 +80,20 @@ public class BoardDao {
 		
 	}
 
+	public int insertBoard(Connection con, BoardVo board) {
+		//0. 쿼리 작성(쿼리 틀) 
+		
+		//1. 쿼리 전송 객체 생성(preparedstmt)
+		
+		//2. 파라미터 설정
+		
+		//3. 쿼리 실행
+		
+		//4. 자원 반납
+		
+		//5. 결과 리턴 
+		
+		return 0;
+	}
+
 }

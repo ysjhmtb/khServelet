@@ -50,7 +50,7 @@ public class BoardListServlet extends HttpServlet {
 
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("url");
+		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);
 	}
 
