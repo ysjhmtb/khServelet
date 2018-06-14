@@ -38,10 +38,20 @@ public class BoardService {
 	public BoardVo selectBoard(int boardNo) {
 		Connection con = JDBCTemplate.getConnection();
 		BoardVo board = new BoardDao().selectBoard(con, boardNo);
-		JDBCTemplate.close(con);
+		
 		
 		//조회수 1 증가 구현 필요 
+		if(null != board) {
+			int result = new BoardDao().updateBoardCount(con, boardNo);
+			
+			if(0 < result) {
+				JDBCTemplate.commit(con);
+			}else {
+				JDBCTemplate.rollback(con);
+			}
+		}
 		
+		JDBCTemplate.close(con);
 		
 		return board;
 	}
