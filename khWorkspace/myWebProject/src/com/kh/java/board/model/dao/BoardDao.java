@@ -22,9 +22,12 @@ public class BoardDao {
 			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
 			//2. 쿼리 작성
-			query = "SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME "
-						+ "FROM BOARD B, MEMBER M "
-						+ "WHERE B.BWRITER = M.USERID";
+			query = "SELECT BNO, BTITLE, BCONTENT, BWRITER, " + 
+					"BCOUNT, BDATE, DELFLAG, BOARDFILE, " + 
+					"USERNAME\n" + 
+					"FROM BOARD B, MEMBER M " + 
+					"WHERE B.BWRITER = M.USERID " + 
+					"ORDER BY BDATE DESC";
 			//3. 쿼리 실행
 			rs = stmt.executeQuery(query);
 			//4. 결과 처리(resultSet-list parsing)
