@@ -39,6 +39,10 @@ table, table td, table th{
 	function bModifyPage(){
 		location.href = "/mwp/updateBoardForm.do?boardNo="+<%=board.getNo()%>;
 	}
+	
+	function bDeletePage(){
+		location.href = "/mwp//deleteBoard.do?boardNo="+<%=board.getNo()%>;
+	}
 
 </script>
 
@@ -105,6 +109,7 @@ table, table td, table th{
 		<button onclick="boardPage();">목록으로</button>
 		<%if(null != member && member.getUserId().equals(board.getWriter())){ %>
 			<button onclick="bModifyPage();">수정하기</button>
+			<button onclick="bDeletePage()">삭제하기</button>
 		<%} %>
 	</div>
 </div>

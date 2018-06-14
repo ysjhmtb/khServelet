@@ -192,6 +192,28 @@ public class BoardDao {
 	}
 	
 	
+	public int deleteBoard(Connection con, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM BOARD WHERE BNO = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
+	
 	
 
 }
