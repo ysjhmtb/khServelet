@@ -55,6 +55,28 @@ public class BoardService {
 		
 		return board;
 	}
+
+	public BoardVo selectBoardForm(int boardNo) {
+		Connection con = JDBCTemplate.getConnection();
+		BoardVo board = new BoardDao().selectBoard(con, boardNo);
+		JDBCTemplate.close(con);
+		return board;
+	}
+
+	public int updateBoard(BoardVo board) {
+		Connection con = JDBCTemplate.getConnection();
+		int result = new BoardDao().updateBoard(con, board);
+		
+		if(0 < result) {
+			JDBCTemplate.commit(con);
+		}else {
+			JDBCTemplate.rollback(con);
+		}
+		
+		JDBCTemplate.close(con);
+		return result;
+		
+	}
 	
 	
 	

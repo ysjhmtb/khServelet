@@ -11,6 +11,8 @@ import com.kh.java.board.model.vo.BoardVo;
 import com.kh.java.common.JDBCTemplate;
 
 public class BoardDao {
+	
+	
 	public ArrayList<BoardVo> selectBoardList(Connection con){
 		ArrayList<BoardVo> list = null;
 		Statement stmt = null;
@@ -52,6 +54,7 @@ public class BoardDao {
 		return list;
 	}
 
+	
 	public int insertBoard(Connection con, BoardVo board) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -79,6 +82,7 @@ public class BoardDao {
 		//5. 결과 리턴
 		return result;
 	}
+	
 
 	public BoardVo selectBoard(Connection con, int boardNo) {
 		BoardVo board = null;
@@ -149,6 +153,37 @@ public class BoardDao {
 			JDBCTemplate.close(pstmt);
 		}
 		
+		
+		return result;
+	}
+	
+
+	
+	public int updateBoard(Connection con, BoardVo board) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String query = "";
+		query = "UPDATE BOARD " + 
+				"SET BTITLE = ?, " + 
+				"BCONTENT = ?, " + 
+				"BOARDFILE = ? " + 
+				"WHERE BNO = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setString(3, board.getAttachFile());
+			pstmt.setInt(4, board.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
 		
 		return result;
 	}

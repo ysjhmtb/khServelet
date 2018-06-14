@@ -32,6 +32,16 @@ table, table td, table th{
 	border:1px solid white;
 }
 </style>
+
+
+
+<script>
+	function bModifyPage(){
+		location.href = "/mwp/updateBoardForm.do?boardNo="+<%=board.getNo()%>;
+	}
+
+</script>
+
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
