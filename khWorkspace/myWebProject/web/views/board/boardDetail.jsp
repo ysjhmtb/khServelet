@@ -61,6 +61,10 @@ table, table td, table th{
 				<th width="100">작성일</th>
 				<td><%=board.getWriteDate() %></td>
 			</tr>
+			
+			
+			<%if(null != board.getAttachFile()) {%>
+			
 			<tr>
 				<th>미리보기</th>
 				<td colspan="5">
@@ -73,6 +77,20 @@ table, table td, table th{
 					<a href="/mwp/fileDownload.do?filename=<%=board.getAttachFile()%>"><%=board.getAttachFile()%></a>
 				</td>
 			</tr>
+			
+			<%}else{ %>
+			
+			<tr>
+				<th colspan="6">첨부파일이 없습니다.</th>
+			
+			</tr>
+			
+			
+			<%} %>
+			
+			
+			
+			
 			<tr>
 				<th>내용</th>
 			</tr>
