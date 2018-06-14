@@ -79,11 +79,15 @@ public class WriteBoardServlet extends HttpServlet {
 		//비지니스 로직 호출
 		int result = new BoardService().insertBoard(board);
 		
-		
-		
-		
-		
-				
+		if(0 < result) {
+			//값을 유지할 필요가 없으므로 리다이렉트 사용
+			response.sendRedirect("/mwp/boardList.do");
+			
+		}else {
+			view =  request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "게시글 작성에 실패하였습니다.");
+			view.forward(request, response);
+		}
 		
 	}
 

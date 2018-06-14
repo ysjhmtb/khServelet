@@ -34,6 +34,17 @@ public class BoardService {
 		JDBCTemplate.close(con);
 		return result;
 	}
+
+	public BoardVo selectBoard(int boardNo) {
+		Connection con = JDBCTemplate.getConnection();
+		BoardVo board = new BoardDao().selectBoard(con, boardNo);
+		JDBCTemplate.close(con);
+		
+		//조회수 1 증가 구현 필요 
+		
+		
+		return board;
+	}
 	
 	
 	

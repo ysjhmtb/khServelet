@@ -40,7 +40,6 @@ table td{
 		location.href="views/board/boardForm.jsp";
 	}
 </script>
-
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
@@ -63,7 +62,16 @@ table td{
 				<%for(BoardVo n : list){ %>
 				<tr>
 					<td><%=n.getNo()%></td>			
-					<td><%=n.getTitle()%></td>			
+					<td>
+						<%=n.getTitle()%>
+<!-- 						if()// (O) 출력 -->
+<!-- 						else // (X) 출력 -->
+						<%if(null != n.getAttachFile()){ %>
+							(O)
+						<%}else{ %>
+							(X)
+						<%} %>
+					</td>			
 					<td><%=n.getWriterName() %></td>			
 					<td><%=n.getCount()%></td>			
 					<td><%=n.getWriteDate() %></td>			
@@ -85,17 +93,23 @@ table td{
 			<input type="button" value="작성하기" onclick="writeBoard();"/>
 		<%} %>
 	</div>
-</div>	
+</div>
+<script>
+$(function(){
+	$(".tableArea td").mouseenter(function(){
+		$(this).parent().css("background","darkgray");
+		$(this).parent().css("cursor","pointer");
+	}).mouseout(function(){
+		$(this).parent().css("background","black");
+	}).click(function(){
+		var boardNo = $(this).parent().children().eq(0).text();
+		location.href = "/mwp/selectBoard.do?boardNo=" + boardNo; 		
+	});
+});
+</script>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
