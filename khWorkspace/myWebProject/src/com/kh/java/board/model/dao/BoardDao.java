@@ -1,6 +1,7 @@
 package com.kh.java.board.model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -81,19 +82,42 @@ public class BoardDao {
 	}
 
 	public int insertBoard(Connection con, BoardVo board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "";
+		
+		
 		//0. 쿼리 작성(쿼리 틀) 
+		query = "INSERT INTO BOARD " + 
+				"VALUES(SEQ_BOARD.NEXTVAL,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)";
 		
-		//1. 쿼리 전송 객체 생성(preparedstmt)
 		
-		//2. 파라미터 설정
+		try {
+			
+			//1. 쿼리 전송 객체 생성(preparedstmt)
+			pstmt = con.prepareStatement(query);
+			
+			//2. 파라미터 설정
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setString(3, board.getWriter());
+			pstmt.setString(4, board.getAttachFile());
+			
+			//3. 쿼리 실행
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			//4. 자원 반납
+			JDBCTemplate.close(pstmt);
+		}
 		
-		//3. 쿼리 실행
-		
-		//4. 자원 반납
 		
 		//5. 결과 리턴 
-		
-		return 0;
+		return result;
 	}
 
 }
