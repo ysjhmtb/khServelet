@@ -113,7 +113,7 @@ table td{
 			<option value="3">작성자</option>
 		</select>		
 		<input type="text" id="searchText" placeholder="검색어 입력"/>
-		<input type="button" value="검색하기" onclick="searchNotice();"/>
+		<input type="button" value="검색하기" onclick="searchBoard();"/>
 		<%if(null != member){%>
 			<input type="button" value="작성하기" onclick="writeBoard();"/>
 		<%} %>
@@ -132,8 +132,19 @@ $(function(){
 		location.href = "/mwp/selectBoard.do?boardNo=" + boardNo + "&currentPage=" + <%=currentPage%>; 		
 	});
 });
+
+
+
 function movePage(pageNum){
 	location.href = "/mwp/boardList.do?currentPage=" + pageNum;
+}
+
+
+function searchBoard(){
+	var condition = $("#searchCondition").val();
+	var searchText = $("#searchText").val();
+	
+	location.href = "/mwp/searchBoard.do?condition=" + condition +"&searchText=" + searchText;
 }
 
 </script>
