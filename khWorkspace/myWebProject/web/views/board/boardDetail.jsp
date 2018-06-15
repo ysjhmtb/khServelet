@@ -85,7 +85,8 @@ table, table td, table th{
 			<%}else{ %>
 			
 			<tr>
-				<th colspan="6">첨부파일이 없습니다.</th>
+				<th>첨부파일</th>
+				<td colspan="5">첨부파일이 없습니다.</td>
 			
 			</tr>
 			

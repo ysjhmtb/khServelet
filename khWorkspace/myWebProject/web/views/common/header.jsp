@@ -150,6 +150,15 @@
 		//페이지 이동
 		//다른 로직
 	}
+	
+	$(function(){
+		
+		//enter key up method를 추천.
+		$("#pwdText").change(function(){
+			$("#loginForm").submit();
+		});
+	});
+	
 </script>
 </head>
 <body>
@@ -167,7 +176,7 @@
 				<tr>
 					<td>비밀번호 : </td>
 					<td>
-						<input type="password" name="userPwd"/>
+						<input type="password" name="userPwd" id="pwdText"/>
 					</td>
 				</tr>
 				<tr>

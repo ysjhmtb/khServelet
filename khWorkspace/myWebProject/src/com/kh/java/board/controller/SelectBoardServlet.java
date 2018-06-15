@@ -30,10 +30,14 @@ public class SelectBoardServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		BoardVo board = new BoardService().selectBoard(boardNo);
 		
+		
 		String url = "";
 		
 		if(null != board) {
 			url = "views/board/boardDetail.jsp";
+			
+			//조회수를 가져오는 시간을 기다리지 않기 위한 방법.
+			board.setCount(board.getCount() + 1 );
 			request.setAttribute("board", board);
 			
 		}else {
