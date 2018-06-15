@@ -212,6 +212,87 @@ public class BoardDao {
 		
 		
 	}
+
+
+	public int selectBoardTotalCount(Connection con) {
+		int result = -1;
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		
+		try {
+			stmt = con.createStatement();
+			query = "SELECT COUNT(*) AS LISTCOUNT FROM BOARD WHERE DELFLAG != 'Y'";
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {
+				result = rs.getInt("LISTCOUNT");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	public ArrayList<BoardVo> selectBoardListPage(Connection con, int currentPage, int limit) {
+		ArrayList<BoardVo> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = "";
+		try {
+			query = "SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME "
+					+ "FROM ( SELECT ROWNUM RNUM, P.* "
+					+				"FROM (SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME "
+					+						"   FROM BOARD B, MEMBER M "
+					+						"   WHERE B.BWRITER = M.USERID "
+					+ 						"   ORDER BY BNO DESC) P) "
+					+ "WHERE RNUM BETWEEN ? AND ? ";
+
+			pstmt = con.prepareStatement(query);
+			
+			int startRow = (currentPage - 1) * limit + 1; 
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			//3. 쿼리 실행
+			rs = pstmt.executeQuery();
+			//4. 결과 처리(resultSet-list parsing)
+			list = new ArrayList<BoardVo>();
+			BoardVo temp = null;
+			while(rs.next()){
+				temp = new BoardVo();
+				temp.setNo(rs.getInt("bno"));
+				temp.setTitle(rs.getString("btitle"));
+				temp.setContent(rs.getString("bcontent"));
+				temp.setWriter(rs.getString("bwriter"));
+				temp.setWriterName(rs.getString("username"));
+				temp.setCount(rs.getInt("bcount"));
+				temp.setWriteDate(rs.getDate("bdate"));
+				temp.setAttachFile(rs.getString("boardfile"));
+				
+				list.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			//5. 자원 반납(close)
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		//6. 결과 리턴
+		return list;
+	}
 	
 	
 

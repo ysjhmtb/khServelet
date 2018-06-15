@@ -128,6 +128,7 @@
 	}
 	
 	function boardPage(){
+		
 		location.href = "<%=request.getContextPath()%>/boardList.do";
 	}
 	

@@ -92,6 +92,28 @@ public class BoardService {
 		JDBCTemplate.close(con);
 		return result;
 	}
+
+	public int selectBoardTotalCount() {
+		//1. 커넥션 연결
+		Connection con = JDBCTemplate.getConnection();
+		
+		//2. dao 메소드 호출
+		int listCount = new BoardDao().selectBoardTotalCount(con);
+		
+		//3. 자원 반납
+		JDBCTemplate.close(con);
+		
+		return listCount;
+	}
+
+	public ArrayList<BoardVo> selectBoardListPage(int currentPage, int limit) {
+		
+		Connection con = JDBCTemplate.getConnection();
+		ArrayList<BoardVo> list = new BoardDao().selectBoardListPage(con, currentPage, limit);
+		
+		JDBCTemplate.close(con);
+		return list;
+	}
 	
 	
 	

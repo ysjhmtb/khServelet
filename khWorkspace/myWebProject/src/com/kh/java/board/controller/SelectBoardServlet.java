@@ -28,6 +28,7 @@ public class SelectBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		BoardVo board = new BoardService().selectBoard(boardNo);
 		
 		
@@ -39,6 +40,7 @@ public class SelectBoardServlet extends HttpServlet {
 			//조회수를 가져오는 시간을 기다리지 않기 위한 방법.
 			board.setCount(board.getCount() + 1 );
 			request.setAttribute("board", board);
+			request.setAttribute("currentPage", currentPage);
 			
 		}else {
 			url = "views/common/errorPage.jsp";

@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 	BoardVo board = (BoardVo)request.getAttribute("board");
+	int currentPage = (int)request.getAttribute("currentPage");
 %>
 <!DOCTYPE html>
 <html>
@@ -107,7 +108,7 @@ table, table td, table th{
 		</table>
 	</div>
 	<div align="center">
-		<button onclick="boardPage();">목록으로</button>
+		<button onclick="boardPageWithCurrentPage(<%=currentPage%>)">목록으로</button>
 		<%if(null != member && member.getUserId().equals(board.getWriter())){ %>
 			<button onclick="bModifyPage();">수정하기</button>
 			<button onclick="bDeletePage()">삭제하기</button>
@@ -115,6 +116,14 @@ table, table td, table th{
 	</div>
 </div>
 <%@ include file="../common/footer.jsp" %>
+
+<script>
+	function boardPageWithCurrentPage(currentPage){
+		location.href = "/mwp/boardList.do?currentPage=" + currentPage;
+	}
+	
+
+</script>
 </body>
 </html>
 

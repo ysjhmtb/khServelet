@@ -1,16 +1,9 @@
-<%@page import="com.kh.java.common.PageInfo"%>
 <%@page import="com.kh.java.board.model.vo.BoardVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<BoardVo> list = (ArrayList<BoardVo>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int listCount = pi.getTotalCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
 %>    
 <!DOCTYPE html>
 <html>
@@ -29,7 +22,7 @@
 }
 .tableArea{
 	width:800px;
-	height:300px;
+	height:400px;
 	margin-left:auto;
 	margin-right:auto;
 }
@@ -87,24 +80,6 @@ table td{
 			<%} %>
 		</table>
 	</div>
-	
-	<!-- 페이징 처리 부분     <<	1 2 3 4 5 6 7 ... >>  -->	
-	<div class="pageArea" align="center">
-		<button onclick="movePage(1);"> << </button>
-		
-		<%for(int i = startPage ; i <= endPage ; i++){ %>
-		
-			<%if(i == currentPage) {%>
-				<button onclick="movePage(<%=i%>);" disabled><%=i %></button>
-			<%} else{%>
-			
-				<button onclick="movePage(<%=i%>);" ><%=i %></button>
-			<%} %>
-		<%} %>
-		
-		<button onclick="movePage(<%=maxPage%>);"> >> </button>
-	</div>
-	<br>
 	<div class="searchArea" align="center">
 		<select id="searchCondition">
 			<option value="0">전체</option>
@@ -127,22 +102,14 @@ $(function(){
 	}).mouseout(function(){
 		$(this).parent().css("background","black");
 	}).click(function(){
-		
 		var boardNo = $(this).parent().children().eq(0).text();
-		location.href = "/mwp/selectBoard.do?boardNo=" + boardNo + "&currentPage=" + <%=currentPage%>; 		
+		location.href = "/mwp/selectBoard.do?boardNo=" + boardNo; 		
 	});
 });
-function movePage(pageNum){
-	location.href = "/mwp/boardList.do?currentPage=" + pageNum;
-}
-
 </script>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
-
-
-
 
 
 
