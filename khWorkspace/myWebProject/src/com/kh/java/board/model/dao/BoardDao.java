@@ -192,14 +192,28 @@ public class BoardDao {
 	
 	
 	public int deleteBoard(Connection con, int boardNo) {
-		int result = 0;
+		
+		/*
+		 과제 : 게시글 삭제 로직 구현(첨부 된 파일 역시 삭제)
+		 데이터베이스에서 삭제가 아닌 DELFALG를 Y로 변경.
+		 
+		 */
+		int result = -1;
 		PreparedStatement pstmt = null;
-		String query = "DELETE FROM BOARD WHERE BNO = ?";
+		String query = "UPDATE BOARD SET DELFLAG = 'Y' WHERE BNO = ?";
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
+			
+			/*
+			 executeUpdate
+			 
+			  
+			  excuteQuery
+			 
+			 */
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
