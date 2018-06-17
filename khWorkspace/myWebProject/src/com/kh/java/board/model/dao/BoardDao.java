@@ -263,6 +263,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		String query = "";
 		try {
+			/*
 			query = "SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME "
 					+ "FROM ( SELECT ROWNUM RNUM, P.* "
 					+				"FROM (SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME "
@@ -270,6 +271,37 @@ public class BoardDao {
 					+						"   WHERE B.BWRITER = M.USERID "
 					+ 						"   ORDER BY BNO DESC) P) "
 					+ "WHERE RNUM BETWEEN ? AND ? ";
+			
+			삭제된 글도 조회되므로 아래와 같이 쿼리가 변경되어야 한다.
+			
+			SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME
+			FROM(
+			  SELECT ROWNUM RNUM, P.*
+			  FROM(
+			        SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT,
+			          BDATE, DELFLAG, BOARDFILE, USERNAME
+			        FROM BOARD B, MEMBER M
+			        WHERE B.BWRITER = M.USERID
+			              AND DELFLAG != 'Y'
+			        ORDER BY BNO DESC
+			      ) P
+			) WHERE RNUM BETWEEN 1 AND 10;
+					
+					
+			*/
+			
+			query = "SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, BDATE, DELFLAG, BOARDFILE, USERNAME " + 
+					"FROM( " + 
+					"SELECT ROWNUM RNUM, P.*" + 
+					"FROM( " + 
+					"SELECT BNO, BTITLE, BCONTENT, BWRITER, BCOUNT, " + 
+					"BDATE, DELFLAG, BOARDFILE, USERNAME " + 
+					"FROM BOARD B, MEMBER M " + 
+					"WHERE B.BWRITER = M.USERID " + 
+					"AND DELFLAG != 'Y' " + 
+					"ORDER BY BNO DESC " + 
+					") P " + 
+					") WHERE RNUM BETWEEN ? AND ?";
 
 			pstmt = con.prepareStatement(query);
 			

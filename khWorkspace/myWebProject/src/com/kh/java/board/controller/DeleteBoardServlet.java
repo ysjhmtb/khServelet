@@ -34,6 +34,7 @@ public class DeleteBoardServlet extends HttpServlet {
 		
 		if(0 < result) {
 			view = request.getRequestDispatcher("views/board/boardList.jsp");
+			
 			request.setAttribute("list", new BoardService().selectBoardList());
 			
 		}else {
