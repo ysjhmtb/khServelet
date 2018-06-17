@@ -1,5 +1,6 @@
 package com.kh.java.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -28,6 +29,16 @@ public class DeleteBoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
+		String fileName = new BoardService().selectBoard(boardNo).getAttachFile();
+		String path = "/Users/yunseokjeon/git/khServlet/khWorkspace/myWebProject/web/upload";
+		if(fileName != null) {
+			System.out.println(fileName);
+			File file = new File(path + "/" + fileName);
+			file.delete();
+		}
+		
+		
+		
 		int result = new BoardService().deleteBoard(boardNo);
 		
 		RequestDispatcher view = null;
@@ -41,6 +52,8 @@ public class DeleteBoardServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
 		}
+		
+		
 		
 		view.forward(request, response);
 	}
