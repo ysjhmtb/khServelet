@@ -44,18 +44,19 @@ public class DeleteBoardServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		
 		if(0 < result) {
-			view = request.getRequestDispatcher("views/board/boardList.jsp");
-			
-			request.setAttribute("list", new BoardService().selectBoardList());
+			response.sendRedirect("/mwp/boardList.do");
+//			view = request.getRequestDispatcher("views/board/boardList.jsp");
+//			request.setAttribute("list", new BoardService().selectBoardList());
 			
 		}else {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			request.setAttribute("msg", "게시글 삭제에 실패하였습니다.");
+			view.forward(request, response);
 		}
 		
 		
 		
-		view.forward(request, response);
+		
 	}
 
 	
