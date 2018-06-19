@@ -110,11 +110,11 @@
 	function myInfo(){
 // 		console.log(localStorage);
 // 		localStorage.removeItem("kakao_2e2524e541bae9363d7d85d3d3fbde83");
-		Kakao.Auth.getStatus(function(status){
-			console.log(status.user.kaccount_email);
-		});
+		//Kakao.Auth.getStatus(function(status){
+		//	console.log(status.user.kaccount_email);
+		//});
 //		location.href = "../member/memberUpdate.jsp";
-		//location.href = "/mwp/views/member/memberUpdate.jsp";
+		location.href = "/mwp/views/member/memberUpdate.jsp";
 	}
 	
 	function noticePage(){
@@ -123,6 +123,10 @@
 	
 	function boardPage(){
 		location.href = "<%=request.getContextPath()%>/boardList.do";
+	}
+	//     /mwp -> context path
+	function galleryPage(){
+		location.href = "/mwp/galleryList.do";		
 	}
 	
 	$(function(){
@@ -201,7 +205,7 @@
 			<div class="menu" onclick="mainPage();">HOME</div>
 			<div class="menu" onclick="noticePage();">공지사항</div>
 			<div class="menu" onclick="boardPage();">게시판</div>
-			<div class="menu">사진 게시판</div>
+			<div class="menu" onclick="galleryPage();">사진 게시판</div>
 		</div>
 	</div>
 </body>
