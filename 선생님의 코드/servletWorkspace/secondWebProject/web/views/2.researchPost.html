@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>설문 조사</title>
+</head>
+<body>
+<h1>개인 취향 테스트(Post)</h1>
+<p>당신의 취향을 테스트 합니다.<br>
+좋아하시는 항목을 선택 후 확인 버튼을 눌러 주십시오.</p>
+<form method="post" action="/swp/researchPost.do">
+	<ul>
+		<li>당신의 이름은?<br>
+			<input type="text" name="name" size="10"/>
+		</li>
+		<li>좋아하는 색은?<br>
+			<input type="radio" name="color" value="회색" id="gray"/>
+			<label for="gray">회색</label><br>
+			<input type="radio" name="color" value="파란색" id="blue"/>
+			<label for="blue">파란색</label><br>
+			<input type="radio" name="color" value="흰색" id="white"/>
+			<label for="white">흰색</label><br>
+			<input type="radio" name="color" value="상아색" id="ivory"/>
+			<label for="ivory">상아색</label><br>
+			<input type="radio" name="color" value="다홍색" id="cherryRed"/>
+			<label for="cherryRed">다홍색</label><br>
+		</li>
+		<li>좋아하는 동물은?<br>
+			<select name="animal">
+				<option value="고양이">고양이</option>
+				<option value="캐피바라">캐피바라</option>
+				<option value="강아지">강아지</option>				
+				<option value="거북이">거북이</option>				
+			</select>
+		</li>
+		<li>좋아하는 음식은?<br>
+			<input type="checkbox" name="food" value="food1" id="pizza"/>
+			<label for="pizza">피자</label>
+			<input type="checkbox" name="food" value="food2" id="tteokbboki"/>
+			<label for="tteokbboki">떡볶이</label>
+			<input type="checkbox" name="food" value="food3" id="budaejjigae"/>
+			<label for="budaejjigae">부대찌개</label><br>
+			<input type="checkbox" name="food" value="food4" id="beaf"/>
+			<label for="beaf">소고기</label>
+			<input type="checkbox" name="food" value="food5" id="spam"/>
+			<label for="spam">스팸</label>
+			<input type="checkbox" name="food" value="food6" id="noodle"/>
+			<label for="noodle">라면</label><br>
+		</li>
+		<li>
+			<input type="submit" value="확인"/> 
+			<input type="reset" value="취소"/>
+		</li>
+	
+	
+	</ul>
+</form>
+</body>
+</html>

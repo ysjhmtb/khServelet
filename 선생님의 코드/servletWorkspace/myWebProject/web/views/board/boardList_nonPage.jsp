@@ -1,0 +1,121 @@
+<%@page import="com.kh.java.board.model.vo.BoardVo"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	ArrayList<BoardVo> list = (ArrayList<BoardVo>)request.getAttribute("list");
+%>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판 목록</title>
+<style>
+.outer{
+	width:800px;
+	height:570px;
+	background:black;
+	color:white;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid white;
+}
+.tableArea{
+	width:800px;
+	height:400px;
+	margin-left:auto;
+	margin-right:auto;
+}
+table td{
+	text-align:center;
+}
+.searchArea{
+	width:650px;
+	margin-left:auto;
+	margin-right:auto;
+}
+</style>
+<script>
+	function writeBoard(){
+		location.href="views/board/boardForm.jsp";
+	}
+</script>
+</head>
+<body>
+<%@ include file="../common/header.jsp" %>
+<div class="outer">
+	<h1 align="center">공지사항</h1>
+	<div class="tableArea">
+		<table align="center">
+			<tr>
+				<th width="100">글번호</th>
+				<th width="300">글제목</th>
+				<th width="100">작성자</th>
+				<th width="100">조회수</th>
+				<th width="150">작성일</th>
+			</tr>
+			<%if(list.size() == 0){ %>
+				<tr>
+					<td colspan="5">조회 된 게시글이 없습니다.</td>
+				</tr>
+			<%}else{ %>
+				<%for(BoardVo n : list){ %>
+				<tr>
+					<td><%=n.getNo()%></td>			
+					<td>
+						<%=n.getTitle()%>
+<!-- 						if()// (O) 출력 -->
+<!-- 						else // (X) 출력 -->
+						<%if(null != n.getAttachFile()){ %>
+							(O)
+						<%}else{ %>
+							(X)
+						<%} %>
+					</td>			
+					<td><%=n.getWriterName() %></td>			
+					<td><%=n.getCount()%></td>			
+					<td><%=n.getWriteDate() %></td>			
+				</tr>
+				<%} %>
+			<%} %>
+		</table>
+	</div>
+	<div class="searchArea" align="center">
+		<select id="searchCondition">
+			<option value="0">전체</option>
+			<option value="1">제목</option>
+			<option value="2">내용</option>
+			<option value="3">작성자</option>
+		</select>		
+		<input type="text" id="searchText" placeholder="검색어 입력"/>
+		<input type="button" value="검색하기" onclick="searchNotice();"/>
+		<%if(null != member){%>
+			<input type="button" value="작성하기" onclick="writeBoard();"/>
+		<%} %>
+	</div>
+</div>
+<script>
+$(function(){
+	$(".tableArea td").mouseenter(function(){
+		$(this).parent().css("background","darkgray");
+		$(this).parent().css("cursor","pointer");
+	}).mouseout(function(){
+		$(this).parent().css("background","black");
+	}).click(function(){
+		var boardNo = $(this).parent().children().eq(0).text();
+		location.href = "/mwp/selectBoard.do?boardNo=" + boardNo; 		
+	});
+});
+</script>
+<%@ include file="../common/footer.jsp" %>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -39,6 +39,8 @@ public class SelectBoardServlet extends HttpServlet {
 		//댓글에 대한 정보 조회 
 		ArrayList<CommentVo> cList 
 				= new CommentService().selectCommentList(boardNo); 
+		System.out.println(cList.size());
+		
 		
 		String url = "";
 		

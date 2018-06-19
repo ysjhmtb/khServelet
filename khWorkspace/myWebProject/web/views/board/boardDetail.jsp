@@ -55,6 +55,11 @@ a{
 	function bModifyPage(){
 		location.href="/mwp/updateBoardForm.do?boardNo=<%=board.getNo()%>";
 	}
+	function deleteBoard(){
+		if(confirm("삭제 하시겠습니까?")){
+			location.href="/mwp/deleteBoard.do?boardNo=<%=board.getNo()%>&fileName=<%=board.getAttachFile()%>";
+		}
+	}
 	function boardPageList(){
 		location.href = "<%=request.getContextPath()%>/boardList.do?currentPage=<%=request.getParameter("currentPage")%>";
 	}
@@ -76,24 +81,21 @@ a{
 			$(obj).hide();
 		}
 	}
+	
 	function updateComment(obj, cno){
-		// 댓글 수정 -> 댓글 번호, 댓글 내용이 필요.
-		var commentValue = $(obj).parent().parent().next().find("textarea").val();
+		//댓글 작성 -> 댓글 번호, 댓글 내용
+		var commentValue =  $(obj).parent().parent().next().find("textarea").val();
 		var cno = cno;
-		
-		
-		
+		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
 		location.href
-		="updateComment.do?cno=" + cno + "&content=" + commentValue + "&bno=<%=board.getNo()%>";
+			="updateComment.do?cno=" + cno + "&content=" + commentValue + "&bno=<%=board.getNo()%>";
 	}
-	
-	function deleteComment(cno, bno){
+	function deleteComment(cno){
 		var cno = cno;
-		var bno = bno;
-		location.href = "deleteComment.do?cno=" + cno + "&bno=" + bno;
+		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
+		location.href
+			="deleteComment.do?cno=" + cno + "&bno=<%=board.getNo()%>";
 	}
-	
-	
 </script>
 </head>
 <body>
@@ -149,6 +151,7 @@ a{
 		<button onclick="boardPageList();">목록으로</button>
 		<%if(null != member && member.getUserId().equals(board.getWriter())){ %>
 			<button onclick="bModifyPage();">수정하기</button>
+			<button onclick="deleteBoard();">삭제하기</button>
 		<%} %>
 	</div>
 	<div class="commentArea">
@@ -161,12 +164,9 @@ a{
 				<td align="right">
 				<%if(member.getUserId().equals(c.getWriter())){ %>
 					<input type="button" class="modifyBtn" value="수정" onclick="updateCommentForm(this, true);"/>
-					<input type="button" class="deleteBtn" value="삭제" 
-						onclick="deleteComment(<%=c.getCno()%>,<%=board.getNo()%>);"/>
-					<input type="button" class="updateBtn" style="display:none;" 
-						value="작성 완료" onclick="updateComment(this,<%=c.getCno()%>);"/>
-					<input type="button" class="cancelBtn" style="display:none;" value="취소" 
-						onclick="updateCommentForm(this, false);"/>
+					<input type="button" class="deleteBtn" value="삭제" onclick="deleteComment(<%=c.getCno()%>);"/>
+					<input type="button" class="updateBtn" style="display:none;" value="작성 완료" onclick="updateComment(this,<%=c.getCno()%>);"/>
+					<input type="button" class="cancelBtn" style="display:none;" value="취소" onclick="updateCommentForm(this, false);"/>
 				<%} %>
 				</td>
 			</tr>
