@@ -339,6 +339,9 @@ public class BoardDao {
 		//6. 결과 리턴
 		return list;
 	}
+
+
+	
 	
 	
 

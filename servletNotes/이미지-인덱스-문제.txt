@@ -1,0 +1,19 @@
+WriteGalleryServlet에서 대표 이미지에 대한 인덱스 적용이 안 되는 경우 존재
+
+
+//		while(fileNameEnum.hasMoreElements()){
+//			String fileName = fileNameEnum.nextElement();
+//			System.out.println(fileName);
+//			//현재 저장된 파일 이름, 기존 client의 파일 이름 리스트에 저장
+//			newNames.add(mRequest.getFilesystemName(fileName));
+//			oldNames.add(mRequest.getOriginalFileName(fileName));
+//		};
+
+위처럼 주석처리한 부분을 아래와 같이 잠정적인 수정.
+
+ 		
+		for(int i = 0 ; fileNameEnum.hasMoreElements() ; i++) {
+			fileNameEnum.nextElement();
+			newNames.add(mRequest.getFilesystemName("galleryImage" + (i + 1)));
+			oldNames.add(mRequest.getOriginalFileName("galleryImage" + (i + 1)));
+		}

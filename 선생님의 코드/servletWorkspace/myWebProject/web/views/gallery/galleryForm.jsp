@@ -89,13 +89,13 @@
 			</table>
 			<div id="fileArea">
 				<input type="file" id="galleryImage1" name="galleryImage1" 
-							multiple="multiple" onchange="printImage(this, 1);"/> 
+							onchange="printImage(this, 1);"/> 
 				<input type="file" id="galleryImage2" name="galleryImage2" 
-							multiple="multiple" onchange="printImage(this, 2);"/> 
+							onchange="printImage(this, 2);"/> 
 				<input type="file" id="galleryImage3" name="galleryImage3" 
-							multiple="multiple" onchange="printImage(this, 3);"/> 
+							onchange="printImage(this, 3);"/> 
 				<input type="file" id="galleryImage4" name="galleryImage4" 
-							multiple="multiple" onchange="printImage(this, 4);"/> 
+							onchange="printImage(this, 4);"/> 
 			</div>	
 		</div>
 		<div class="btnArea" align="center">
@@ -125,10 +125,23 @@
 	function printImage(obj, index){
 		if(obj.files && obj.files[0]){
 			var reader = new FileReader();
-			console.log(reader);
 			reader.onload=function(e){
-				$("#titleImg").attr("src",e.target.result);
+				switch(index){
+				case 1:
+					$("#titleImg").attr("src", e.target.result);
+					break;
+				case 2:
+					$("#detailImg1").attr("src", e.target.result);
+					break;
+				case 3:
+					$("#detailImg2").attr("src", e.target.result);
+					break;
+				case 4:
+					$("#detailImg3").attr("src", e.target.result);
+					break;
+				}
 			}
+			reader.readAsDataURL(obj.files[0]);
 		}
 	}
 	</script>

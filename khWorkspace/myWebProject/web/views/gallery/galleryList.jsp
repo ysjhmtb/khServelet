@@ -42,15 +42,15 @@
 		cursor:pointer;
 	}
 </style>
-
 <script>
 	function moveGalleryForm(){
-		location.href="/mwp/views/gallery/galleryFrom.jsp";
-		
+		location.href="/mwp/views/gallery/galleryForm.jsp";
 	}
-
+	
+	function attachDetailPage(bno){
+		location.href="/mwp/selectAttachDetail.do?bno=" + bno;
+	}
 </script>
-
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
@@ -60,9 +60,9 @@
 		<div class="thumnailArea">
 			<%for(int i = 0; i < list.size() ; i++){ %>
 			<%	AttachmentVo av = list.get(i); %>			
-				<div class="image-list" align="center">
+				<div class="image-list" onclick="attachDetailPage(<%=av.getBno() %>)" align="center">
 					<div>
-						<img src="/mwp/photoUpload/<%=av.getChangeName()%>" 
+						<img src="/mwp/upload_gallery/<%=av.getChangeName()%>" 
 									width="200px" height="150px"/>
 					</div>
 					<p>
@@ -82,7 +82,7 @@
 			<input type="text" id="searchText" placeholder="검색어 입력"/>
 			<input type="button" value="검색하기" onclick=""/>
 			<%if(null != member){%>
-				<input type="button" value="작성하기" onclick="moveGalleryForm()"/>
+				<input type="button" value="작성하기" onclick="moveGalleryForm();"/>
 			<%} %>
 		</div>
 	</div>

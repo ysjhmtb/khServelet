@@ -1,9 +1,8 @@
 package com.kh.java.gallery.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class AttachmentVo {
-
 	private int fno;
 	private int bno;
 	private String originName;
@@ -13,32 +12,22 @@ public class AttachmentVo {
 	private int fileLevel;
 	private int downloadCount;
 	private String delflag;
-	//========================== DB table
-	
+	//====================DB table
 	private String username;
 	private String title;
 	private String content;
 	private Date writeDate;
-	//========================== 화면 출력용 변수 
+	//====================화면 출력용 변수
 	
-	
-	
-	
-	
-	
-	
-	public AttachmentVo() {
-		
-	}
+	public AttachmentVo(){}
 
-	public AttachmentVo(int fno, int bno, String originName, String changeName, String paht, Date uploadDate,
+	public AttachmentVo(int fno, int bno, String originName, String changeName, String path, Date uploadDate,
 			int fileLevel, int downloadCount, String delflag) {
-		super();
 		this.fno = fno;
 		this.bno = bno;
 		this.originName = originName;
 		this.changeName = changeName;
-		this.path = paht;
+		this.path = path;
 		this.uploadDate = uploadDate;
 		this.fileLevel = fileLevel;
 		this.downloadCount = downloadCount;
@@ -81,8 +70,8 @@ public class AttachmentVo {
 		return path;
 	}
 
-	public void setPath(String paht) {
-		this.path = paht;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	public Date getUploadDate() {
@@ -117,8 +106,6 @@ public class AttachmentVo {
 		this.delflag = delflag;
 	}
 	
-	
-
 	public String getUsername() {
 		return username;
 	}
@@ -151,14 +138,10 @@ public class AttachmentVo {
 		this.writeDate = writeDate;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "AttachmentVo [fno=" + fno + ", bno=" + bno + ", originName=" + originName + ", changeName=" + changeName
-				+ ", paht=" + path + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel + ", downloadCount="
+				+ ", path=" + path + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel + ", downloadCount="
 				+ downloadCount + ", delflag=" + delflag + "]";
 	}
-	
-	
 }

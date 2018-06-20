@@ -46,6 +46,9 @@
 	function moveGalleryForm(){
 		location.href="/mwp/views/gallery/galleryForm.jsp";
 	}
+	function attachDetailPage(bno){
+		location.href="/mwp/selectAttachDetail.do?bno="+bno;
+	}
 </script>
 </head>
 <body>
@@ -56,9 +59,9 @@
 		<div class="thumnailArea">
 			<%for(int i = 0; i < list.size() ; i++){ %>
 			<%	AttachmentVo av = list.get(i); %>			
-				<div class="image-list" align="center">
+				<div class="image-list" onclick="attachDetailPage(<%=av.getBno()%>);" align="center">
 					<div>
-						<img src="/mwp/photoUpload/<%=av.getChangeName()%>" 
+						<img src="/mwp/upload_gallery/<%=av.getChangeName()%>" 
 									width="200px" height="150px"/>
 					</div>
 					<p>
