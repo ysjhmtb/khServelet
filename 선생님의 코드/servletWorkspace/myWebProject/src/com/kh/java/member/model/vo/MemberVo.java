@@ -18,6 +18,14 @@ public class MemberVo {
 	
 	public MemberVo(){
 	}
+	
+	public MemberVo(String userId, String userName, int age) {
+		this.userId = userId;
+		this.userName = userName;
+		this.age = age;
+	}
+
+
 	public MemberVo(String userId, String password, String userName, char gender, int age, String email, String phone,
 			String address, String hobbyStr) {
 		this.userId = userId;

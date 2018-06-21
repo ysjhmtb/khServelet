@@ -168,6 +168,12 @@
 	
 	
 	
+	function ajaxPage(){
+		location.href = "/mwp/views/ajax/ajaxStudy.jsp";
+		
+	}
+	
+	
 </script>
 </head>
 <body>
@@ -214,10 +220,15 @@
 	<br>
 	<div class="wrap">
 		<div class="nav">
+		
+		
 			<div class="menu" onclick="mainPage();">HOME</div>
 			<div class="menu" onclick="noticePage();">공지사항</div>
 			<div class="menu" onclick="boardPage();">게시판</div>
 			<div class="menu" onclick="galleryPage()">사진 게시판</div>
+			<div class="menu" onclick="ajaxPage()">Ajax</div>
+			
+			
 		</div>
 	</div>
 </body>

@@ -37,9 +37,20 @@ public class MemberVo {
 		this.hobbyStr = hobbyStr;
 	}
 
+	
+	
 
 
 	
+	public MemberVo(String userId, String userName, int age) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.age = age;
+	}
+
+
+
 	public String getUserId() {
 		return userId;
 	}
