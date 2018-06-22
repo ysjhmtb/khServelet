@@ -17,13 +17,12 @@
 <style>
 .outer{
 	width:1000px;
-	height:850px;
+	height:1000px;
 	background:black;
 	color:white;
 	margin-left:auto;
 	margin-right:auto;
 	margin-top:50px;
-	padding:30px;
 }
 .titleImageArea{
 	width:500;
@@ -41,6 +40,27 @@ table, table tr, table td{
 	margin:auto;
 }
 
+#replyArea{
+	width:1000px;
+	margin-bottom:50px;
+}
+
+.commentWriteArea{
+	width:1000px;
+	background:black;
+	color:white;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:80px;
+}
+li{
+	background:black;
+}
+
+ul{
+	padding:0px;
+	list-style:none;
+}
 </style>
 </head>
 <body>
@@ -95,7 +115,87 @@ table, table tr, table td{
 			</td>
 		</tr>
 	</table>
+	<br>
+	<%if(null != member){ %>
+	<div class="commentWriteArea">
+		<form method="post" id="commentForm" action="writeComment.do">
+			<table width="800">
+				<input type="hidden" name="bno" id="bno" value="<%=mainImage.getBno()%>"/>
+				<input type="hidden" name="writer"	id="writer" value="<%=member.getUserId() %>"/>
+				<tr>
+					<td>
+						<textarea cols="90" rows="4" name="content" id="content"></textarea>
+					</td>
+					<td>
+						<!-- <input type="submit" value="댓글작성"/> -->
+						<input type="button" onclick="writeComment();" value="댓글작성"/>
+					</td>
+				</tr>
+			</table>		
+		</form>
+	</div>
+	<%} %>
+	<div id="replyArea">
+		<ul id="replyList">
+<!-- 			<li>아이디(이름) - 작성한 내용</li>			 -->
+		</ul>
+	</div>
 </div>
 <%@ include file="../common/footer.jsp" %>
+<script>
+
+	$(function(){
+		//댓글 목록 조회 servlet 호출
+		//화면에 반영
+		var $replyList = $("#replyList");
+	   var str = "<span>testtest</span>";
+	   $replyList.text(str);
+	});
+
+
+	function writeComment(){
+		var bno = $("#bno").val();
+		var writer = $("#writer").val();
+		var content = $("#content").val();
+		
+		$.ajax({
+			url : "/mwp/writeCommentGallery.do",
+			type : "get",
+			data : {bno : bno, writer : writer, content : content},
+			success : function(data){
+				var $replyList = $("#replyList");
+				$replyList.find("li").remove();
+				
+				for(var key in data){
+					var comment = data[key];
+					var $li = $("<li>");
+					//아이디(이름) - 작성한 내용
+					$li.text(comment.writer + 
+							"(" + comment.writerNm + ") - " + comment.content);
+					$replyList.append($li);
+				}
+			}, error : function(e){
+				console.log(e);
+			}
+		});
+	}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

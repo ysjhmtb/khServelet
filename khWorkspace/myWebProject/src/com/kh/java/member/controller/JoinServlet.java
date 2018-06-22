@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.java.member.model.service.MemberService;
 import com.kh.java.member.model.vo.MemberVo;
 
-import oracle.net.aso.s;
-
 /**
  * Servlet implementation class JoinServlet
  */
@@ -87,8 +85,7 @@ public class JoinServlet extends HttpServlet {
 			view 
 				= request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
-			
-			
+		
 		}
 		
 		System.out.println("result : " + result);

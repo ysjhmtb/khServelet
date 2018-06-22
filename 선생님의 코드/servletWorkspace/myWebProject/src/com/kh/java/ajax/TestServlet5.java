@@ -30,7 +30,7 @@ public class TestServlet5 extends HttpServlet {
 		result.put("id", member.getUserId());
 		result.put("age", member.getAge());
 		result.put("email", member.getEmail());
-		result.put("gender", member.getGender());
+		result.put("gender", member.getGender() + "");
 		result.put("addr", member.getAddress());
 		
 		response.setContentType("application/json");

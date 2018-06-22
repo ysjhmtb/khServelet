@@ -125,8 +125,143 @@
 			});
 		});
 		
+		$("#submit7").click(function(){
+			$.ajax({
+				url : "/mwp/test7.do",
+				type : "get",
+				data : {ids : $("#userIndexes").val()},
+				success : function(data){
+					console.log(data);
+					var user;
+					var resultStr = "";
+					for(var key in data){
+						user = data[key];
+						resultStr += user.userId + "/" + user.age + "/" 
+											+decodeURIComponent(user.username) + "<br>"; 
+					}
+					$("#outputDiv5").html(resultStr);
+				},error : function(e){
+					console.log("error", e);
+				}
+			});
+		});
 		
+		$("#submit8").click(function(){
+			$.ajax({
+				url : "/mwp/test8.do",
+				type : "get",
+				success : function(data){
+					console.log(data);
+					var resultHtml = "";
+					for(var key in data){
+						resultHtml += "<option value='" + data[key].userId + "'>";
+						resultHtml += decodeURIComponent(data[key].username);
+						resultHtml += "</option>";
+					}
+					console.log(resultHtml);
+					$("#selectUserList1").html(resultHtml);
+				},error : function(e){
+					console.log(e)
+				}
+			});
+			
+		});
+		$("#selectNameBtn").click(function(){
+			$.ajax({
+				url : "/mwp/userList.do",
+				type : "post",
+				success : function(data){
+					console.log(data);
+					var resultHtml = "";
+					var username = ""; 
+					for(var key in data){
+						username = decodeURIComponent(data[key].username);
+						
+						resultHtml += "<option "; 
+						resultHtml += username == $("#selectName").val() ? " selected " : "";
+						resultHtml += "value='" + data[key].userId + "'>";
+						resultHtml += username;
+						resultHtml += "</option>";
+					}
+					console.log(resultHtml);
+					$("#selectUserList2").html(resultHtml);
+				},error : function(e){
+					console.log(e)
+				}
+			});
+		});
 		
+		$("#submit9").click(function(){
+			$.ajax({
+				url : "/mwp/test8.do",
+				type : "get",
+				success : function(data){
+					console.log(data);
+					var $tbody = $("#userListTable1 tbody");
+					$.each(data, function(index, value){
+						console.log(value);
+						var $tr = $("<tr>");
+						var $idTd = $("<td>").text(value.userId);
+						var $nameTd = $("<td>").text(decodeURIComponent(value.username));
+						var $ageTd = $("<td>").text(value.age);
+						
+						$tr.append($idTd);
+						$tr.append($nameTd);
+						$tr.append($ageTd);
+						
+						$tbody.append($tr);
+					});
+				},error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		
+		$("#submit10").click(function(){
+			$.ajax({
+				url : "/mwp/test10.do",
+				type : "get",
+				success : function(data){
+					console.log(data);
+					var user;
+					var $select = $("#userListSelect2");
+					for(var key in data){
+						user = data[key];						
+						var $option = $("<option>");
+						$option.val(user.userId);
+						$option.text(user.userName);
+						$select.append($option);
+					}
+				},error : function(e){
+					console.log(e);
+				}
+			});
+		});
+		
+		$("#submit11").click(function(){
+			$.ajax({
+				url : "/mwp/test11.do",
+				type : "get",
+				success : function(data){
+					console.log(data);
+					var $table = $("#outputTable");
+					var resultStr = "<tr><th>아이디</th><th>이름</th>" + 
+																"<th>나이</th></tr>";
+					for(var key in data){
+						console.log(key);
+						var user = data[key];
+						resultStr += "<tr>";
+						resultStr += "<td>" + user.userId + "</td>";
+						resultStr += "<td>" + user.userName + "</td>";
+						resultStr += "<td>" + user.age + "</td>";
+						resultStr += "</tr>";
+					}
+					$table.html(resultStr);
+				},error : function(e){
+					console.log(e);
+				}
+			});
+		});
 	});
 
 </script>
@@ -171,10 +306,55 @@
 	인덱스 : <input type="text" id="userIndex"/><br>
 	<button id="submit6">서버 전송</button>
 	<div id="outputDiv4" style="border:1px solid red; height:auto;"></div>
-	 
+	<hr>
 	
+	<h3>7. 요청 값을 검색 하여 해당 결과 리스트로 반환</h3>
+	<p>검색할 인덱스 1 / 2,5,8</p>
+	인덱스 : <input type="text" id="userIndexes"/><br>
+	<button id="submit7">서버 전송</button>
+	<div id="outputDiv5" style="border:1px solid red; height:auto;"></div>
+	<hr>
 	
+	<h3>8. 전체 리스트를 select의 option 항목에 추가</h3>
+	<button id="submit8">서버 전송</button>
+	<select id="selectUserList1"></select>
+	<hr>
 	
+	<h3>실습2. 이름 입력 -> 해당 목록에서 해당 이름의 option 선택하기</h3>
+	이름 : <input type="text" id="selectName"/> 
+	<button id="selectNameBtn">서버 전송</button><br>
+	<select id="selectUserList2"></select>
+	<hr>
+	
+	<h3>9. 전체 리스트를 표 형식으로 출력</h3>
+	<button id="submit9">서버 전송</button><br>
+	<table id="userListTable1" border="1" cellpadding="0" cellspacing="0">
+		<thead>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>나이</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<hr>
+	
+	<h3>10. Gson 이용해서 list 출력</h3>
+	<button id="submit10">서버 전송</button><br>
+	<select id="userListSelect2"></select>
+	<hr>
+		
+	<h3>11. Gson 이용해서 Map 출력</h3>
+	<button id="submit11">서버 전송</button>
+	<table id="outputTable">
+		<tr>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>나이</th>
+		</tr>
+	</table>
 	
 	
 	
