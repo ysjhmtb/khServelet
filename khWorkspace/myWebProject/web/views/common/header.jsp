@@ -10,12 +10,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="/mwp/js/jquery-3.3.1.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-  
-  
 <style>
 	body{
 		background:url("/mwp/images/background.jpg") no-repeat;
@@ -116,11 +110,11 @@
 	function myInfo(){
 // 		console.log(localStorage);
 // 		localStorage.removeItem("kakao_2e2524e541bae9363d7d85d3d3fbde83");
-		Kakao.Auth.getStatus(function(status){
-			console.log(status.user.kaccount_email);
-		});
+		//Kakao.Auth.getStatus(function(status){
+		//	console.log(status.user.kaccount_email);
+		//});
 //		location.href = "../member/memberUpdate.jsp";
-		//location.href = "/mwp/views/member/memberUpdate.jsp";
+		location.href = "/mwp/views/member/memberUpdate.jsp";
 	}
 	
 	function noticePage(){
@@ -128,23 +122,20 @@
 	}
 	
 	function boardPage(){
-		
 		location.href = "<%=request.getContextPath()%>/boardList.do";
 	}
-	
+	//     /mwp -> context path
 	function galleryPage(){
-		location.href = "/mwp/galleryList.do";	
+		location.href = "/mwp/galleryList.do";		
 	}
 	
-	
-	
 	$(function(){
-		Kakao.init('2176ef7240bdb4d15b1109660b0f4365');
+		Kakao.init('3a3c19b17c6dccaf7fbcfb062df5d924');
 	    // 카카오 로그인 버튼을 생성합니다.
 	    Kakao.Auth.createLoginButton({
 	      container: '#kakao-login-btn',
 	      success: function(authObj) {
-	        alert(JSON.stringify(authObj));
+	      	alert(JSON.stringify(authObj));
 	      },
 	      fail: function(err) {
 	         alert(JSON.stringify(err));
@@ -158,29 +149,26 @@
 		//다른 로직
 	}
 	
+	
 	$(function(){
-		
-		//enter key up method를 추천.
+		//keyup - enterkey
 		$("#pwdText").change(function(){
 			$("#loginForm").submit();
-		});
-	});
-	
-	
-	
+		});	
+	})
 	function ajaxPage(){
-		location.href = "/mwp/views/ajax/ajaxStudy.jsp";
-		
+		location.href = "/mwp/views/ajax/ajaxStudy.jsp"	;	
 	}
-	
-	
+	function storagePage(){
+		location.href = "/mwp/views/api/localStorage.jsp";	
+	}
 </script>
 </head>
 <body>
 	<h1 align="center">My Web Project</h1>
 	<div class="loginArea">
 	<%if(member == null){ %>
-		<form id="loginForm" action="/mwp/login.do" method="post">
+		<form id="loginForm" action="/mwp/login.au" method="post">
 			<table>
 				<tr>
 					<td>아이디 : </td>
@@ -220,16 +208,22 @@
 	<br>
 	<div class="wrap">
 		<div class="nav">
-		
-		
 			<div class="menu" onclick="mainPage();">HOME</div>
 			<div class="menu" onclick="noticePage();">공지사항</div>
 			<div class="menu" onclick="boardPage();">게시판</div>
-			<div class="menu" onclick="galleryPage()">사진 게시판</div>
-			<div class="menu" onclick="ajaxPage()">Ajax</div>
-			
-			
+			<div class="menu" onclick="galleryPage();">사진 게시판</div>
+			<div class="menu" onclick="ajaxPage();">Ajax</div>
+			<div class="menu" onclick="storagePage();">웹 스토리지</div>
 		</div>
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

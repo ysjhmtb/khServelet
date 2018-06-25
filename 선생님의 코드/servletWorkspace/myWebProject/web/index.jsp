@@ -29,19 +29,13 @@
 	<script>
 		$(function(){
 			//팝업창 띄우기
-			//window.open("/mwp/noticePopup.do","_blank","width=300, height=400,left=200,top=200");
+			var value = localStorage.getItem("dayCheck");
+			var today = new Date().getDate();
+
+			if(null == value || today != value.split(" ")[2]){
+				window.open("/mwp/noticePopup.do","_blank","width=300, height=400,left=200,top=200");
+			}
 		});
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

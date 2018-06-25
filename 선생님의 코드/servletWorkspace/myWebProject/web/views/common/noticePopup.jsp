@@ -9,10 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 팝업!!</title>
+<script type="text/javascript" src="/mwp/js/jquery-3.3.1.min.js"></script>
 <style>
 .outer{
 	width:300px;
-	height:400px;
+	height:600px;
 	background:black;
 	color:white;
 	margin-left:auto;
@@ -26,6 +27,17 @@
 	border:1px solid white;
 }
 </style>
+<script>
+	$(function(){
+		$("#closeBtn").click(function(){
+			if($("#dayCheck").prop("checked")){
+				localStorage.setItem("dayCheck",new Date());
+			}
+			close();
+		});
+	});
+
+</script>
 </head>
 <body>
 <div class="outer">
@@ -44,7 +56,9 @@
 				<td colspan="2">${notice.content}</td>
 			</tr>
 		</table>
-	</div>		
+	</div>
+	<input type="checkbox" id="dayCheck"/> 오늘 하루 동안 열지 않기
+	<button id="closeBtn">닫기</button>		
 </div>	
 </body>
 </html>

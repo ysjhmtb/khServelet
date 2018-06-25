@@ -136,6 +136,29 @@
 	
 	
 	
+	//???????????
+	$(function(){
+		$("#idCheckBtn").click(function(){
+			console.log("test");
+			
+			var inputId = $("#userId").val();
+			console.log(inputId);
+			
+			$.ajax({
+				url : "/mwp/idCheck.do",
+				type : "post",
+				data : {userId : inputId},
+				success : function(data){
+					console.log(data);
+					
+				}, error : function(e){
+					console.log(e);
+				}
+				
+			});
+		});		
+	});
+	
 	
 
 </script>
