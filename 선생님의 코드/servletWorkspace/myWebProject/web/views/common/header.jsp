@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="/mwp/js/jquery-3.3.1.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <style>
 	body{
 		background:url("/mwp/images/background.jpg") no-repeat;
@@ -128,7 +129,7 @@
 	function galleryPage(){
 		location.href = "/mwp/galleryList.do";		
 	}
-	
+	var naverLogin;
 	$(function(){
 		Kakao.init('3a3c19b17c6dccaf7fbcfb062df5d924');
 	    // 카카오 로그인 버튼을 생성합니다.
@@ -141,7 +142,29 @@
 	         alert(JSON.stringify(err));
 	      }
 	    });
+	    
+	    naverLogin = new naver.LoginWithNaverId(
+    		{
+    			clientId: "STokf_c_5b9UupTwNlO1",
+    			callbackUrl: "http://localhost:8081/mwp/index.jsp",
+    			isPopup: true, /* 팝업을 통한 연동처리 여부 */
+    			callbackHandle: true,
+    			loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+    		}
+    	);
+    	
+    	/* 설정정보를 초기화하고 연동을 준비 */
+    	naverLogin.init();
+    	
+    	naverLogin.getLoginStatus(function (status) {
+    		if (status) {
+    			close();
+    		} else {
+    			console.log("AccessToken이 올바르지 않습니다.");
+    		}
+    	});
 	});
+	
 	
 	function kakao_logout(){
 		Kakao.Auth.logout();
@@ -161,6 +184,33 @@
 	}
 	function storagePage(){
 		location.href = "/mwp/views/api/localStorage.jsp";	
+	}
+	function mapPage(){
+		location.href = "/mwp/views/api/map.jsp";
+		
+	}
+	function confirmEmail(){
+		naverLogin.getLoginStatus(function (status) {
+			if (status) {
+				var email = naverLogin.user.getEmail();
+				console.log(email);
+			} else {
+				console.log("AccessToken이 올바르지 않습니다.");
+			}
+		});
+	}
+	function naverLogout(){
+		$.ajax({
+			type:"post",
+			dataType:"text/html",
+			url:"http://nid.naver.com/nidlogin.logout",
+			crossdomain:true,
+			xhrFields:{
+				withCredentials:true
+			},success:function(data){
+				alert("로그아웃 성공");
+			}
+		});
 	}
 </script>
 </head>
@@ -202,6 +252,9 @@
 <!-- 	<a href="http://developers.kakao.com/logout">로그아웃</a> -->
 	<button onclick="kakao_logout();">카카오 로그아웃</button>
 	<br>
+	<div id="naverIdLogin"></div>
+	<button onclick="confirmEmail();">이메일 확인</button>
+	<button onclick="naverLogout();">네이버 로그아웃</button>
 	<br>
 	<br>
 	<br>
@@ -209,11 +262,12 @@
 	<div class="wrap">
 		<div class="nav">
 			<div class="menu" onclick="mainPage();">HOME</div>
-			<div class="menu" onclick="noticePage();">공지사항</div>
-			<div class="menu" onclick="boardPage();">게시판</div>
-			<div class="menu" onclick="galleryPage();">사진 게시판</div>
+			<div class="menu" onclick="noticePage();">Notice</div>
+			<div class="menu" onclick="boardPage();">Board</div>
+			<div class="menu" onclick="galleryPage();">Gallery</div>
 			<div class="menu" onclick="ajaxPage();">Ajax</div>
-			<div class="menu" onclick="storagePage();">웹 스토리지</div>
+			<div class="menu" onclick="storagePage();">Storage</div>
+			<div class="menu" onclick="mapPage();">Map</div>
 		</div>
 	</div>
 </body>
