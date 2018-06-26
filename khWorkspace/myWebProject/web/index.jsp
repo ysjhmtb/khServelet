@@ -26,6 +26,8 @@
 	</div>
 	<%@ include file="views/common/footer.jsp" %>
 	<!-- include 시에 해당 파일의 내용이 소스 형태로 추가 -->
+	
+	
 	<script>
 		$(function(){
 			//팝업창 띄우기
@@ -39,6 +41,8 @@
 			}
 		});
 	</script>
+	
+	
 </body>
 </html>
 

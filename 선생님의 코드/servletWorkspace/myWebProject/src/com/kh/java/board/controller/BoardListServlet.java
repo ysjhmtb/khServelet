@@ -81,17 +81,3 @@ public class BoardListServlet extends HttpServlet {
 		view.forward(request, response);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
