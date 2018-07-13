@@ -88,6 +88,7 @@
 		text-align:center;
 		width:100%;
 	}
+	
 </style>
 <script>
 	function login(){
@@ -105,7 +106,8 @@
 	function mainPage(){
 		//request.getContextPath() - /mwp
 		//location.href = "/mwp/index.jsp";
-		location.href = "<%=request.getContextPath()%>/index.jsp";
+		console.log('${pageContext.request.contextPath}');
+		location.href = "${pageContext.request.contextPath}/index.jsp";
 	}
 	
 	function myInfo(){
@@ -212,6 +214,29 @@
 			}
 		});
 	}
+	function testShowInfo(){
+		$.ajax({
+			url:"http://kopis.or.kr/openApi/restful/pblprfr",
+			data:{service:'effdcee65e9a465e850e00ac59bc2cad',
+					stdate:20170101,
+					eddate:20170731,
+					cpage:1,
+					rows:999,
+					shcate:'AAAA'},
+			type:"get",
+			success:function(data){
+				console.log(data);
+				console.log($.parseXML(data));
+			}
+		});
+	}
+	function testgogo(obj){
+		var reader = new FileReader();
+		reader.onload = function(e){
+			console.log(e.target.result);
+		}
+		reader.readAsText(obj.files[0]);
+	}
 </script>
 </head>
 <body>
@@ -242,7 +267,7 @@
 		</form>
 		<%}else{%>
 			<div class="userInfo">
-				<p><%=member.getUserName()%>님 방문을 환영 합니다.</p>
+				<p>${user.userName}님 방문을 환영 합니다.</p>
 				<div id="memberInfoBtn" onclick="myInfo();">정보 수정</div>
 				<div id="memberLogoutBtn" onclick="logout();">로그 아웃</div>
 			</div>
@@ -257,6 +282,8 @@
 	<button onclick="naverLogout();">네이버 로그아웃</button>
 	<br>
 	<br>
+	<button onclick="testShowInfo();">데이터 요청</button>
+	<input type="file" onchange="testgogo(this);"/>
 	<br>
 	<br>
 	<div class="wrap">

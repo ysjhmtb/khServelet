@@ -1,5 +1,6 @@
 package com.kh.java.gallery.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -43,11 +44,11 @@ public class WriteGalleryServlet extends HttpServlet {
 		//3. 파일 저장 경로 설정
 		String root = request.getServletContext().getRealPath("/");
 		String path = root + "upload_gallery/";
+		
 		//4. request -> multipartrequest
 		//filerenamePolicy -> FileRenamePolicy 상속 -> rename() override
 		MultipartRequest mRequest = new MultipartRequest(request,
 															path, maxSize, "UTF-8", new MyRenamePolicy());
-		
 		//전송 값을 변수에 저장
 		//객체 2개 -> 게시판에 추가할 객체, attachment 추가할 객체(list)
 		String title = mRequest.getParameter("title");

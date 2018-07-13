@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 	NoticeVo notice = (NoticeVo)request.getAttribute("notice");
-%>
+%> 
 <!DOCTYPE html>
 <html>
 <head>

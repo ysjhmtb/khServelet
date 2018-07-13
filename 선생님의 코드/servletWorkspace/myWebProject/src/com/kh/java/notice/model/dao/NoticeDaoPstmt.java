@@ -79,7 +79,7 @@ public class NoticeDaoPstmt {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, noticeNo);
 			//쿼리 실행 후 결과 처리
-			rs = pstmt.executeQuery(query);
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				int no = rs.getInt("nno");
@@ -129,7 +129,13 @@ public class NoticeDaoPstmt {
 			pstmt = con.prepareStatement(query);
 			switch(condition){
 			case 0:
-			
+				pstmt.setString(1, keyword);
+				pstmt.setString(2, keyword);
+				pstmt.setString(3, keyword);
+				break;
+			default :
+				pstmt.setString(1, keyword);
+				break;
 			}
 
 			System.out.println("실행 된 쿼리 : " + query);
@@ -162,46 +168,43 @@ public class NoticeDaoPstmt {
 
 	public int insertNotice(Connection con, NoticeVo notice) {
 		int result = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		String query = "";
 		try {
-			//1. 쿼리 실행 객체 생성
-			stmt = con.createStatement();
-			//2. 쿼리 작성
-			query = "INSERT INTO NOTICE " 
-					+"VALUES (SEQ_NNO.NEXTVAL, '"+notice.getTitle()+"' , '"
-					+ notice.getContent() + "', '"+notice.getWriter()+"', 0, sysdate)";
+			query = prop.getProperty("insertNotice");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, notice.getTitle());
+			pstmt.setString(2, notice.getContent());
+			pstmt.setString(3, notice.getWriter());
+			
 			System.out.println("공지 사항 작성 쿼리 : " + query);
 			
 			//3. 쿼리 실행
-			result = stmt.executeUpdate(query);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			//4. 자원 반납
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 		return result;
 	}
 
 	public int updateNoticeCount(Connection con, int noticeNo) {
 		int result = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		String query = "";
 		try {
-			//1. 쿼리 전송 객체 생성
-			stmt = con.createStatement();
-			//2. 쿼리 작성
-			query = "UPDATE NOTICE "
-					+ "SET NCOUNT = NCOUNT + 1 "
-					+ "WHERE NNO = " + noticeNo;
+			query = prop.getProperty("updateNoticeCount");
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
 			//3. 쿼리 실행
-			result = stmt.executeUpdate(query);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			//4. 자원 반납(close)
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 		//5. 결과 반환
 		return result;
@@ -216,11 +219,7 @@ public class NoticeDaoPstmt {
 			//쿼리 전송 객체 생성
 			stmt = con.createStatement();
 			//쿼리 작성
-			query = "SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME "
-					 + "FROM NOTICE N "
-					 + "JOIN MEMBER ON (NWRITER = USERID) " 
-					 + "WHERE N.NNO = (SELECT MAX(M.NNO) "
-					 + "                      FROM NOTICE M)";
+			query = prop.getProperty("selectLastNotice");
 			//쿼리 실행 후 결과 처리
 			rs = stmt.executeQuery(query);
 			
@@ -247,24 +246,22 @@ public class NoticeDaoPstmt {
 	
 	public int updateNotice(Connection con, NoticeVo notice){
 		int result = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		String query = "";
 		try {
-			//1. 쿼리 전송 객체 생성
-			stmt = con.createStatement();
-			//2. 쿼리 작성
-			query = "UPDATE NOTICE "
-						+ "SET NTITLE='"+notice.getTitle()+"',"
-							  +"NCONTENT='"+notice.getContent()+"' "
-						+ "WHERE NNO = " + notice.getNo();
-			System.out.println("실행 한 쿼리 : " + query);
+			query = prop.getProperty("updateNotice");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, notice.getTitle());
+			pstmt.setString(2, notice.getContent());
+			pstmt.setInt(3, notice.getNo());
+			
 			//3. 쿼리 실행
-			result = stmt.executeUpdate(query);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			//4. 자원 반납(close)
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 		//5. 결과 반환
 		return result;
@@ -272,21 +269,18 @@ public class NoticeDaoPstmt {
 
 	public int deleteNotice(Connection con, int noticeNo) {
 		int result = 0;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		String query = "";
 		try {
-			//1. 쿼리 전송 객체 생성
-			stmt = con.createStatement();
-			//2. 실행 쿼리 작성
-			query = "DELETE FROM NOTICE "
-						+ "WHERE NNO = " + noticeNo;
-			//3. 쿼리 실행
-			result = stmt.executeUpdate(query);
+			query = prop.getProperty("deleteNotice");
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			//4. 자원 반납(close)
-			JDBCTemplate.close(stmt);
+			JDBCTemplate.close(pstmt);
 		}
 		//5. 결과 반환(return)
 		return result;
@@ -301,10 +295,7 @@ public class NoticeDaoPstmt {
 			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
 			//2. 쿼리문 작성
-			query = "SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE "
-						+ "FROM NOTICE "
-						+ "WHERE NNO = (SELECT MAX(N.NNO) "
-						+ "                       FROM NOTICE N)";
+			query = prop.getProperty("selectNoticeLast");
 			//3. 쿼리 실행
 			rs = stmt.executeQuery(query);
 			//4. 결과 처리(result set -> 객체)
