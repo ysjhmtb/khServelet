@@ -50,6 +50,10 @@
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
+
+
+
+
 	<div class="outer">
 		<h2 align="center">공지 사항 내용</h2>
 		<div class="tableArea">
@@ -82,6 +86,9 @@
 			</div>
 		</div>		
 	</div>
+	
+	
+	
 <%@ include file="../common/footer.jsp" %>	
 </body>
 </html>

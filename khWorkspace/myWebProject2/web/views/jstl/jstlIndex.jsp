@@ -14,7 +14,7 @@
 <li>
 	<a href="jstlBasic1.jsp">1. basic jstl 1</a>
 </li>
-<li>ㅊ
+<li>
 	<a href="/mwp2/jstlIf.do?condition=5">2. jstl - if</a>
 </li>
 <li>
@@ -37,6 +37,21 @@
 </c:url>
 <li>
 	<a href="<c:out value="${urlPage }"/>">6. jstl - url</a>
+</li>
+
+<li>
+	<a href="/mwp2/jstlFmt.do"/>7. jstl - formatter</a>
+</li>
+
+<li>
+	8. jstl - function
+		
+	<form action="/mwp2/jstlFn.do" method="get">
+		복날 음식 종류를 아는대로 입력해 주십시오.(여러개일 경우 ,로 구분하여 주십시오.)<br/>
+		음식 : <input type="text" name="inputText" />
+		<input type="submit" value="음식 전송"/>
+	</form>
+	
 </li>
 
 </ul>
