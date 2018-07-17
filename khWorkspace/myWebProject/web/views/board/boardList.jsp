@@ -132,35 +132,18 @@ $(function(){
 		location.href = "/mwp/selectBoard.do?boardNo=" + boardNo + "&currentPage=" + <%=currentPage%>; 		
 	});
 });
-
-
-
 function movePage(pageNum){
 	location.href = "/mwp/boardList.do?currentPage=" + pageNum;
 }
-
-
 function searchBoard(){
 	var condition = $("#searchCondition").val();
 	var searchText = $("#searchText").val();
 	
 	location.href = "/mwp/searchBoard.do?condition=" + condition +"&searchText=" + searchText;
 }
-
 </script>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
