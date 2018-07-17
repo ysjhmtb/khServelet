@@ -122,7 +122,7 @@
 		<input type="button" value="검색하기" onclick="searchNotice();"/>
 		
 
-		<c:if test="${!empty member || (member.userId).equals('admin') }">
+		<c:if test="${!empty member && (member.userId).equals('admin') }">
 			<input type="button" value="작성하기" onclick="writeNotice();"/>
 		</c:if>
 		
