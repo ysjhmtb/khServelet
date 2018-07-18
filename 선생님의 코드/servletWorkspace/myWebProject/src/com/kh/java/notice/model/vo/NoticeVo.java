@@ -3,48 +3,15 @@ package com.kh.java.notice.model.vo;
 import java.util.Date;
 
 public class NoticeVo {
-	private int no;
-	private String title;
-	private String content;
-	private String writer;
-	private int count;
-	private Date writeDate;
+	private int nno;
+	private String ntitle;
+	private String ncontent;
+	private String nwriter;
+	private int ncount;
+	private Date ndate;
 	private String name;
 	
 	public NoticeVo(){
-	}
-	
-	public NoticeVo(int no, String title, String content) {
-		this.no = no;
-		this.title = title;
-		this.content = content;
-	}
-
-	public NoticeVo(String id, String title, String content){
-		writer = id;
-		this.title = title;
-		this.content = content;
-	}
-	
-	public NoticeVo(int no, String title, String content, String writer, int count, Date writeDate) {
-		this.no = no;
-		this.title = title;
-		this.content = content;
-		this.writer = writer;
-		this.count = count;
-		this.writeDate = writeDate;
-	}
-	
-	
-	
-	public NoticeVo(int no, String title, String content, String writer, int count, Date writeDate, String name) {
-		this.no = no;
-		this.title = title;
-		this.content = content;
-		this.writer = writer;
-		this.count = count;
-		this.writeDate = writeDate;
-		this.name = name;
 	}
 
 	public String getName() {
@@ -56,58 +23,59 @@ public class NoticeVo {
 	}
 
 
-	public int getNo() {
-		return no;
+
+	public int getNno() {
+		return nno;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setNno(int nno) {
+		this.nno = nno;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getNtitle() {
+		return ntitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setNtitle(String ntitle) {
+		this.ntitle = ntitle;
 	}
 
-	public String getContent() {
-		return content;
+	public String getNcontent() {
+		return ncontent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setNcontent(String ncontent) {
+		this.ncontent = ncontent;
 	}
 
-	public String getWriter() {
-		return writer;
+	public String getNwriter() {
+		return nwriter;
 	}
 
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setNwriter(String nwriter) {
+		this.nwriter = nwriter;
 	}
 
-	public int getCount() {
-		return count;
+	public int getNcount() {
+		return ncount;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setNcount(int ncount) {
+		this.ncount = ncount;
 	}
 
-	public Date getWriteDate() {
-		return writeDate;
+	public Date getNdate() {
+		return ndate;
 	}
 
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setNdate(Date ndate) {
+		this.ndate = ndate;
 	}
 
 	@Override
 	public String toString() {
-		return "NoticeVo [no=" + no + ", title=" + title + ", content=" + content + ", writer=" + writer + ", count="
-				+ count + ", writeDate=" + writeDate + "]";
+		return "NoticeVo [nno=" + nno + ", ntitle=" + ntitle + ", ncontent=" + ncontent + ", nwriter=" + nwriter
+				+ ", ncount=" + ncount + ", ndate=" + ndate + ", name=" + name + "]";
 	}
 }
 

@@ -41,6 +41,7 @@ public class NoticeListServlet extends HttpServlet {
 		//3.비지니스 로직 호출.(서비스 호출)
 		//공지사항의 목록을 조회.
 		List<NoticeVo> list = new NoticeService().getNoticeList();
+		System.out.println(list);
 		
 		for(NoticeVo vo : list) {
 			System.out.println(vo.toString());

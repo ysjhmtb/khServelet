@@ -16,7 +16,7 @@ public class NoticeDao {
 		//커넥션을 맺는다
 		Statement stmt = null;
 		ResultSet rs = null;
-		ArrayList<NoticeVo> result = new ArrayList<>();
+		ArrayList<NoticeVo> result = new ArrayList<NoticeVo>();
 		//쿼리 객체 생성
 		try {
 			stmt = con.createStatement();
@@ -36,7 +36,7 @@ public class NoticeDao {
 				Date date = rs.getDate("ndate");
 				String name = rs.getString("username");
 				
-				temp = new NoticeVo(no, title, content, writer, count, date);
+				temp = new NoticeVo(no, title, content, writer, count, date, name);
 				temp.setName(name);
 				result.add(temp);
 			}
@@ -95,75 +95,6 @@ public class NoticeDao {
 							+ "FROM NOTICE "
 							+ "JOIN MEMBER ON (NWRITER = USERID) ";
 		try {
-			
-			/*
-
-			 0 : 전체
-
-			 SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME
-
-			 FROM NOTICE
-
-			 JOIN MEMBER ON (NWRITER = USERID)
-
-			 WHERE (NTITLE LIKE '%점검%' 
-
-			 		OR NCONTENT LIKE '%검색어%' 
-
-			 		OR USERNAME LIKE '%검색어%');
-
-			 
-
-			 
-
-			 1 : 제목
-
-			 
-
-			 SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME
-
-			 FROM NOTICE
-
-			 JOIN MEMBER ON (NWRITER = USERID)
-
-			 WHERE NTITLE LIKE '%점검%';
-
-			 
-
-			 
-
-			 2 : 내용
-
-			 
-
-			 SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME
-
-			 FROM NOTICE
-
-			 JOIN MEMBER ON (NWRITER = USERID)
-
-			 WHERE NCONTENT LIKE '%검색어%';
-
-			 
-
-			 
-
-			 3 : 작성자(이름)
-
-			 
-
-			 SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME
-
-			 FROM NOTICE
-
-			 JOIN MEMBER ON (NWRITER = USERID)
-
-			 WHERE USERNAME LIKE '%검색어%';
-
-			 
-
-			 */
-
 			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
 			//2. 쿼리 작성
@@ -187,12 +118,11 @@ public class NoticeDao {
 				break;
 			}
 			System.out.println("실행 된 쿼리 : " + query);
-			
 			//3. 결과 처리
 			rs = stmt.executeQuery(query);
 			list = new ArrayList<NoticeVo>();
-			NoticeVo temp = null;
 			
+			NoticeVo temp = null;
 			while(rs.next()){
 				int no = rs.getInt("nno");
 				String title = rs.getString("ntitle");
@@ -219,42 +149,23 @@ public class NoticeDao {
 		int result = 0;
 		Statement stmt = null;
 		String query = "";
-		
 		try {
-			
-			
-			//1.쿼리 실행 객체 생성.
+			//1. 쿼리 실행 객체 생성
 			stmt = con.createStatement();
-			
-			//2.쿼리 작성.
-			/*
-			 INSERT INTO NOTICE 
-			 VALUES (SEQ_NNO.NEXTVAL, '제목', '내용', 'admin', 0, sysdate);
-			 
-			 
-			 */
+			//2. 쿼리 작성
 			query = "INSERT INTO NOTICE " 
-					+ "VALUES (SEQ_NNO.NEXTVAL, '" + notice.getTitle() +"', '"
-					+ notice.getContent() + "', '"
-					+ notice.getWriter() + "', 0, sysdate)";
+					+"VALUES (SEQ_NNO.NEXTVAL, '"+notice.getTitle()+"' , '"
+					+ notice.getContent() + "', '"+notice.getWriter()+"', 0, sysdate)";
 			System.out.println("공지 사항 작성 쿼리 : " + query);
 			
-			
-			//3.쿼리 실행.
+			//3. 쿼리 실행
 			result = stmt.executeUpdate(query);
-			
-			
-			
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			//4.자원 반납.
+			//4. 자원 반납
 			JDBCTemplate.close(stmt);
 		}
-		
-		
 		return result;
 	}
 
@@ -262,150 +173,145 @@ public class NoticeDao {
 		int result = 0;
 		Statement stmt = null;
 		String query = "";
-		
-		
 		try {
-			//1.쿼리 전송 객체 생성.
+			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
-			//2.쿼리 작성.
-			/*
-			 UPDATE NOTICE 
-			 SET NCOUNT = NCOUNT + 1
-			 WHERE NNO = 24;
-			 */
-			
+			//2. 쿼리 작성
 			query = "UPDATE NOTICE "
 					+ "SET NCOUNT = NCOUNT + 1 "
 					+ "WHERE NNO = " + noticeNo;
-			
-			//3.쿼리 실행.
+			//3. 쿼리 실행
 			result = stmt.executeUpdate(query);
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			//4.자원 반납.
+		}finally{
+			//4. 자원 반납(close)
 			JDBCTemplate.close(stmt);
 		}
-		
-		//5.결과 반환.
+		//5. 결과 반환
 		return result;
 	}
 
-	public int updateNotice(Connection con, NoticeVo notice) {
+	public NoticeVo selectLastNotice(Connection con) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		String query = "";
+		NoticeVo result = null;
+		try {
+			//쿼리 전송 객체 생성
+			stmt = con.createStatement();
+			//쿼리 작성
+			query = "SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME "
+					 + "FROM NOTICE N "
+					 + "JOIN MEMBER ON (NWRITER = USERID) " 
+					 + "WHERE N.NNO = (SELECT MAX(M.NNO) "
+					 + "                      FROM NOTICE M)";
+			//쿼리 실행 후 결과 처리
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()){
+				int no = rs.getInt("nno");
+				String title = rs.getString("ntitle");
+				String content = rs.getString("ncontent");
+				String writer = rs.getString("nwriter");
+				int count = rs.getInt("ncount");
+				Date date = rs.getDate("ndate");
+				String name = rs.getString("username");
+				
+				result = new NoticeVo(no, title, content, writer, count, date, name);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			//close
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(stmt);
+		}
+		return result;
+	}
+	
+	public int updateNotice(Connection con, NoticeVo notice){
 		int result = 0;
 		Statement stmt = null;
 		String query = "";
-		
-		
 		try {
-			//1. 쿼리 전송 객체 생성.
+			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
-			
-			//2. 쿼리 작성.
-			query = "UPDATE NOTICE " 
-					+ "SET NTITLE='" + notice.getTitle() 
-					+ "', NCONTENT='" + notice.getContent()  
-					+ "' WHERE NNO= " + notice.getNo();
-			System.out.println("executed query : " + query);
-			
-			
-			//3. 쿼리 실행.
+			//2. 쿼리 작성
+			query = "UPDATE NOTICE "
+						+ "SET NTITLE='"+notice.getTitle()+"',"
+							  +"NCONTENT='"+notice.getContent()+"' "
+						+ "WHERE NNO = " + notice.getNo();
+			System.out.println("실행 한 쿼리 : " + query);
+			//3. 쿼리 실행
 			result = stmt.executeUpdate(query);
-			
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			//4. 자원 반납.
+		}finally{
+			//4. 자원 반납(close)
 			JDBCTemplate.close(stmt);
-			
 		}
-		
-		//5. 결과 리턴
+		//5. 결과 반환
 		return result;
 	}
 
 	public int deleteNotice(Connection con, int noticeNo) {
-		
 		int result = 0;
 		Statement stmt = null;
 		String query = "";
-		
-		
 		try {
-			//1. creating query statement object
+			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
-			
-			//2. writing query to execute
-			query = "DELETE FROM NOTICE WHERE NNO = " + noticeNo;
-			System.out.println("called query as delete notice : " + query);
-			
-			//3. executing query
+			//2. 실행 쿼리 작성
+			query = "DELETE FROM NOTICE "
+						+ "WHERE NNO = " + noticeNo;
+			//3. 쿼리 실행
 			result = stmt.executeUpdate(query);
-			
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			//4. retrieving resource
+		}finally{
+			//4. 자원 반납(close)
 			JDBCTemplate.close(stmt);
 		}
-		
-		//5. returning results
+		//5. 결과 반환(return)
 		return result;
 	}
-
-	public NoticeVo selectNoticeLast(Connection con) {
-		
+	
+	public NoticeVo selectNoticeLast(Connection con){
 		NoticeVo result = null;
 		Statement stmt = null;
-		String query = "";
 		ResultSet rs = null;
-		
-		
+		String query = "";
 		try {
-			//1. 쿼리 전송 객체 생성 
+			//1. 쿼리 전송 객체 생성
 			stmt = con.createStatement();
-			
-			//2. 쿼리 작성 
-			query = "SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE " + 
-					"FROM NOTICE " + 
-					"WHERE NNO = (SELECT MAX(N.NNO) FROM NOTICE N)";
-			
-			
-			//3. 쿼리 실행 
+			//2. 쿼리문 작성
+			query = "SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE "
+						+ "FROM NOTICE "
+						+ "WHERE NNO = (SELECT MAX(N.NNO) "
+						+ "                       FROM NOTICE N)";
+			//3. 쿼리 실행
 			rs = stmt.executeQuery(query);
-			
-			
-			
-			//4. 결과 처리 
-			while(rs.next()) {
+			//4. 결과 처리(result set -> 객체)
+			while(rs.next()){
 				String title = rs.getString("ntitle");
 				String content = rs.getString("ncontent");
 				result = new NoticeVo();
 				result.setTitle(title);
 				result.setContent(content);
 			}
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			//5. 자원 회수 
+		}finally{
+			//5. 자원 반납(close)
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(stmt);
 		}
-
-		
-		//6. 결과 반환 
+		//6. 결과 반환
 		return result;
-		
 	}
 }
+
 
 
 

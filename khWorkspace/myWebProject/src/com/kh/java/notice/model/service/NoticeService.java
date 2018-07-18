@@ -4,23 +4,38 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.java.common.JDBCTemplate;
+import com.kh.java.common.MySqlFactory;
 import com.kh.java.notice.model.dao.NoticeDao;
+import com.kh.java.notice.model.dao.NoticeDaoPstmt;
 import com.kh.java.notice.model.vo.NoticeVo;
 
 
 public class NoticeService {
+	
+	
+	//기존 statement 적용
+	//NoticeDao noticeDao = new NoticeDao();
+	//preparedStatement 적용
+	NoticeDaoPstmt noticeDao = new NoticeDaoPstmt();
+	
 	public List<NoticeVo> getNoticeList() {
-		//커넥션을 맺는 역할 -> 서비스.
-		// 	-> 트랜잭션 처리를 해야 하기 때문에.
-		Connection con = JDBCTemplate.getConnection();
 		
-		ArrayList<NoticeVo> list = new NoticeDao().selectNoticeList(con);
-		
-		JDBCTemplate.close(con);
-		
-		return list;
-		
+				//~~~~Factory - Factory 패턴 -> 객체를 생성 하실때 
+				//커넥션을 맺는 역할 -> 서비스 
+				//	-> 트랜젝션 관리를 해야 하기 때문에
+//				Connection con = JDBCTemplate.getConnection();
+//				ArrayList<NoticeVo> list = noticeDao.selectNoticeList(con);
+//				JDBCTemplate.close(con);
+//				return list;
+				
+				//openSession - parameter - autocommit에 대한 설정 여부
+				SqlSession session = MySqlFactory.getSqlSession().openSession(false);
+				List<NoticeVo> list = noticeDao.selectNoticeList(session);
+				session.close();
+				return list;
 		
 	}
 	

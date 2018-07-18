@@ -1,6 +1,14 @@
 <%@page import="com.kh.java.notice.model.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <%
 	NoticeVo notice = (NoticeVo)request.getAttribute("notice");
 %>
@@ -60,28 +68,29 @@
 			<table>
 				<tr>
 					<th width="100">제 목 : </th>
-					<td colspan="3"><%=notice.getTitle() %></td>
+					<td colspan="3"> <c:out value="${notice.title }" /> </td>
 				</tr>
 				<tr>
 					<th>작성자 : </th>
-					<td><%=notice.getName() %></td>
+					<td> <c:out value="${notice.writer }"/> </td>
 					<th width="100">작성일 : </th>
-					<td><%=notice.getWriteDate() %></td>
+					<td> <c:out value="${notice.writeDate }"/> </td>
 				</tr>
 				<tr>
 					<th>내용</th>
 				</tr>
 				<tr>
-					<td colspan="4"><%=notice.getContent() %></td>
+					<td colspan="4"> <c:out value="${notice.content }"/> </td>
 				</tr>
 			</table>
 			
 			<div align="center">
 				<button onclick="noticeList()">목록으로 돌아가기.</button>
 				
-				<%if(null != member && member.getUserId().equals("admin")){ %>
+				<c:if test="${ (!empty member) && (\"admin\".equals(member.userId)) }">
 					<button onclick="updateNoticePage()">수정하기.</button>
-				<%} %>
+				
+				</c:if>
 			
 			</div>
 		</div>		

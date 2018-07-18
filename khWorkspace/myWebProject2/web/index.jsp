@@ -19,6 +19,10 @@
 <a href="/mwp2/views/jstl/jstlIndex.jsp">JSTL index</a>
 
 
+<h1>mybatis</h1>
+<a href="memberList.do">select</a>
+
+
 
 
 

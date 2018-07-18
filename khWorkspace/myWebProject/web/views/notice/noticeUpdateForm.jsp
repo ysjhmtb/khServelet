@@ -29,7 +29,7 @@
 <script>
 	function deleteNotice(){
 		if(confirm("삭제하시겠습니까?")){
-			location.href = "/mwp/deleteNotice.do?noticeNo=<%=notice.getNo()%>";
+			location.href = "/mwp/deleteNotice.do?noticeNo=${notice.no}";
 		}
 		
 		
@@ -48,15 +48,15 @@
 		<div class="tableArea" align="center">
 			<form method="post" action="/mwp/updateNotice.do">
 			
-				<input type="hidden" name="writer" value="<%=notice.getWriter()%>">
-				<input type="hidden" name="noticeNo" value="<%=notice.getNo()%>">
+				<input type="hidden" name="writer" value="${notice.writer}">
+				<input type="hidden" name="noticeNo" value="${notice.no}">
 				
 				<table>
 				
 				
 				<tr>
 					<th>제 목 : </th>
-					<td colspan="3"><input type="text" name="title" size="33" value="<%=notice.getTitle()%>"></td>
+					<td colspan="3"><input type="text" name="title" size="33" value="${notice.title}"></td>
 				</tr>
 				
 				<tr>
@@ -64,7 +64,7 @@
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea name="content" cols="40" rows="15"><%=notice.getContent()%></textarea>
+						<textarea name="content" cols="40" rows="15"> <c:out value="${notice.content }"/> </textarea>
 					</td>
 				</tr>
 			</table>

@@ -14,8 +14,10 @@
 <a href="/mwp2/el4.do">4.기본 객체(array) 정보 출력</a><br/>
 <a href="/mwp2/views/el/el5.jsp">5.연산자 출력</a><br/>
 <a href="/mwp2/el6.do">6.내장객체(scope) 출력</a><br/>
-<a href="/mwp2/views/el/elForm.jsp">7. 폼 데이터 전송 시 출력</a>
-
+<a href="/mwp2/views/el/elForm.jsp">7. 폼 데이터 전송 시 출력</a><br/>
+<a href="/mwp2/views/jstl/jstlIndex.jsp">JSTL 인덱스 페이지</a>
+<h1>mybatis</h1>
+<a href="memberList.do">select</a>
 
 
 

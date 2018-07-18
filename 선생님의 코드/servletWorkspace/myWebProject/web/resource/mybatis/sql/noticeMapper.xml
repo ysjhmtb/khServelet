@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeMapper">
+  <select id="selectNoticeList" resultType="com.kh.java.notice.model.vo.NoticeVo">
+    SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, USERNAME AS NAME 
+    FROM NOTICE 
+    JOIN MEMBER ON (NWRITER = USERID) 
+    ORDER BY NNO DESC
+  </select>
+</mapper>

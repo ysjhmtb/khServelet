@@ -149,6 +149,7 @@ a{
 	</div>
 	<div align="center">
 		<button onclick="boardPageList();">목록으로</button>
+		
 		<%if(null != member && member.getUserId().equals(board.getWriter())){ %>
 			<button onclick="bModifyPage();">수정하기</button>
 			<button onclick="deleteBoard();">삭제하기</button>

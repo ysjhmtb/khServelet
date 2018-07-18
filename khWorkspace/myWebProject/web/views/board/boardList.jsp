@@ -3,6 +3,16 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+
+
 <%
 	ArrayList<BoardVo> list = (ArrayList<BoardVo>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -50,7 +60,104 @@ table td{
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
+
+
+
+
 <div class="outer">
+	<h1 align="center">공지사항</h1>
+	<div class="tableArea">
+		<table align="center">
+			<tr>
+				<th width="100">글번호</th>
+				<th width="300">글제목</th>
+				<th width="100">작성자</th>
+				<th width="100">조회수</th>
+				<th width="150">작성일</th>
+			</tr>
+			
+			<c:if test="${list.size() == 0 }">
+				<tr>
+					<td colspan="5">조회 된 게시글이 없습니다.</td>
+				</tr>
+			
+			</c:if>
+			
+			<c:if test="${list.size() != 0 }">
+				<c:forEach items="${list }" var="n" varStatus="status">
+					<tr>
+						<td> <c:out value="${n.no }"/> </td>
+						
+						<td>
+							<c:out value="${n.title }"/>
+							
+							<c:if test="${!empty n.attachFile }">
+								(O)
+							</c:if>
+							
+							<c:if test="${empty n.attachFile }">
+								(X)
+							</c:if>
+						
+						</td>
+						
+						<td><c:out value="${n.writerName }"/></td>						
+						<td><c:out value="${n.count }"/></td>						
+						<td><c:out value="${n.writeDate }"/></td>
+						
+						
+					</tr>
+				</c:forEach>
+			
+			</c:if>
+			
+		</table>
+	</div>
+	
+	
+	
+	
+	<!-- 페이징 처리 부분     <<	1 2 3 4 5 6 7 ... >>  -->	
+	<div class="pageArea" align="center">
+		<button onclick="movePage(1);"> << </button>
+		
+		
+		<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+			
+			<c:if test="${i == currentPage }">
+				<button onclick="movePage(${i});" disabled>${i }</button>
+			</c:if>
+			
+			<c:if test="${i != currentPage }">
+				<button onclick="movePage(${i});" >${i }</button>
+			</c:if>
+		</c:forEach>	
+		
+		
+		<button onclick="movePage(${maxPage});"> >> </button>
+	</div>
+	
+	<br>
+	<div class="searchArea" align="center">
+		<select id="searchCondition">
+			<option value="0">전체</option>
+			<option value="1">제목</option>
+			<option value="2">내용</option>
+			<option value="3">작성자</option>
+		</select>		
+		<input type="text" id="searchText" placeholder="검색어 입력"/>
+		<input type="button" value="검색하기" onclick="searchBoard();"/>
+		
+		<c:if test="${!empty member }">
+			<input type="button" value="작성하기" onclick="writeBoard();"/>
+		</c:if>
+		
+	</div>
+</div> 
+
+
+
+<%-- <div class="outer">
 	<h1 align="center">공지사항</h1>
 	<div class="tableArea">
 		<table align="center">
@@ -118,7 +225,13 @@ table td{
 			<input type="button" value="작성하기" onclick="writeBoard();"/>
 		<%} %>
 	</div>
-</div>
+</div> --%>
+
+
+
+
+
+
 <script>
 $(function(){
 	$(".tableArea td").mouseenter(function(){

@@ -25,6 +25,8 @@ public class NoticeListServlet extends HttpServlet {
 		//2. 전송 값 변수에 저장 X
 		//3. 비지니스 로직 호출(서비스 호출)
 		List<NoticeVo> list = new NoticeService().getNoticeList(); 
+		System.out.println(list);
+		
 		
 		//공지사항 조회 값 확인
 //		for(NoticeVo vo : list){

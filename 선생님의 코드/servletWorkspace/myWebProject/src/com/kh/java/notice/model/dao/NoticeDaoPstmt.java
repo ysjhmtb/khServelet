@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
+
+import org.apache.ibatis.session.SqlSession;
 
 import com.kh.java.common.JDBCTemplate;
 import com.kh.java.gallery.model.dao.GalleryDao;
@@ -315,6 +318,10 @@ public class NoticeDaoPstmt {
 		}
 		//6. 결과 반환
 		return result;
+	}
+
+	public List<NoticeVo> selectNoticeList(SqlSession session) {
+		return session.selectList("NoticeMapper.selectNoticeList");
 	}
 }
 

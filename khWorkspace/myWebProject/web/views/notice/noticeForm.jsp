@@ -33,7 +33,7 @@
 		<div class="tableArea" align="center">
 			<form method="post" action="/mwp/writeNotice.do">
 			
-				<input type="hidden" name="writer" value="<%=member.getUserId()%>">
+				<input type="hidden" name="writer" value="${member.userId}">
 				
 				<table>
 				<tr>
