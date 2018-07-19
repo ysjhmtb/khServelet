@@ -18,7 +18,7 @@ public class JDBCTemplate {
 //			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe",
 //					"jsp",
 //					"jsp");
-
+			
 			//properties로 설정 정보를 분리
 			String filePath 
 					= JDBCTemplate.class.getResource("/oracleDriver.properties").getPath();

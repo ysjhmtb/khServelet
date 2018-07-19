@@ -2,6 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+
+
+
 <mapper namespace="MemberMapper">
 
   <select id="selectMemberList" resultType="Member">
@@ -9,5 +14,38 @@
 	FROM MEMBER
 	ORDER BY USERNAME
   </select>
+  
+  <!-- cmd + shift + R로 편하게 찾아오기.  -->
+  <!-- http://www.mybatis.org/mybatis-3/ko/configuration.html#typeAliases
+  	String 대신 string을 사용할 수 있는 이유.  
+    -->
+    
+  
+  <select id="selectMember" parameterType="string" resultType="Member">
+    SELECT USERID, PASSWORD, USERNAME, GENDER,
+	  AGE, EMAIL, PHONE, ADDRESS, HOBBY, ENROLLDATE
+	FROM MEMBER 
+	WHERE USERID = #{id}
+  </select>
+  
+  <update id="updateMember" parameterType="Member">  	
+  	UPDATE MEMBER
+	SET USERNAME=#{username}, AGE=#{age},
+	  PHONE=#{phone}
+	WHERE USERID=#{userid}  
+  </update>
+  
+  <delete id="deleteMember" parameterType="string"> 
+  	DELETE FROM MEMBER WHERE USERID = #{id} 
+  </delete>
+  
+  <insert id="insertMember" parameterType="Member">
+  <!-- ctrl + shift + x 대소문자 변경   -->
+  	INSERT INTO MEMBER(USERID, PASSWORD, USERNAME,
+	  GENDER, AGE, PHONE, ENROLLDATE)
+    VALUES( #{userid}, #{password}, #{username}, #{gender}, 
+    #{age}, #{phone}, SYSDATE)
+  </insert>
+ 
   
 </mapper>

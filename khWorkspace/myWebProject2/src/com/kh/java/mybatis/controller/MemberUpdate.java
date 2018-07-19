@@ -1,7 +1,6 @@
 package com.kh.java.mybatis.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,24 +12,45 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.java.mybatis.model.service.MybatisService;
 import com.kh.java.mybatis.model.vo.Member;
 
-
-@WebServlet("/memberList.do")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/updateMember.do")
+public class MemberUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-    public MemberListServlet() {
+    public MemberUpdate() {
         super();
         
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Member> list = new MybatisService().selectMemberList();
-		System.out.println(list);
+		request.setCharacterEncoding("UTF-8");
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/jstl/memberList.jsp");
-		request.setAttribute("list", list);
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		int age = Integer.parseInt(request.getParameter("age"));
+		String phone = request.getParameter("phone");
+		
+		Member member = new Member();
+		member.setUserid(id);
+		member.setAge(age);
+		member.setUsername(name);
+		member.setPhone(phone);
+
+		int result = new MybatisService().updateMember(member);
+		
+		String url = "";
+		if(result > 0) {
+			request.setAttribute("member", member);
+			url = "views/mybatis/memberPage.jsp";
+			
+		}else {
+			//에러페이지로 이동 
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);
+		
+		
 		
 	}
 

@@ -3,7 +3,6 @@ package com.kh.java.mybatis.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,31 +11,35 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.java.mybatis.model.service.MybatisService;
 import com.kh.java.mybatis.model.vo.Member;
-@WebServlet("/memberList.do")
-public class MemberListServlet extends HttpServlet {
+import com.kh.java.mybatis.model.vo.Search;
+
+@WebServlet("/searchMember.do")
+public class MemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public MemberListServlet() {
+    public MemberSearchServlet() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Member> list = new MybatisService().selectMemberList();
-		System.out.println(list);
-		RequestDispatcher view = request.getRequestDispatcher("views/jstl/memberList.jsp");
-		request.setAttribute("list", list);
-		view.forward(request, response);
+		String condition 
+				= request.getParameter("condition");
+		String keyword
+				= request.getParameter("keyword");
+		Search search = new Search();
+		search.setCondition(condition);
+		search.setKeyword(keyword);
+		
+		List<Member> list 
+			= new MybatisService().selectMemberSearch(search); 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

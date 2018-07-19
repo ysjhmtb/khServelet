@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+<!-- http://www.mybatis.org/mybatis-3/ko/configuration.html#settings  -->
+
+ <settings>
+ 	<setting name="jdbcTypeForNull" value="NULL"/>
+ 	
+ 	
+ </settings>
+
   <typeAliases>
   	<typeAlias type="com.kh.java.mybatis.model.vo.Member" alias="Member"/>
   

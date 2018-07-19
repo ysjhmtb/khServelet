@@ -8,4 +8,36 @@
 		FROM MEMBER
 		ORDER BY USERNAME
 	</select>
+	<select id="selectMember" parameterType="string" resultType="Member">
+		SELECT USERID, PASSWORD, USERNAME, GENDER, AGE, EMAIL, PHONE, ADDRESS, HOBBY, ENROLLDATE
+		FROM MEMBER
+		WHERE USERID = #{test}
+	</select>
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		SET USERNAME=#{username}, AGE=#{age}, PHONE=#{phone}
+		WHERE USERID=#{userid}
+	</update>
+	<delete id="deleteMember" parameterType="string">
+		DELETE
+		FROM MEMBER
+		WHERE USERID = #{id}
+	</delete>
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER(USERID, PASSWORD, USERNAME, GENDER, AGE, PHONE, ENROLLDATE)
+			VALUES (#{userid}, #{password}, #{username}, #{gender}, #{age}, #{phone}, SYSDATE)
+	</insert>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
