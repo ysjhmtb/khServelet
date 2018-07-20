@@ -20,12 +20,8 @@
 
 
 <h1>mybatis</h1>
-<a href="memberList.do">select</a>
-
-
-
-
-
+<a href="memberList.do">member</a>
+<a href="photoList.do">photo</a>
 
 </body>
 </html>

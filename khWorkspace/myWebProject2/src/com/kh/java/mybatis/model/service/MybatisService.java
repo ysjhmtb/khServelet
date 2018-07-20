@@ -1,11 +1,13 @@
 package com.kh.java.mybatis.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.kh.java.mybatis.model.dao.MybatisDao;
 import com.kh.java.mybatis.model.vo.Member;
+import com.kh.java.mybatis.model.vo.Photo;
 import com.kh.java.mybatis.model.vo.Search;
 
 public class MybatisService {
@@ -84,8 +86,28 @@ public class MybatisService {
 	}
 
 	public List<Member> selectMemberSearch(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		SqlSession session = MySqlFactory.getSqlSessionFactory().openSession(false);
+		List<Member> list = dao.selectMemberSearch(session, search);
+		
+		session.close();
+		return list;
+	}
+
+	public List<Photo> selectPhotoList() {
+		
+		SqlSession session = MySqlFactory.getSqlSessionFactory().openSession(false);
+		List<Photo> list = dao.selectPhtoList(session);
+		session.close();
+		return list;
+	}
+
+	public Photo selectPhoto(HashMap<String, String> params) {
+		
+		SqlSession session = MySqlFactory.getSqlSessionFactory().openSession(false);
+		Photo photo = dao.selectPhoto(session, params);
+		session.close();
+		return photo;
 	}
 
 	

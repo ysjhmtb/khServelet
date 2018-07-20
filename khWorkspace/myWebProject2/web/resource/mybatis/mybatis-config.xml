@@ -8,12 +8,15 @@
 
  <settings>
  	<setting name="jdbcTypeForNull" value="NULL"/>
- 	
- 	
+ 	<setting name="mapUnderscoreToCamelCase" value="true"/> 	
  </settings>
+
 
   <typeAliases>
   	<typeAlias type="com.kh.java.mybatis.model.vo.Member" alias="Member"/>
+  	<typeAlias type="com.kh.java.mybatis.model.vo.Search" alias="Search"/>
+  	<typeAlias type="com.kh.java.mybatis.model.vo.Photo" alias="Photo"/>
+  	<typeAlias type="com.kh.java.mybatis.model.vo.PhotoReply" alias="Reply"/>
   
   </typeAliases>
   
@@ -30,6 +33,7 @@
   </environments>
   <mappers>
     <mapper resource="/mybatis/sql/memberMapper.xml"/>
+    <mapper resource="/mybatis/sql/photoMapper.xml"/>
   </mappers>
   
   
