@@ -1,0 +1,115 @@
+
+
+@ 동적 쿼리
+-> 일반적으로 검색 기능이나 다중 입력 처리 등을 수행해야 할 경우 
+SQL을 실행하는 DAO를 여러번 호출하여 실행하였지만 마이바티스에서는 이를
+동적으로 제어할 수 있는 구문을 제공하여 좀 더 쉽게 쿼리를 구현할 수 있도록 기능을 제공함
+
+
+## 동적 쿼리 지원 구문 종류 ##
+1. if
+2. choose (when, otherwise)
+3. trim 
+4. foreach
+
+
+
+@ if 구문
+-> 동적 쿼리를 구현할 때 가장 기본적으로 사용되는 구문
+-> 특정 조건을 만족할 경우 안의 구문을 쿼리에 포함시킴
+-> 필요로 하는 조건이 1개 이상일시 if구문을 여러개 사용할 수도 있음
+
+ex)
+
+<if test="조건식">
+	. . .
+</if>
+
+
+
+@ choose 구문
+-> 자바의 if-else 혹은 switch , 오라클의 choose 구문과 유사하며
+주어진 구문 중 한가지만 수행하고자 할 때 사용함
+-> when 은 if문과 흡사하며, otherwise는 else 또는 default와 흡사함
+
+ex)
+<choose> 
+      <when test=" 조건식 ">
+           . . . 
+      </when>
+      <otherwise>
+           . . .
+      </otherwise>
+  </choose> 
+
+
+
+@ trim 구문
+-> trim은 쿼리 구문의 특정 부분을 없앨 때 사용 됨
+-> 태그 안의 내용이 완성될 때 처음 시작할 단어와 시작시 제거해야 할 단어를 명시함
+
+ex)
+
+<trim prefix="WHERE" prefixOverrides="AND |OR ">
+
+</trim>
+
+
+
+@ foreach 구문
+-> 동적 쿼리를 구현할 때 collection에 대한 반복 처리를 제공 함
+
+## foreach 속성 ##
+item	: 반복 될 때 접근 가능한 객체 변수
+index	: 반복되는 횟수를 가리키는 변수 (횟수를 정하지 않는다면 생략 가능함)
+collection : 반복에 쓰일 Collection (array,list,map 등등)
+open	: 첫 반복시 여는 문자열  ex) '('
+separator : 반복되는 객체를 나열 할때 구분하기 위한 구분자  ex) ','
+close : 마지막 반복시 포함할 닫는 문자열 ex) ')'
+
+
+ex)
+
+<select id="searchBadwords" resultType="arraylist">
+  SELECT * FROM BOARD 
+  WHERE TITLE IN
+  <foreach item="item" index="index" collection="list"
+  open="(" separator="," close=")">
+       #{item}
+  </foreach>
+</select> 
+
+
+# 결과 SQL 생성시 #
+
+SELECT * FROM BOARD
+WHERE TITLE IN ( 'XXX' , '사행성', '욕설', … ) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

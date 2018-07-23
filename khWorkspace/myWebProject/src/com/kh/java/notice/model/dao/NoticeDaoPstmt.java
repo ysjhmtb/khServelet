@@ -176,9 +176,9 @@ public class NoticeDaoPstmt {
 		try {
 			query = prop.getProperty("insertNotice");
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, notice.getTitle());
-			pstmt.setString(2, notice.getContent());
-			pstmt.setString(3, notice.getWriter());
+			pstmt.setString(1, notice.getNtitle());
+			pstmt.setString(2, notice.getNcontent());
+			pstmt.setString(3, notice.getNwriter());
 			
 			System.out.println("공지 사항 작성 쿼리 : " + query);
 			
@@ -254,9 +254,9 @@ public class NoticeDaoPstmt {
 		try {
 			query = prop.getProperty("updateNotice");
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, notice.getTitle());
-			pstmt.setString(2, notice.getContent());
-			pstmt.setInt(3, notice.getNo());
+			pstmt.setString(1, notice.getNtitle());
+			pstmt.setString(2, notice.getNcontent());
+			pstmt.setInt(3, notice.getNno());
 			
 			//3. 쿼리 실행
 			result = pstmt.executeUpdate();
@@ -306,8 +306,8 @@ public class NoticeDaoPstmt {
 				String title = rs.getString("ntitle");
 				String content = rs.getString("ncontent");
 				result = new NoticeVo();
-				result.setTitle(title);
-				result.setContent(content);
+				result.setNtitle(title);
+				result.setNcontent(content);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -49,7 +49,7 @@
 	}
 	
 	function updateNoticePage(){
-		location.href = "/mwp/updateNoticeForm.do?noticeNo=<%=notice.getNo()%>";
+		location.href = "/mwp/updateNoticeForm.do?noticeNo=${notice.nno }";
 	}
 
 
@@ -68,19 +68,19 @@
 			<table>
 				<tr>
 					<th width="100">제 목 : </th>
-					<td colspan="3"> <c:out value="${notice.title }" /> </td>
+					<td colspan="3"> <c:out value="${notice.ntitle }" /> </td>
 				</tr>
 				<tr>
 					<th>작성자 : </th>
-					<td> <c:out value="${notice.writer }"/> </td>
+					<td> <c:out value="${notice.nwriter }"/> </td>
 					<th width="100">작성일 : </th>
-					<td> <c:out value="${notice.writeDate }"/> </td>
+					<td> <c:out value="${notice.ndate }"/> </td>
 				</tr>
 				<tr>
 					<th>내용</th>
 				</tr>
 				<tr>
-					<td colspan="4"> <c:out value="${notice.content }"/> </td>
+					<td colspan="4"> <c:out value="${notice.ncontent }"/> </td>
 				</tr>
 			</table>
 			

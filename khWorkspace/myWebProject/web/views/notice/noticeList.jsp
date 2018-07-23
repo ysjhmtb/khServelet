@@ -96,13 +96,13 @@
 			<c:if test="${fn:length(list) != 0 }">
 				<c:forEach items="${list }" var="noticeVo" varStatus="status">					
 					<tr>
-						<td>${noticeVo.no }</td>
+						<td>${noticeVo.nno }</td>
 						<td>
-							<a href="/mwp/noticeDetail.do?noticeNo=${noticeVo.no }">${noticeVo.title }</a>
+							<a href="/mwp/noticeDetail.do?noticeNo=${noticeVo.nno }">${noticeVo.ntitle }</a>
 						</td>						
 						<td>${noticeVo.name }</td>						
-						<td>${noticeVo.count }</td>						
-						<td>${noticeVo.writeDate }</td>
+						<td>${noticeVo.ncount }</td>						
+						<td>${noticeVo.ndate }</td>
 					</tr>
 				</c:forEach>	
 			</c:if>

@@ -13,6 +13,23 @@ public class NoticeVo {
 	
 	public NoticeVo(){
 	}
+	
+	
+	
+
+	public NoticeVo(int nno, String ntitle, String ncontent, String nwriter, int ncount, Date ndate, String name) {
+		super();
+		this.nno = nno;
+		this.ntitle = ntitle;
+		this.ncontent = ncontent;
+		this.nwriter = nwriter;
+		this.ncount = ncount;
+		this.ndate = ndate;
+		this.name = name;
+	}
+
+
+
 
 	public String getName() {
 		return name;

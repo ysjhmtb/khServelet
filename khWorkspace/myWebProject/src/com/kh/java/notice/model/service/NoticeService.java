@@ -41,6 +41,15 @@ public class NoticeService {
 	
 	public NoticeVo getNotice(int noticeNo) {
 		
+		NoticeDao dao = new NoticeDao();
+		
+		SqlSession session = MySqlFactory.getSqlSession().openSession(false);
+		NoticeVo notice = dao.getNotice(session, noticeNo);
+		session.close();
+		
+		return notice;
+		
+		/*
 		Connection con = JDBCTemplate.getConnection();
 		NoticeVo notice = new NoticeDao().selectNotice(con, noticeNo);
 		
@@ -60,6 +69,7 @@ public class NoticeService {
 		JDBCTemplate.close(con);
 		
 		return notice;
+		*/
 	}
 	
 	public NoticeVo getNoticeOne() {

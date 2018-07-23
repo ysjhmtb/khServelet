@@ -1,0 +1,139 @@
+
+mybatis-config.xml 내용 태그
+
+@ <properties> 태그
+-> 외부 java property 파일의 내용을 불러올 때 사용
+
+## properties 태그 예시 ##
+ <properties resource="경로+파일명.properties">
+   <!--properties파일에 값 설정 가능-->
+   <property name="key명" value="설정값">
+</properties>
+
+
+## properties 설정값 활용 ##
+<dataSource>
+  <property name="명칭" value="${properties에 설정된 key명}"/>
+  <property name="명칭" value="${properties에 설정된 key명}"/>
+</dataSource>
+
+
+
+
+@ <settings> 태그 
+-> mybatis 구동 시 선언할 설정들을 작성 함
+
+## settings 태그 예시 ##
+ <settings>
+     <!-- Null 값이 발생할 경우 빈칸이 아닌 null로 인식하라 -->
+     <setting name="jdbcTypeForNull" value="NULL"/>
+ </settings>
+
+
+* 속성값 참조 : http://www.mybatis.org/mybatis-3/ko/configuration.html
+
+
+
+
+
+@ <typeAliases> 태그
+-> mybatis에서 사용할 자료형의 별칭을 선언
+
+## typeAliases 태그 예시
+
+<typeAliases>
+  <!-- type에는 패키지 명까지 전부 기술해주어야 한다. -->
+  <typeAlias type="member.model.vo.Member" alias="Member" />
+</typeAliases>
+
+※ 사용자가 직접 별칭을 선언해도 되지만 Mybatis 내장 별칭도 있음 (내장별칭.jpg 참조)
+
+
+
+
+@ <environments> 태그
+-> mybatis에서 연동할 DataBase 정보를 등록함
+
+
+
+## environments 태그 예시 ##
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+
+ex)
+
+ <environments default="development">
+   <!-- environment id를 구분하여 연결할 DB를 여러 개 구성할 수도 있다 -->
+    <environment id="development">
+       <transactionManager type="JDBC" /> 
+       <dataSource type="POOLED">
+ 
+         <property name="driver" 
+                   value="oracle.jdbc.driver.OracleDriver" />
+         <property name="url"
+                   value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+         <property name="username" value="student" />
+         <property name="password" value="student" />
+
+       </dataSource>
+    </environment>
+  </environments>
+
+transactionManager 
+트랜잭션을 누가 관리할 것인가에 대한 설정.
+1. JDBC - 이 설정은 간단하게 JDBC 커밋과 롤백을 처리하기 위해 사용된다. 
+트랜잭션의 스코프를 관리하기 위해 dataSource 로 부터 커넥션을 가져온다.
+2. MANAGED - 커밋이나 롤백을 하지 않고, 대신 컨테이너가 트랜잭션의 모든 생명주기를 관리한다. 
+디플트로 커넥션을 닫아줌.
+
+
+
+@ <mappers> 태그
+-> 사용하고자 하는 쿼리가 정의된 mapper 파일을 등록
+-> DataBase에 사용되는 쿼리문들을 담고 있는 파일들을 등록함
+
+
+## mapper 태그 예시 ##
+    <mappers>
+		<!-- DataBase에 사용되는 쿼리문들을 담은 mapper 파일들을 등록 -->
+		<mapper resource="/mappers/student/student-mapper.xml"/>
+   </mappers>
+
+ex)
+
+
+<mappers>
+  <mapper resource="member/model/mapper/member-mapper.xml" />
+  <mapper resource="notice/model/mapper/notice-mapper.xml" />
+  <mapper resource="board/model/mapper/board-mapper.xml" />  
+</mappers>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

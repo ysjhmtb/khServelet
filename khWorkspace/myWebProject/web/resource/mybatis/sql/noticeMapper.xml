@@ -2,12 +2,43 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="NoticeMapper">
-  <select id="selectNoticeList" resultType="com.kh.java.notice.model.vo.NoticeVo">
+
+
+<!--
+
+	private String name;
+  -->
+  
+  <resultMap type="NoticeVo" id="resultNotice">
+  	<id property="nno" column="NNO" />
+	<result property="ntitle" column="NTITLE" />
+	<result property="ncontent" column="NCONTENT" />
+	<result property="nwriter" column="WRITER" />
+	<result property="ncount" column="NCOUNT" />
+	<result property="ndate" column="NDATE" />
+	<result property="name" column="USERNAME" />	
+	
+  </resultMap>
+
+  <select id="selectNoticeList" resultMap="resultNotice">
     SELECT NNO, NTITLE, NCONTENT, NWRITER, 
     		NCOUNT, NDATE, USERNAME
 	FROM NOTICE 
 	JOIN MEMBER ON (NWRITER = USERID)
 	ORDER BY NNO DESC
   </select>
+  
+  <select id="getNotice" resultType="NoticeVo">
+  
+  	SELECT NNO, NTITLE, NCONTENT, NWRITER,
+  			NCOUNT, NDATE, USERNAME
+  	FROM NOTICE
+  	JOIN MEMBER ON (NWRITER = USERID)
+  	WHERE NNO = #{noticeNO}
+  	ORDER BY NNO DESC
+  
+  </select>
+  
 </mapper>

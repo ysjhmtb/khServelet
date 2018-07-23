@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.java.common.JDBCTemplate;
 import com.kh.java.notice.model.vo.NoticeVo;
 
@@ -154,8 +156,8 @@ public class NoticeDao {
 			stmt = con.createStatement();
 			//2. 쿼리 작성
 			query = "INSERT INTO NOTICE " 
-					+"VALUES (SEQ_NNO.NEXTVAL, '"+notice.getTitle()+"' , '"
-					+ notice.getContent() + "', '"+notice.getWriter()+"', 0, sysdate)";
+					+"VALUES (SEQ_NNO.NEXTVAL, '"+notice.getNtitle()+"' , '"
+					+ notice.getNcontent() + "', '"+notice.getNwriter()+"', 0, sysdate)";
 			System.out.println("공지 사항 작성 쿼리 : " + query);
 			
 			//3. 쿼리 실행
@@ -239,9 +241,9 @@ public class NoticeDao {
 			stmt = con.createStatement();
 			//2. 쿼리 작성
 			query = "UPDATE NOTICE "
-						+ "SET NTITLE='"+notice.getTitle()+"',"
-							  +"NCONTENT='"+notice.getContent()+"' "
-						+ "WHERE NNO = " + notice.getNo();
+						+ "SET NTITLE='"+notice.getNtitle()+"',"
+							  +"NCONTENT='"+notice.getNcontent()+"' "
+						+ "WHERE NNO = " + notice.getNno();
 			System.out.println("실행 한 쿼리 : " + query);
 			//3. 쿼리 실행
 			result = stmt.executeUpdate(query);
@@ -297,8 +299,8 @@ public class NoticeDao {
 				String title = rs.getString("ntitle");
 				String content = rs.getString("ncontent");
 				result = new NoticeVo();
-				result.setTitle(title);
-				result.setContent(content);
+				result.setNtitle(title);
+				result.setNcontent(content);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -310,6 +312,14 @@ public class NoticeDao {
 		//6. 결과 반환
 		return result;
 	}
+
+	public NoticeVo getNotice(SqlSession session, int noticeNo) {
+		return session.selectOne("NoticeMapper.getNotice", noticeNo);
+	}
+
+	
+
+	
 }
 
 
