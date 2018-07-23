@@ -11,29 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.java.mybatis.model.service.MybatisService;
-import com.kh.java.mybatis.model.vo.Member;
-import com.kh.java.mybatis.model.vo.Search;
+import com.kh.java.mybatis.model.vo.Photo;
 
-@WebServlet("/searchMember.do")
-public class MemberSearchServlet extends HttpServlet {
+@WebServlet("/photoList.do")
+public class PhotoListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public MemberSearchServlet() {
+       
+    public PhotoListServlet() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String condition 
-				= request.getParameter("condition");
-		String keyword
-				= request.getParameter("keyword");
-		Search search = new Search();
-		search.setCondition(condition);
-		search.setKeyword(keyword);
-		
-		List<Member> list 
-			= new MybatisService().selectMemberSearch(search); 
-		
-		RequestDispatcher view = request.getRequestDispatcher("views/jstl/memberList.jsp");
+		List<Photo> list 
+				= new MybatisService().selectPhotoList();
+		System.out.println(list);
+		RequestDispatcher view = request.getRequestDispatcher("views/mybatis/photoList.jsp");
 		request.setAttribute("list", list);
 		view.forward(request, response);
+		
 	}
 }

@@ -17,10 +17,8 @@
 <a href="/mwp2/views/el/elForm.jsp">7. 폼 데이터 전송 시 출력</a><br/>
 <a href="/mwp2/views/jstl/jstlIndex.jsp">JSTL 인덱스 페이지</a>
 <h1>mybatis</h1>
-<a href="memberList.do">select</a>
-
-
-
+<a href="memberList.do">member</a><br/>
+<a href="photoList.do">photo</a>
 </body>
 </html>
 

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PhotoMapper">
+	<resultMap type="Photo" id="resultPhoto">
+		<id property="no" column="NO"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="readCount" column="READ_COUNT"/>
+		<result property="writeDate" column="WRITE_DATE"/>
+		<result property="userId" column="USER_ID"/>
+		<collection property="reply" column="NO" 
+					ofType="Reply" resultMap="replyMap"/>
+	</resultMap>
+	<resultMap type="Reply" id="replyMap">
+		<id property="no" column="R_NO"/>
+		<result property="photoNo" column="PHOTO_NO"/>
+		<result property="writer" column="WRITER"/>
+		<result property="content" column="R_CONTENT"/>
+		<result property="writeDate" column="R_DATE"/>
+	</resultMap>
+
+	<select id="selectPhotoList" resultType="Photo">
+		<include refid="photoHeader"/>
+	</select>
+	<select id="selectPhoto" parameterType="hashmap" resultMap="resultPhoto">
+		SELECT P.NO, P.TITLE, P.CONTENT, P.READ_COUNT, 
+		            P.WRITE_DATE, P.USER_ID, R.NO AS "R_NO",
+		            P.NO AS "PHOTO_NO", R.WRITER, 
+		            R.CONTENT AS "R_CONTENT",
+		            R.WRITE_DATE AS "R_DATE"
+		FROM PHOTO P
+		LEFT JOIN PHOTO_REPLY R ON (P.NO = R.PHOTO_NO)
+		WHERE P.NO = #{no}
+	</select>
+	<sql id="photoHeader">
+		SELECT NO, TITLE, CONTENT, READ_COUNT, WRITE_DATE, USER_ID
+		FROM PHOTO
+	</sql>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,6 +8,36 @@
 		FROM MEMBER
 		ORDER BY USERNAME
 	</select>
+	<select id="selectMemberSearch" parameterType="Search" resultType="Member">
+		SELECT USERID, USERNAME, AGE, EMAIL, PHONE
+		FROM MEMBER
+		<if test="condition == 'name'">
+			WHERE USERNAME LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="condition == 'id'">
+			WHERE USERID = #{keyword} 
+		</if>
+		<if test="condition == 'age'">
+			WHERE AGE >= TO_NUMBER(#{keyword})
+		</if>
+		ORDER BY USERNAME
+	</select>
+	<select id="selectMemberSearch2" parameterType="Search" resultType="Member">
+		SELECT USERID, USERNAME, AGE, EMAIL, PHONE
+		FROM MEMBER
+		<choose>
+			<when test="condition == 'name'">
+				WHERE USERNAME LIKE '%' || #{keyword} || '%'
+			</when>
+			<when test="condition == 'id'">
+				WHERE USERID = #{keyword} 
+			</when>
+			<otherwise>
+				WHERE AGE >= TO_NUMBER(#{keyword})
+			</otherwise>
+		</choose>
+		ORDER BY USERNAME
+	</select>
 	<select id="selectMember" parameterType="string" resultType="Member">
 		SELECT USERID, PASSWORD, USERNAME, GENDER, AGE, EMAIL, PHONE, ADDRESS, HOBBY, ENROLLDATE
 		FROM MEMBER
@@ -27,8 +57,12 @@
 		INSERT INTO MEMBER(USERID, PASSWORD, USERNAME, GENDER, AGE, PHONE, ENROLLDATE)
 			VALUES (#{userid}, #{password}, #{username}, #{gender}, #{age}, #{phone}, SYSDATE)
 	</insert>
-	
 </mapper>
+
+
+
+
+
 
 
 
