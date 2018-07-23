@@ -6,7 +6,12 @@
   
 <mapper namespace="PhotoMapper">
 
+<!--
+<collection property="reply" column="NO" ofType="Reply" resultMap="replyMap"/>
 
+게시글 하나에 대해 여러 댓글을 담는 리스트. 여러 댓글이 공통적으로 하나의 게시글에 연동되므로
+column="NO"이다.
+-->
 
 <resultMap type="Photo" id="resultPhoto">
 	<id property="no" column="NO"/>
