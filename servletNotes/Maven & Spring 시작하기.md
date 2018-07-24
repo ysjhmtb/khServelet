@@ -246,6 +246,81 @@
 
 8) 
 
+web.xml 에서 
+
+```xml
+<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+</servlet-mapping>
+```
+
+를
+
+```xml
+<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+</servlet-mapping>
+```
+
+와 같이 변경.
+
+9) 
+
+HomeController.java 에서 
+
+`@RequestMapping(value = "/", method = RequestMethod.GET) ` 를 `@RequestMapping(value = "index.do", method = RequestMethod.GET)` 로 변경.
+
+10) 
+
+servlet-context.xml에서   
+
+```xml
+<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+```
+
+를 통해 가지는 이점.
+
+
+
+
+
+MemberController.java 에서 
+
+```java
+@Controller
+public class MemberController {
+	
+	@RequestMapping("memberList.do")
+	public String memberList() {
+		
+		
+		
+		
+		return "member/memberList";
+	}
+
+}
+
+```
+
+"member/memberList" 라고만 입력해도 prefix와 suffix 가 자동으로 연결되어 완성된다.
+
+
+
+11) 
+
+
+
+
+
+
+
 
 
 

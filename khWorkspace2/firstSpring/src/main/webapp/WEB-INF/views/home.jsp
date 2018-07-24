@@ -8,10 +8,11 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
+<h1> 	스프링 첫 페이지 입니다. </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<ul>
+	<li><a href="memberList.do">멤버 목록</a></li>
+</ul>
+
 </body>
 </html>
