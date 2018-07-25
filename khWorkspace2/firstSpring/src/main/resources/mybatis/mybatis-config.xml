@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- http://www.mybatis.org/mybatis-3/ko/configuration.html#settings  -->
+
+ <settings>
+ 	<setting name="jdbcTypeForNull" value="NULL"/>
+ 	<setting name="mapUnderscoreToCamelCase" value="true"/> 	
+ </settings>
+
+
+  <typeAliases>
+  	<typeAlias type="com.kh.firstSpring.member.model.vo.Member" alias="Member"/>
+  	<typeAlias type="com.kh.firstSpring.notice.model.vo.Notice" alias="Notice"/>
+  </typeAliases>
+  
+
+  <mappers>
+  	<!-- resources가 빌드 패쓰 루트이므로 mybatis부터 기술해야 한다.  -->
+    <mapper resource="mybatis/sql/memberMapper.xml"/>
+  </mappers>
+  
+  
+  
+</configuration>

@@ -1,8 +1,22 @@
 package com.kh.firstSpring.member.model.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.kh.firstSpring.member.model.dao.MemberDao;
+import com.kh.firstSpring.member.model.vo.Member;
 
 @Service
 public class MemberService {
+	
+	@Autowired
+	MemberDao dao;
+	
+	public Member selectMember(Member member) {
+		
+		System.out.println("service 정상 호출됨.");
+		
+		return dao.selectMember(member);
+	}
 	
 }

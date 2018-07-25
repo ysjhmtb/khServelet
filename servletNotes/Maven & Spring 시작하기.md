@@ -313,7 +313,19 @@ public class MemberController {
 
 
 
-11) 
+## Spring의 구조
+
+[Spring MVC flow with Example](http://www.codenuclear.com/spring-mvc-flow-with-example/)   
+
+[Spring MVC 구조의 처리 과정](http://jeong-pro.tistory.com/96)   
+
+[Spring MVC RESTful Web Service – difference between @Controller and @RestController](http://javasampleapproach.com/spring-framework/spring-mvc-rest-difference-between-controller-and-restcontroller)   
+
+
+
+
+
+
 
 
 
