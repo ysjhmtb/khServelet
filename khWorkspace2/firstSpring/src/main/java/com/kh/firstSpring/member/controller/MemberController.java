@@ -47,4 +47,18 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:index.do";
 	}
+	
+	
+	@RequestMapping(value="memberJoinForm.do")
+	public String memberJoinForm() {
+		return "member/memberJoin";
+	}
+	
+	
+	@RequestMapping("join.do")
+	public String memberJoin(Member member){
+		System.out.println(member);
+		return "redirect:index.do";
+	}
+	
 }

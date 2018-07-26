@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
 <style>
 	.outer{
 		width:600px;
@@ -46,6 +47,21 @@
 			$("#userPwd2").focus();
 			return false;
 		}
+		
+		var phone = $("#phone1").val() + "-" + $("#phone2").val() + "-" +$("#phone3").val(); 
+		$("#phone").val(phone);
+		
+		var address = $("#zipcode") + ", " + $("#address1").val() + ", " + $("#address2");
+		$("#address").val(address);
+		
+		var hobbies = new Array();
+		$("input:checkbox").each(function(value){
+			if($(this).prop("checked")){
+				hobbies.push($(this).val());
+			}
+		});
+		$("#hobby").val(hobbies.join(","));
+		
 		//다른 값들을 체크 하는 로직 추가(유효성 검사 로직 추가 영역)
 		return true;
 	}
@@ -81,7 +97,10 @@
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
-
+                
+                console.log('data.zonecode : ' + data.zonecode);
+                console.log('fullAddr : ' + fullAddr);
+                
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 //data.zonecode; //5자리 새우편번호 사용
                 $("#zipcode").val(data.zonecode);
@@ -97,17 +116,20 @@
 <body>
 	<div class="outer">
 		<h2 align="center">회원 가입</h2>
-		<form id="joinForm" method="post" action="/mwp/join.au" 
+		<form id="joinForm" method="post" action="join.do" 
 					onsubmit="return validate();" >
+		<input type="hidden" name="phone" id="phone"/>
+		<input type="hidden" name="address" id="address"/>
+		<input type="hidden" name="hobby" id="hobby"/>
 		<table>
 			<tr>
 				<td width="200px;"><span class="import">*</span>아이디</td>
-				<td><input type="text" name="userId" id="userId" required/></td>
+				<td><input type="text" name="userid" id="userId" required/></td>
 				<td width="200px"><div id="idCheckBtn">중복 확인</div></td>
 			</tr>		
 			<tr>
 				<td><span class="import">*</span>비밀번호</td>
-				<td><input type="password" name="userPwd" id="userPwd" required/></td>
+				<td><input type="password" name="password" id="userPwd" required/></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -117,7 +139,7 @@
 			</tr>
 			<tr>
 				<td><span class="import">*</span>이름</td>
-				<td><input type="text" name="userName" id="userName" required/></td>
+				<td><input type="text" name="username" id="userName" required/></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -190,6 +212,8 @@
 		</form>
 	</div>
 <c:import url="../footer.jsp"/>	
+
+
 </body>
 </html>
 
