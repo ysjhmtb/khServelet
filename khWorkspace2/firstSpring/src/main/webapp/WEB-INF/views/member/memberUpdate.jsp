@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 가입</title>
+<title>회원 정보 수정</title>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <style>
 	.outer{
@@ -35,6 +35,8 @@
 		background:yellowgreen;
 	}
 </style>
+
+
 <script>
 	function memberJoin(){
 		$("#joinForm").submit();		
@@ -125,6 +127,36 @@
 			});		
 		});
 	});
+	
+	$(function(){
+		
+		var userid = '<c:out value="${sessionScope.user.userid}"/>';
+		console.log(userid);
+		$("#userId").val(userid);
+		
+		var password = '<c:out value="${sessionScope.user.password}"/>';
+		console.log(password);
+		$("#userPwd").val(password);
+		$("#userPwd2").val(password);
+		
+		var username = '<c:out value="${sessionScope.user.username}" />';
+		console.log(username);
+		$("#userName").val(username);
+		
+		var gender = '<c:out value="${sessionScope.user.gender}" />';
+		console.log(gender);
+		$("input:radio").each(function(){
+			if($(this).val() == gender){
+				$(this).prop("checked",true);
+			}
+		});
+		
+		var age = '<c:out value="${sessionScope.user.age}" />';
+		console.log(age);
+		$("#userAge").val(age);
+		
+	
+	});
 </script>
 </head>
 
@@ -132,7 +164,7 @@
 
 <body>
 	<div class="outer">
-		<h2 align="center">회원 가입</h2>
+		<h2 align="center">회원 정보 수정</h2>
 		<form id="joinForm" method="post" action="join.do" 
 					onsubmit="return validate();" >
 		<input type="hidden" name="phone" id="phone"/>
@@ -170,7 +202,7 @@
 			</tr>
 			<tr>
 				<td>나이</td>
-				<td><input type="number" name="age" min="10" max="100" 
+				<td><input type="number" name="age" id="userAge" min="10" max="100" 
 									value="20"/></td>
 				<td></td>
 			</tr>

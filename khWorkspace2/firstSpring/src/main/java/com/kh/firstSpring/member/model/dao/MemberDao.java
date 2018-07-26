@@ -11,12 +11,24 @@ public class MemberDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	
+	
 	public Member selectMember(Member member) {
-		
-		return sqlSession.selectOne("MemberMapper.selectMemberId",
-				member);
-		
+		return sqlSession.selectOne("MemberMapper.selectMemberId", member);
 	}
 
+
+	public int insertMember(Member member) {
+		System.out.println(member);
+		return sqlSession.insert("MemberMapper.insertMember", member);
+	}
 }
+
+
+
+
+
+
+
+
+

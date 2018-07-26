@@ -6,12 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/firstSpring/resources/js/jquery-3.3.1.min.js"></script>
-
-
+<script type="text/javascript" src="resources/js/jquery-3.3.1.min.js"></script>
 <style>
 	body{
-		/* background:url("/resources/images/background.jpg") no-repeat; */
 		background-size:cover;
 	}
 	.wrap{
@@ -87,37 +84,41 @@
 		width:100%;
 	}
 </style>
-
 <script>
-	$(function(){
-		alert('연동 확인');
-	});
-	
 	function join(){
-		location.href = "memberJoinForm.do";
+		location.href="memberJoinForm.do";
 	}
-
+	function login(){
+		$("#loginForm").submit();
+	}
+	
+	function logout(){
+		location.href="logout.do";	
+	}
+	
+	function myInfo(){
+		location.href="memberUpdateForm.do"
+	}
+	
+	
 </script>
-
 </head>
 <body>
 	<h1 align="center">My Web Project</h1>
 	<div class="loginArea">
-	
-	
-	<c:if test="${empty sessionScope.user}">
-		<form id="loginForm" action="/mwp/login.au" method="post">
+	<c:if test="${empty sessionScope.user }">
+		<form id="loginForm" action="login.do" method="post">
 			<table>
 				<tr>
 					<td>아이디 : </td>
 					<td>
-						<input type="text" name="userId"/>
+						<input type="text" name="userid"/>
 					</td>
 				</tr>
 				<tr>
 					<td>비밀번호 : </td>
 					<td>
-						<input type="password" name="userPwd" id="pwdText"/>
+						<input type="password" name="password" id="pwdText"/>
 					</td>
 				</tr>
 				<tr>
@@ -128,17 +129,14 @@
 				</tr>
 			</table>		
 		</form>
-	</c:if>
-	
-	<c:if test="${!empty sessionScope.user }">
-		<div class="userInfo">
-			<p>${user.userName}님 방문을 환영 합니다.</p>
-			<div id="memberInfoBtn" onclick="myInfo();">정보 수정</div>
-			<div id="memberLogoutBtn" onclick="logout();">로그 아웃</div>
-		</div>
-	</c:if>
-		
-		
+		</c:if>
+		<c:if test="${!empty sessionScope.user }">
+			<div class="userInfo">
+				<p>${user.username}님 방문을 환영 합니다.</p>
+				<div id="memberInfoBtn" onclick="myInfo();">정보 수정</div>
+				<div id="memberLogoutBtn" onclick="logout();">로그 아웃</div>
+			</div>
+		</c:if>
 	</div>
 	<br>
 	<br>
