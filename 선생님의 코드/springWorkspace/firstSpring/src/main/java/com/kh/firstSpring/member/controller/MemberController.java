@@ -62,6 +62,20 @@ public class MemberController {
 		return member == null ?
 					"사용가능 한 아이디 입니다." : "중복 된 아이디 입니다.";
 	}
+	
+	@RequestMapping("updateMemberForm.do")
+	public String updateMemberForm(){
+		return "member/memberUpdate";
+	}
+	
+	@RequestMapping("updateMember.do")
+	public String updateMember(Member member, HttpSession session){
+		int result = memberService.updateMember(member);
+		if(0 < result){
+			session.setAttribute("user", member);
+		}
+		return "redirect:index.do";
+	}
 }
 
 

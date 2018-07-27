@@ -13,6 +13,19 @@
 		INSERT INTO MEMBER
 		VALUES (#{userid}, #{password}, #{username}, #{gender}, #{age}, #{email}, #{phone}, #{address}, #{hobby}, sysdate)
 	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		SET PASSWORD = #{password},
+			  USERNAME = #{username},
+			  GENDER = #{gender},
+			  AGE = #{age},
+			  EMAIL = #{email},
+			  PHONE = #{phone},
+			  ADDRESS = #{address},
+			  HOBBY = #{hobby}
+		WHERE USERID=#{userid}
+	</update>
 </mapper>
 
 

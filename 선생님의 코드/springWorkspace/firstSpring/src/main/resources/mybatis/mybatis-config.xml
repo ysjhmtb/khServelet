@@ -13,6 +13,7 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/sql/memberMapper.xml" />
+		<mapper resource="mybatis/sql/noticeMapper.xml" />
 	</mappers>
 </configuration>
 

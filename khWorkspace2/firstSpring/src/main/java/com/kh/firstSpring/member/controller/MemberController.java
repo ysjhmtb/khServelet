@@ -66,6 +66,20 @@ public class MemberController {
 	public String memberUpdateForm() {
 		return "member/memberUpdate";
 	}
+
+	@RequestMapping("updateMember.do")
+	public String updateMember(Member member, HttpSession session) {
+		
+		int result = memberService.updateMember(member);
+		
+		if(0 < result) {
+			session.setAttribute("user", member);
+		}else {
+			
+		}
+		
+		return "redirect:index.do";
+	}
 	
 }
 

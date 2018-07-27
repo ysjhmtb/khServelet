@@ -100,6 +100,10 @@
 		location.href="memberUpdateForm.do"
 	}
 	
+	function noticePage(){
+		location.href="noticeList.do";
+	}
+	
 	
 </script>
 </head>

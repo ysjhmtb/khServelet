@@ -22,6 +22,11 @@ public class MemberDao {
 		System.out.println(member);
 		return sqlSession.insert("MemberMapper.insertMember", member);
 	}
+
+
+	public int updateMember(Member member) {
+		return sqlSession.update("MemberMapper.updateMember", member);
+	}
 }
 
 

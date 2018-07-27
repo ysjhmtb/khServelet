@@ -21,6 +21,8 @@
   <mappers>
   	<!-- resources가 빌드 패쓰 루트이므로 mybatis부터 기술해야 한다.  -->
     <mapper resource="mybatis/sql/memberMapper.xml"/>
+    <mapper resource="mybatis/sql/noticeMapper.xml"/>
+    
   </mappers>
   
   

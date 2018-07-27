@@ -22,6 +22,7 @@ public class Notice {
 	private String writer;
 	private int count;
 	private Date date;
+	private String attach;
 	
 	public Notice() {
 		
@@ -77,11 +78,26 @@ public class Notice {
 		this.date = date;
 	}
 
+
+
+	public String getAttach() {
+		return attach;
+	}
+
+
+
+	public void setAttach(String attach) {
+		this.attach = attach;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Notice [no=" + no + ", title=" + title + ", content=" + content + ", writer=" + writer + ", count="
-				+ count + ", date=" + date + "]";
+				+ count + ", date=" + date + ", attach=" + attach + "]";
 	}
+
 	
 	
 	

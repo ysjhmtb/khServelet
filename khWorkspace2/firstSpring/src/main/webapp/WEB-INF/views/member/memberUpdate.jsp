@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 <c:import url="../header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -118,16 +121,24 @@
 				data:{id:$("#userId").val()},
 				type:"get",
 				success:function(data){
-					
 					alert(data);
-					
 				},error:function(e){
 					console.log(e);
 				}
 			});		
 		});
-	});
+		
+		
+		
+		var hobbies = '${user.hobby}'.split(',');
+		$("input:checkbox").each(function(index){
+			if(-1 < $.inArray($(this).val(), hobbies)){
+				$(this).prop("checked", true);
+			}
+		});
+	})
 	
+	/*
 	$(function(){
 		
 		var userid = '<c:out value="${sessionScope.user.userid}"/>';
@@ -155,8 +166,34 @@
 		console.log(age);
 		$("#userAge").val(age);
 		
+		var email = '<c:out value="${sessionScope.user.email}" />';
+		console.log(email);
+		$("#userEmail").val(email);
+		
+		var phone = '<c:out value="${sessionScope.user.phone}" />';
+		console.log(phone);
+		var phoneSplited = phone.split('-');
+		console.log(phoneSplited);
+		
+		$(phoneSplited).each(function(i, value){
+			
+			console.log(i, value);
+			var tempPhoneId = '#phone' + (i+1);
+			console.log(tempPhoneId);
+			$(tempPhoneId).val(value);
+		});
+		
+		var address = '<c:out value="${sessionScope.user.address}" />';
+		console.log(address);
+		
+		var hobby = '<c:out value="${sessionScope.user.hobby}" />';
+		console.log(hobby);
 	
 	});
+	
+	*/
+	
+	
 </script>
 </head>
 
@@ -165,7 +202,7 @@
 <body>
 	<div class="outer">
 		<h2 align="center">회원 정보 수정</h2>
-		<form id="joinForm" method="post" action="join.do" 
+		<form id="joinForm" method="post" action="updateMember.do" 
 					onsubmit="return validate();" >
 		<input type="hidden" name="phone" id="phone"/>
 		<input type="hidden" name="address" id="address"/>
@@ -173,10 +210,10 @@
 		<table>
 			<tr>
 				<td width="200px;"><span class="import">*</span>아이디</td>
-				<td><input type="text" name="userid" id="userId" required/></td>
+				<td><input type="text" name="userid" id="userId" readonly value="${sessionScope.user.userid }"/></td>
 				<td width="200px"><div id="idCheckBtn">중복 확인</div></td>
-				
 			</tr>		
+				
 			<tr>
 				<td><span class="import">*</span>비밀번호</td>
 				<td><input type="password" name="password" id="userPwd" required/></td>
@@ -189,66 +226,80 @@
 			</tr>
 			<tr>
 				<td><span class="import">*</span>이름</td>
-				<td><input type="text" name="username" id="userName" required/></td>
+				<td><input type="text" name="username" id="userName" required
+						value="${sessionScope.user.username }"/></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>성별</td>
 				<td>
-					<input type="radio" name="gender" value="M" checked> 남성
-					<input type="radio" name="gender" value="F"> 여성
+				
+					<input type="radio" name="gender" value="M" 
+						<c:if test="${user.gender eq 'M' }">
+							checked
+						</c:if>
+					> 남성
+					<input type="radio" name="gender" value="F"
+						<c:if test="${user.gender eq 'F' }">
+							checked
+						</c:if>
+					> 여성
+					
 				</td>
+				
 				<td></td>
 			</tr>
 			<tr>
 				<td>나이</td>
-				<td><input type="number" name="age" id="userAge" min="10" max="100" 
-									value="20"/></td>
+				<td><input type="number" name="age" min="10" max="100" 
+									value="${user.age }"/></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="email" name="email"/></td>
+				<td><input type="email" name="email" value="${user.email }"/></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
 				<td>
-					<input type="text" name="phone1" id="phone1" size="2"/>-
-					<input type="text" name="phone2" id="phone2" size="2"/>-
-					<input type="text" name="phone3" id="phone3" size="2"/>
+					<input type="text" name="phone1" id="phone1" size="2" value="${fn:split(user.phone,'-')[0] }"/>-
+					<input type="text" name="phone2" id="phone2" size="2" value="${fn:split(user.phone,'-')[1] }"/>-
+					<input type="text" name="phone3" id="phone3" size="2" value="${fn:split(user.phone,'-')[2] }"/>
 				</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>우편번호</td>
-				<td><input type="text" name="zipcode" id="zipcode"/></td>
+				<td><input type="text" name="zipcode" id="zipcode" value="${fn:split(user.address,',')[0] }"/></td>
 				<td><div id="searchAddressBtn" onclick="openAddressPopup();">주소 검색</div></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td><input type="text" name="address1" id="address1"/></td>
+				<td><input type="text" name="address1" id="address1" value="${fn:split(user.address,',')[1] }"/></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>상세주소</td>
-				<td><input type="text" name="address2" id="address2"/></td>
+				<td><input type="text" name="address2" id="address2" value="${fn:split(user.address,',')[2] }"/></td>
 				<td></td>
 			</tr>
+			
+			
 			<tr>
 				<td>취미</td>
 				<td>
-					<input type="checkbox" id="game" name="hobby" value="게임"/>
+					<input type="checkbox" id="game"  value="게임"/>
 					<label for="game">게임</label>
-					<input type="checkbox" id="climbing" name="hobby" value="등산"/>
+					<input type="checkbox" id="climbing"  value="등산"/>
 					<label for="climbing">등산</label>
-					<input type="checkbox" id="sing" name="hobby" value="노래"/>
+					<input type="checkbox" id="sing"  value="노래"/>
 					<label for="sing">노래</label>
-					<input type="checkbox" id="board" name="hobby" value="보드"/>
+					<input type="checkbox" id="board"  value="보드"/>
 					<label for="board">보드</label>
-					<input type="checkbox" id="read" name="hobby" value="독서"/>
+					<input type="checkbox" id="read"  value="독서"/>
 					<label for="read">독서</label>
-					<input type="checkbox" id="etc" name="hobby" value="기타"/>
+					<input type="checkbox" id="etc"  value="기타"/>
 					<label for="etc">기타</label>
 				</td>
 				<td></td>

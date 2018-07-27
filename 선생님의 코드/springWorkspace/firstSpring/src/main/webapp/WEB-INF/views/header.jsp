@@ -94,7 +94,12 @@
 	function logout(){
 		location.href="logout.do";
 	}
-	
+	function myInfo(){
+		location.href="updateMemberForm.do";
+	}
+	function noticePage(){
+		location.href="noticeList.do";
+	}
 </script>
 </head>
 <body>

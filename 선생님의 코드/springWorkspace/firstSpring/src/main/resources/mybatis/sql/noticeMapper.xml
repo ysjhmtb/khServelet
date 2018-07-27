@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="NoticeMapper">
+	<resultMap type="Notice" id="noticeMap">
+		<id property="no" column="NNO"/>
+		<result property="title" column="NTITLE"/>
+		<result property="content" column="NCONTENT"/>
+		<result property="writer" column="NWRITER"/>
+		<result property="count" column="NCOUNT"/>
+		<result property="date" column="NDATE"/>
+		<result property="attach" column="ATTACH"/>
+	</resultMap>
+	
+	<sql id="selectNoticeHeader">
+		SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, ATTACH
+		FROM NOTICE
+	</sql>
+	
+	<select id="selectNoticeList" resultMap="noticeMap">
+		<include refid="selectNoticeHeader"></include>
+	</select>
+	
+	<select id="selectNotice" resultMap="noticeMap">
+		<include refid="selectNoticeHeader"></include>
+		WHERE NNO = #{no}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

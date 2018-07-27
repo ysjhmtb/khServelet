@@ -206,17 +206,17 @@
 			<tr>
 				<td>취미</td>
 				<td>
-					<input type="checkbox" id="game" name="hobby" value="게임"/>
+					<input type="checkbox" id="game"  value="게임"/>
 					<label for="game">게임</label>
-					<input type="checkbox" id="climbing" name="hobby" value="등산"/>
+					<input type="checkbox" id="climbing"  value="등산"/>
 					<label for="climbing">등산</label>
-					<input type="checkbox" id="sing" name="hobby" value="노래"/>
+					<input type="checkbox" id="sing"  value="노래"/>
 					<label for="sing">노래</label>
-					<input type="checkbox" id="board" name="hobby" value="보드"/>
+					<input type="checkbox" id="board"  value="보드"/>
 					<label for="board">보드</label>
-					<input type="checkbox" id="read" name="hobby" value="독서"/>
+					<input type="checkbox" id="read"  value="독서"/>
 					<label for="read">독서</label>
-					<input type="checkbox" id="etc" name="hobby" value="기타"/>
+					<input type="checkbox" id="etc"  value="기타"/>
 					<label for="etc">기타</label>
 				</td>
 				<td></td>

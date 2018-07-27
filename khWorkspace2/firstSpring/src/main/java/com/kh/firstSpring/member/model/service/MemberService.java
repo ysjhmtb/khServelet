@@ -21,6 +21,11 @@ public class MemberService {
 		
 	}
 
+	public int updateMember(Member member) {
+		
+		return dao.updateMember(member);
+	}
+
 }
 
 
