@@ -26,6 +26,23 @@
 		<include refid="selectNoticeHeader"></include>
 		WHERE NNO = #{no}
 	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE
+		VALUES (SEQ_NNO.NEXTVAL, #{title}, #{content}, #{writer}, 0, SYSDATE, #{attach})
+	</insert>
+	
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET NTITLE=#{title}, NCONTENT=#{content}, ATTACH=#{attach}
+		WHERE NNO=#{no}		
+	</update>
+	
+	<delete id="deleteNotice" parameterType="Notice">
+		DELETE 
+		FROM NOTICE
+		WHERE NNO = #{no}
+	</delete>
 </mapper>
 
 

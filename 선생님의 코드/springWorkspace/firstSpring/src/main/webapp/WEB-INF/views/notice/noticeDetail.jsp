@@ -29,47 +29,50 @@
 }
 </style>
 <script>
-	function noticeList(){
-		location.href="/mwp/noticeList.do";
-	}
 	function updateNoticePage(){
-		
+		location.href="updateNoticeForm.do?no=${notice.no}";
 	}
 </script>
-
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
 	<div class="outer">
 		<h2 align="center">공지 사항 내용</h2>
 		<div class="tableArea">
 			<table>
 				<tr>
 					<th width="100">제 목 : </th>
-					<td colspan="3"><%=notice.getTitle() %></td>
+					<td colspan="3">${notice.title }</td>
 				</tr>
 				<tr>
 					<th>작성자 : </th>
-					<td><%=notice.getName() %></td>
+					<td>${notice.writer }</td>
 					<th width="100">작성일 : </th>
-					<td><%=notice.getWriteDate() %></td>
+					<td>${notice.date }</td>
+				</tr>
+				<tr>
+					<th>첨부파일 : </th>
+					<td colspan="3">
+						<a href="/firstSpring/resources/upload/${notice.attach }" download>
+							${notice.attach }
+						</a>
+					</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 				</tr>
 				<tr>
-					<td colspan="4"><%=notice.getContent() %></td>
+					<td colspan="4">${notice.content }</td>
 				</tr>
 			</table>
 			<div align="center">
-				<button onclick="noticeList();">목록으로</button>
-				<%if(null != member && member.getUserId().equals("admin")){ %>
+				<button onclick="noticePage();">목록으로</button>
+				<c:if test="${!empty user && user.userid eq 'admin'}"> 
 					<button onclick="updateNoticePage();">수정하기</button>
-				<%} %>
+				</c:if>
 			</div>
 		</div>		
 	</div>
-<%@ include file="../common/footer.jsp" %>	
+<c:import url="../footer.jsp"/>	
 </body>
 </html>
 

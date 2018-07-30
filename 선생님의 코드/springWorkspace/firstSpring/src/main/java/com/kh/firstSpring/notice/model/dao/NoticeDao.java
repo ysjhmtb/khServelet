@@ -20,6 +20,18 @@ public class NoticeDao {
 	public Notice selectNotice(int no) {
 		return sqlSession.selectOne("NoticeMapper.selectNotice", no);
 	}
+
+	public int insertNotice(Notice notice) {
+		return sqlSession.insert("NoticeMapper.insertNotice", notice);
+	}
+
+	public int updateNotice(Notice notice) {
+		return sqlSession.update("NoticeMapper.updateNotice", notice);
+	}
+
+	public int deleteNotice(Notice notice) {
+		return sqlSession.delete("NoticeMapper.deleteNotice", notice);
+	}
 }
 
 

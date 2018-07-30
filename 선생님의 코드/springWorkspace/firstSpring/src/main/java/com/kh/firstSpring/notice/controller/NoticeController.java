@@ -109,12 +109,71 @@ public class NoticeController {
 		
 		notice.setAttach(file.getOriginalFilename());
 		
-		//int result = service.insertNotice(notice);
-		
-		
+		int result = service.insertNotice(notice);
+				
 		return "redirect:noticeList.do";
 	}
 	
+	@RequestMapping("updateNoticeForm.do")
+	public ModelAndView updateNoticeForm(ModelAndView mv, int no){
+		Notice notice = service.selectNotice(no);
+		mv.addObject("notice", notice);
+		mv.setViewName("notice/noticeUpdateForm");
+		return mv;
+	}
+	
+	@RequestMapping("updateNotice.do")
+	public String updateNotice(Notice notice, 
+								@RequestParam("addedFile") MultipartFile file,
+								HttpServletRequest request){
+		
+		//기존 파일 삭제
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String path = root + "\\upload";
+		String filePath = "";
+		File folder = new File(path);
+		filePath = folder + "\\" + notice.getAttach();
+		File oldFile = new File(filePath);
+		if(oldFile.exists()){
+			oldFile.delete();
+		}
+				
+		//새로운 파일 저장
+		String newFilePath = folder + "\\" + file.getOriginalFilename();
+		try {
+			file.transferTo(new File(newFilePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		notice.setAttach(file.getOriginalFilename());
+		
+		int result = service.updateNotice(notice);
+		
+		return "redirect:noticeDetail.do?no=" + notice.getNo();
+	}
+	
+	
+//	attach, no
+	//첨부파일 삭제
+	//디비 정보 삭제
+	@RequestMapping("deleteNotice.do")
+	public String deleteNotice(Notice notice, HttpServletRequest request){
+		//기존 파일 삭제
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String path = root + "\\upload";
+		String filePath = "";
+		File folder = new File(path);
+		filePath = folder + "\\" + notice.getAttach();
+		File oldFile = new File(filePath);
+		if(oldFile.exists()){
+			oldFile.delete();
+		}
+		
+		int result = service.deleteNotice(notice);
+		
+		return "redirect:noticeList.do";
+	}
 }
 
 
