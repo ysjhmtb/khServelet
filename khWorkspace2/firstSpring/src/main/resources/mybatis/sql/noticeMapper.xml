@@ -19,12 +19,37 @@
 		SELECT NNO, NTITLE, NCONTENT, NWRITER, NCOUNT, NDATE, ATTACH FROM NOTICE
 	</select>
 	
-	<select id="selectNotice" parameterType="int" resultType="Notice">
+	<select id="selectNotice" parameterType="int" resultMap="noticeMap">
 		SELECT
 		  NNO, NTITLE, NCONTENT, NWRITER, NCOUNT,
 		  NDATE, ATTACH
 		FROM NOTICE
 		WHERE NNO = #{no}
 	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE 
+		VALUES(SEQ_NNO.NEXTVAL, #{title}, #{content}, #{writer},
+				0, SYSDATE, #{attach})
+				
+		<!--
+			title = '해당 글의 제목';
+			column = 'title';
+			이라면 
+			
+			#{title}을 하면 '해당 글의 제목'이 들어가지만
+			${title}을 하면 해당 글의 제목 이 들어간다.
+			
+			SET ${title} = #{title} 은
+			SET	title = '해당 글의 제목' 을 의미한다.
+		 -->
+	</insert>
+	
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET NTITLE=#{title}, NCONTENT=#{content},
+			ATTACH=#{attach}
+		WHERE NNO=#{no}			
+	</update>
 	
 </mapper>

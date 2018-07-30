@@ -21,6 +21,14 @@ public class NoticeService {
 	public Notice selectNotice(int no) {
 		return dao.selectNotice(no);
 	}
+
+	public int insertNotice(Notice notice) {
+		return dao.insertNotice(notice);
+	}
+
+	public int updateNotice(Notice notice) {
+		return dao.updateNotice(notice);
+	}
 	
 	
 }

@@ -98,19 +98,23 @@ public class NoticeController {
 		 
 	 }
 	 
+	 
 	 @RequestMapping("noticeDetail.do")
 	 public ModelAndView noticeDetail(@RequestParam("noticeNo")int no, ModelAndView mv) {
 		 
 		 Notice notice = noticeService.selectNotice(no);
+		 System.out.println("notice : " + notice);
 		 mv.addObject("notice", notice);
 		 mv.setViewName("notice/noticeDetail");
 		 return mv;
 	 }
 	 
+	 
 	 @RequestMapping("writeNoticeForm.do")
 	 public String writeNoticeForm() {
 		 return "notice/noticeForm";
 	 }
+	 
 	 
 	 @RequestMapping("writeNotice.do")
 		public String writeNotice(Notice notice, 
@@ -138,7 +142,7 @@ public class NoticeController {
 			}
 			
 			filePath = path + "/" + file.getOriginalFilename();
-			
+			System.out.println(filePath);
 			
 			try {
 				
@@ -151,11 +155,81 @@ public class NoticeController {
 			
 			notice.setAttach(file.getOriginalFilename());
 			
-			// int result = noticeService.insertNotice(notice);
-			
+			int result = noticeService.insertNotice(notice);
 			
 			return "redirect:noticeList.do";
 		}
+	 
+	 @RequestMapping("updateNoticeForm.do")
+		public ModelAndView updateNoticeForm(ModelAndView mv, int no){
+		 	System.out.println("no : " + no);
+			Notice notice = noticeService.selectNotice(no);
+			System.out.println("notice : " + notice); 
+			mv.addObject("notice", notice);
+			mv.setViewName("notice/noticeUpdateForm");
+			return mv;
+		}
+	 
+	 @RequestMapping("updateNotice.do")
+	 public String updateNotice(Notice notice, 
+			 @RequestParam("addedFile") MultipartFile file,
+			 HttpServletRequest request) {
+		 
+		 
+		 
+		 //기존 파일 삭제 
+		 	String root = request.getSession().getServletContext().
+					getRealPath("resources");
+			String path = root + "/upload";
+			System.out.println(path);
+			String filePath = "";
+			File folder = new File(path);
+			
+			
+			
+			filePath = folder + "/" + notice.getAttach();
+			
+			File oldFile = new File(filePath);
+			if(oldFile.exists()) {
+				oldFile.delete();
+			}
+			
+			
+			//새로운 파일 저장
+			
+			String newFilePath = folder + "/" + file.getOriginalFilename();
+
+			try {
+				
+				file.transferTo(new File(newFilePath));
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			notice.setAttach(file.getOriginalFilename());
+			
+			int result = noticeService.updateNotice(notice);
+		 
+		 
+		 
+		System.out.println("updateNotice.do");
+		 return "redirect:noticeDetail.do?noticeNo=" + notice.getNo();
+		 
+	 }
+ 
+	 
+	 @RequestMapping("deleteNotice.do")
+	 public String deleteNotice(Notice notice) {
+		 
+		 
+		 
+		 
+		 return "redirect:noticeList.do";
+	 }
+	 
 	 
 	
 	
