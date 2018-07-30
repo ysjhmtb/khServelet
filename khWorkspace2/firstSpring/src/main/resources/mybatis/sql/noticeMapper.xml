@@ -52,4 +52,9 @@
 		WHERE NNO=#{no}			
 	</update>
 	
+	<delete id="deleteNotice" parameterType="Notice">
+		DELETE FROM NOTICE WHERE NNO = #{no}
+	
+	</delete>
+	
 </mapper>

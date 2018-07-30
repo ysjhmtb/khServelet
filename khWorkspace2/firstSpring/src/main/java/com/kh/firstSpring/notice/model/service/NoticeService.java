@@ -29,6 +29,11 @@ public class NoticeService {
 	public int updateNotice(Notice notice) {
 		return dao.updateNotice(notice);
 	}
+
+	public int deleteNotice(Notice notice) {
+		
+		return dao.deleteNotice(notice);
+	}
 	
 	
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -222,10 +223,26 @@ public class NoticeController {
  
 	 
 	 @RequestMapping("deleteNotice.do")
-	 public String deleteNotice(Notice notice) {
+	 public String deleteNotice(Notice notice, HttpServletRequest request) {
 		 
+		//기존 파일 삭제 
+	 	String root = request.getSession().getServletContext().
+				getRealPath("resources");
+		String path = root + "/upload";
+		System.out.println(path);
+		String filePath = "";
+		File folder = new File(path);
+		
+		
+		
+		filePath = folder + "/" + notice.getAttach();
+		
+		File oldFile = new File(filePath);
+		if(oldFile.exists()) {
+			oldFile.delete();
+		}
 		 
-		 
+		int result = noticeService.deleteNotice(notice);
 		 
 		 return "redirect:noticeList.do";
 	 }
