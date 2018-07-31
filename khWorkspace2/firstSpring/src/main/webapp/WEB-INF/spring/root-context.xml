@@ -32,6 +32,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 	</bean>
 	
 	
+	
+	
 		
 	<!-- FileUpload -->
 	<bean id="multipartResolver"
@@ -39,6 +41,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 		<property name="maxUploadSize" value="100000000" />
 		<property name="maxInMemorySize" value="100000000" />
 	</bean>
+	
+	
+	
 	
 		
 </beans>

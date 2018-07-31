@@ -13,7 +13,7 @@ public class NoticeService {
 	
 	@Autowired
 	NoticeDao dao;
-
+	
 	public List<Notice> selectNoticeList() {
 		return dao.selectNoticeList();
 	}

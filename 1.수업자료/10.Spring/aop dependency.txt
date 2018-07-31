@@ -1,0 +1,28 @@
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.8.13</version>
+</dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<beans:bean id="log" class="com.kh.testSpring2.common.LogAdvice"></beans:bean>
+	
+	<aop:config>
+		<aop:aspect ref="log">
+			<aop:pointcut expression="execution(* com.kh.testSpring2.notice.model.service.*Service.*(..))" id="allPointcut"/>
+			<aop:before method="printLog" pointcut-ref="allPointcut"/>
+			<aop:after method="print2Log" pointcut-ref="allPointcut"/>
+		</aop:aspect>
+	</aop:config>

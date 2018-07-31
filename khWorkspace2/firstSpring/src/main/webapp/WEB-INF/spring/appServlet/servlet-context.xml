@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -18,7 +20,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- jsp와 이름을 매핑  -->
+	<!-- 경로와 jsp와 이름을 매핑  -->
 	
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -30,6 +32,43 @@
 		빈으로 등록. -->
 	<context:component-scan base-package="com.kh.firstSpring" />
 	
+	<!--
+	
+	<beans:bean id="log" class="com.kh.firstSpring.common.LogAdvice"/>
+	<aop:config>
+		<aop:pointcut id="allPointCut" expression="execution(* com.kh.firstSpring..*Service.*(..))"/>
+		  <aop:aspect ref="log">
+		  	<aop:before method="printLog" pointcut-ref="allPointCut"/>
+		  </aop:aspect> 
+		
+	</aop:config>
 	
 	
+			* : 모든 반환형.
+			
+			com.kh.firstSpring.notice.model.service.NoticeService :
+			이 경로 아래에 있는 것들 중
+			
+			com.kh.firstSpring..*Service.*(..) :
+			firstSpring 아래의 모든 서비스에 적용.
+			
+			.*(..) :
+			경로 아래의 모든 메소드(매개변수 타입은 구분하지 않겠다.)
+			
+			
+			  -->
+		 	<!-- 등록해둔 bean인 log를 언제 사용할지 설정.  
+		 	
+		 	
+	-->
+		 	
+		 	
+	
+	
+	
+		 	<aop:aspectj-autoproxy>
+		 		
+		 	</aop:aspectj-autoproxy>
+		 	
+		 	
 </beans:beans>
