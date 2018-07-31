@@ -32,6 +32,10 @@ public class NoticeDao {
 	public int deleteNotice(Notice notice) {
 		return sqlSession.delete("NoticeMapper.deleteNotice", notice);
 	}
+
+	public void insertNotice2(Notice notice) {
+		sqlSession.insert("NoticeMapper.insertNotice2", notice);
+	}
 }
 
 

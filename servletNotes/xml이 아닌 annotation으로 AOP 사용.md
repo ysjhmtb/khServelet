@@ -73,3 +73,45 @@ public class LogAdvice {
 
 
 
+---
+
+xml로 하고자 한다면
+
+```xml
+<!-- servlet-context.xml -->
+
+
+<beans:bean id="log" class="com.kh.firstSpring.common.LogAdvice"/>
+
+<!-- 
+	* : 모든 반환형.
+			
+    com.kh.firstSpring.notice.model.service.NoticeService :
+    이 경로 아래에 있는 것들 중
+
+    com.kh.firstSpring..*Service.*(..) :
+    firstSpring 아래의 모든 서비스에 적용.
+
+    .*(..) :
+    경로 아래의 모든 메소드(매개변수 타입은 구분하지 않겠다.)
+
+
+-->
+<aop:config>
+    <aop:pointcut id="allPointCut" expression="execution(* com.kh.firstSpring..*Service.*(..))"/>
+    
+    <!-- 등록해둔 bean인 log를 언제 사용할지 설정. -->
+    <aop:aspect ref="log">
+        <aop:before method="printLog" pointcut-ref="allPointCut"/>
+    </aop:aspect> 
+
+</aop:config>
+	
+	
+			
+			
+			
+			
+		 	
+```
+

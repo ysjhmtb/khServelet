@@ -45,6 +45,17 @@
 		 -->
 	</insert>
 	
+	
+	<insert id="insertNotice2" parameterType="Notice">
+		INSERT INTO NOTICE2 
+		VALUES(130, #{title}, #{content}, #{writer},
+				0, SYSDATE, #{attach})
+				
+	</insert>
+	
+	
+	
+	
 	<update id="updateNotice" parameterType="Notice">
 		UPDATE NOTICE
 		SET NTITLE=#{title}, NCONTENT=#{content},

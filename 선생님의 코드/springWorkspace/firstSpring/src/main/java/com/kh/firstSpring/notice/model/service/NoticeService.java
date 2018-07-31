@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.firstSpring.common.LogAdvice;
 import com.kh.firstSpring.notice.model.dao.NoticeDao;
 import com.kh.firstSpring.notice.model.vo.Notice;
 
@@ -21,8 +22,10 @@ public class NoticeService {
 		return dao.selectNotice(no);
 	}
 
-	public int insertNotice(Notice notice) {
-		return dao.insertNotice(notice);
+	public int insertNotice(Notice notice) throws Exception{
+		dao.insertNotice(notice);
+		dao.insertNotice2(notice);
+		return 0; 
 	}
 
 	public int updateNotice(Notice notice) {

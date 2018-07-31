@@ -43,6 +43,11 @@
 		FROM NOTICE
 		WHERE NNO = #{no}
 	</delete>
+	
+	<insert id="insertNotice2" parameterType="Notice">
+		INSERT INTO NOTICE2
+		VALUES (130, #{title}, #{content}, #{writer}, 0, SYSDATE, #{attach})
+	</insert>
 </mapper>
 
 

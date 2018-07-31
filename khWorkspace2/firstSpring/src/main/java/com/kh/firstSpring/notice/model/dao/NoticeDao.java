@@ -25,6 +25,12 @@ public class NoticeDao {
 	public int insertNotice(Notice notice) {
 		return sqlSession.insert("NoticeMapper.insertNotice", notice);
 	}
+	
+	// 에러 발생 목적.
+	public int insertNotice2(Notice notice) {
+		return sqlSession.insert("NoticeMapper.insertNotice2", notice);
+	}
+	
 
 	public int updateNotice(Notice notice) {
 		return sqlSession.update("NoticeMapper.updateNotice", notice);
@@ -33,6 +39,8 @@ public class NoticeDao {
 	public int deleteNotice(Notice notice) {
 		return sqlSession.delete("NoticeMapper.deleteNotice", notice);
 	}
+
+	
 	
 	
 }

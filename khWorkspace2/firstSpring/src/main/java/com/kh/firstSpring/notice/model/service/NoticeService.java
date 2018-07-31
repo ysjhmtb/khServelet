@@ -23,6 +23,7 @@ public class NoticeService {
 	}
 
 	public int insertNotice(Notice notice) {
+		
 		return dao.insertNotice(notice);
 	}
 

@@ -120,7 +120,7 @@ public class NoticeController {
 	 @RequestMapping("writeNotice.do")
 		public String writeNotice(Notice notice, 
 							@RequestParam("file") MultipartFile file,
-							HttpServletRequest request){
+							HttpServletRequest request) throws Exception{
 			System.out.println(notice);
 			System.out.println(file.getOriginalFilename());
 			
@@ -156,9 +156,15 @@ public class NoticeController {
 			
 			notice.setAttach(file.getOriginalFilename());
 			
-			int result = noticeService.insertNotice(notice);
 			
-			return "redirect:noticeList.do";
+			String view = "redirect:noticeList.do";
+			try{
+				int result = noticeService.insertNotice(notice);
+			}catch(Exception e){
+				view = "error";
+			}
+			return view;
+			
 		}
 	 
 	 @RequestMapping("updateNoticeForm.do")

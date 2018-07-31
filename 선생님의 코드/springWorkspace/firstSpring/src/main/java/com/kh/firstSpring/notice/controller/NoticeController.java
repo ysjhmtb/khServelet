@@ -109,9 +109,13 @@ public class NoticeController {
 		
 		notice.setAttach(file.getOriginalFilename());
 		
-		int result = service.insertNotice(notice);
-				
-		return "redirect:noticeList.do";
+		String view = "redirect:noticeList.do";
+		try{
+			int result = service.insertNotice(notice);
+		}catch(Exception e){
+			view = "error";
+		}
+		return view;
 	}
 	
 	@RequestMapping("updateNoticeForm.do")
