@@ -5,14 +5,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+<!-- include summernote-ko-KR -->
+<script src="resources/js/summernote-ko-KR.js"></script>
+
+
 <meta charset="UTF-8">
 <title>공지사항 수정</title>
 <style>
 .outer{
 	width:800px;
-	height:500px;
+	height:900px;
 	background:black;
-	color:white;
+	color:gray;
 	margin-left:auto;
 	margin-right:auto;
 	padding:20px;
@@ -25,6 +40,13 @@
 		$("#noticeForm").attr("action","deleteNotice.do");
 		$("#noticeForm").submit();
 	}
+	
+	$(document).ready(function() {
+		  $('#summernote').summernote({
+			  height:600,
+			  lang: 'ko-KR' // default: 'en-US'
+		  });
+		});
 	
 	
 </script>
@@ -64,7 +86,7 @@
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea name="content" cols="40" rows="15">${notice.content }</textarea>
+						<textarea id="summernote" name="content">${notice.content }</textarea>
 					</td>
 				</tr>
 			</table>

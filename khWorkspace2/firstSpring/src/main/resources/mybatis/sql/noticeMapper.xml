@@ -29,8 +29,8 @@
 	
 	<insert id="insertNotice" parameterType="Notice">
 		INSERT INTO NOTICE 
-		VALUES(SEQ_NNO.NEXTVAL, #{title}, #{content}, #{writer},
-				0, SYSDATE, #{attach})
+		VALUES(SEQ_NNO.NEXTVAL, #{title}, #{writer},
+				0, SYSDATE, #{attach}, #{content})
 				
 		<!--
 			title = '해당 글의 제목';

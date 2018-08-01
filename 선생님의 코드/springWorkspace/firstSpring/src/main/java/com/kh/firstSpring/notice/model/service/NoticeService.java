@@ -23,9 +23,7 @@ public class NoticeService {
 	}
 
 	public int insertNotice(Notice notice) throws Exception{
-		dao.insertNotice(notice);
-		dao.insertNotice2(notice);
-		return 0; 
+		return dao.insertNotice(notice); 
 	}
 
 	public int updateNotice(Notice notice) {

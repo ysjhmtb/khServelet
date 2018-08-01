@@ -5,20 +5,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script src="resources/js/summernote-ko-KR.js"></script>
+
 <meta charset="UTF-8">
 <title>공지사항 작성</title>
 <style>
 .outer{
 	width:800px;
-	height:500px;
+	height:900px;
 	background:black;
-	color:white;
+	color:gray;
 	margin-left:auto;
 	margin-right:auto;
 	padding:20px;
 	border:1px solid white;
 }
 </style>
+<script type="text/javascript">
+	$(function() {
+	  $('#summernote').summernote({
+		  height: 600,
+		  lang: 'ko-KR'
+	  });
+	});
+</script>
 </head>
 <body>
 <div class="outer">
@@ -45,7 +60,7 @@
 				</tr>
 				<tr>
 					<td colspan="4">
-						<textarea name="content" cols="40" rows="15"></textarea>
+						<textarea id="summernote" name="content"></textarea>
 					</td>
 				</tr>
 			</table>
