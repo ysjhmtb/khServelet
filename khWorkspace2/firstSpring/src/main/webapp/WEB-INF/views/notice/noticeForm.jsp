@@ -56,6 +56,22 @@
 		
 		
 	*/
+	
+	/*
+	If we use Summernote editor by normal process 
+	then it is not possible to upload images on the server 
+	because Summernote converts images to Base 64 format 
+	so when we save an image in the database then it takes 
+	too much space in the database. 
+	But with the help of some code we can upload images 
+	on the server through summernote editor. 
+	We have to use a default “onImageUpload” summernote function 
+	for image uploading.
+	
+	https://webkul.com/blog/image-upload-summernote/
+
+
+	*/
 
 
 
