@@ -40,12 +40,56 @@
 </style>
 
 
+
+
 <script>
+
+	/*
+		ronlobo commented on 3 Sep 2013
+		The images are stored as base64. You could convert them 
+		when storing to a real image and replace the src 
+		with location of the new image.
+		https://github.com/summernote/summernote/issues/46#issuecomment-23706833
+		
+		에디터에 입력된 사진들이 어느 경로에 저장되는지 궁금했는데 아마도 사진이 인코딩되어 
+		html 속에 존재하는 것 같다.
+		
+		
+	*/
+
+
+
 	$(document).ready(function() {
 	  $('#summernote').summernote({
 		  height:600,
 		  lang: 'ko-KR' // default: 'en-US'
+		  
+		  /* 
+		  	https://stackoverflow.com/questions/21628222/summernote-image-upload
+		  	
+		  	onImageUpload: function(files, editor, welEditable) {
+                sendFile(files[0], editor, welEditable);
+            } */
 	  });
+	  
+	  /*
+	  function sendFile(file, editor, welEditable) {
+          data = new FormData();
+          data.append("file", file);
+          $.ajax({
+              data: data,
+              type: "POST",
+              url: "http://localhost/firstSpring/resources/upload",
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function(url) {
+                  editor.insertImage(welEditable, url);
+              }
+          });
+      }
+	  */
+	  
 	});
 	
 	
